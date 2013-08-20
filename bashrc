@@ -67,3 +67,6 @@ source ~/.aliases
 # Set Proxy
 touch ~/.proxy
 source ~/.proxy
+
+# Set port
+export PORT=3050
