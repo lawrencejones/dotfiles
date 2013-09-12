@@ -39,6 +39,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export BLUE="\x1b[34m"
 export RED="\x1b[31m"
 export GREEN="\x1b[32m"
+export CLRCOL="\x1b[0m"
 
 # Enable grep and ls color output
 if [ -x /usr/bin/dircolors ]; then
@@ -67,6 +68,9 @@ source ~/.aliases
 # Set Proxy
 touch ~/.proxy
 source ~/.proxy
+
+# PA Pi ip
+export pi='192.168.0.2'
 
 # Set port
 export PORT=3050

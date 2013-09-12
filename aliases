@@ -91,3 +91,4 @@ alias blue='echo -e $BLUE'
 alias screen='screen-4.0.3'
 
 alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
+alias ls='ls -l'

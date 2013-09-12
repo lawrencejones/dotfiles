@@ -14,3 +14,5 @@ set expandtab
 filetype indent on
 au FileType ruby set tabstop=2
 au FileType make set noexpandtab
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
