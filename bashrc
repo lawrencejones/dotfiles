@@ -70,7 +70,10 @@ touch ~/.proxy
 source ~/.proxy
 
 # PA Pi ip
-export pi='192.168.0.2'
+export pi='192.168.0.6'
 
 # Set port
 export PORT=3050
+
+# Set imu build path
+export imupath='/Users/lawrencejones/Projects/gpio/build/imu/imu'

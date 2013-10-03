@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/gpio/src/devs'
-let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/gpio/src/devs/itg3050'
-let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/gpio/src/devs'
-let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/gpio/src'
-let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/gpio'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/gpio/data/accels'
+let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/gpio/src/dev/shared'
+let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/gpio/src/dev'
+let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/gpio/src/dev/shared'
+let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/gpio/src/dev'
+let g:netrw_dirhist_6='/Users/lawrencejones/Desktop/Projects/gpio'
