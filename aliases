@@ -1,54 +1,28 @@
 #FILE LOCATION ~/.profile
 
-alias ios='projects; cd cate-ios'
-alias curlscript='curl -k https://localhost:4567/classy-cate.user.js > ~/Desktop/script.user.js'
+#------- Editing of .profile file and refresh command -----------
+alias profile='vim ~/.profile'
+alias aliases='vim ~/.aliases'
+#----------------------------------------------------------------
+
+#------- Utilities ----------------------------------------------
+alias ls='ls -l'
+alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
+alias listpath='echo $PATH | tr ":" "\n"'
+alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
+#----------------------------------------------------------------
+
 #------  Work folder access -------------------------------------
-alias work='cd ~/Desktop/Imperial/00-AllModules;'
-alias maths='cd MathsMethods'
-alias labs='ssh lmj112@edge05.doc.ic.ac.uk'
-alias ichack='contest; cd ../IC*'
-alias cate='projects; cd CATEScraper*'
-alias topicsDir='cd /vol/project/2012/163/g1216302'
-alias timeline='cd /Users/lawrencejones/Desktop/Projects/jQueryTimeline'
-alias haskell='cd ~/Desktop/Imperial/00-AllModules/Haskell'
-alias logic='cd Logic'
-alias javapic='cd ~/Desktop/Imperial/00-AllModules/Java/Labs/01*'
-alias scratch='cd ~/Desktop/ScratchBox'
-alias turtle='cd ~/Desktop/Imperial/00-AllModules/Java/Labs/02*'
-alias contest='cd ~/Desktop/ProgComp/GoogleCodeJam'
-alias glue='projects; cd GLUE*'
-alias timeline='cd /Users/lawrencejones/Desktop/Projects/jQueryTimeline'
 alias projects='cd /Users/lawrencejones/Desktop/Projects'
-alias p='projects'
+alias timeline='cd /Users/lawrencejones/Desktop/Projects/jQueryTimeline'
+alias livehack='cd /Users/lawrencejones/Desktop/Projects/LiveHack'
 alias classy='cd /Users/lawrencejones/Desktop/Projects/classy-cate'
-alias coff='cd /Users/lawrencejones/Desktop/Projects/CoffeeScriptRedux'
-#----------------------------------------------------------------
-
-#------- Navigation aliases -------------------------------------
-alias ..='cd ..'
-#alias labs='cd ~/Desktop/Labs'
-alias dl='cd ~/Downloads'
-alias publicDrop='~/Dropbox/Public/'
-#------- Find command aliases -----------------------------------
-alias findName='find ~ -name '
-alias andOpen='-exec open {} \;'
-alias aws='ssh -i ~/.ichack_team6.pem root@ec2-46-51-143-229.eu-west-1.compute.amazonaws.com'
-alias js='cd ~/Desktop/Javascript/MM*'
-alias topics='cd ~/Desktop/Topics'
-alias topRuby='ruby ~/Desktop/Topics/web/web.rb'
-alias scrapeCate='python /Users/lawrencejones/Desktop/ProgComp/CATEScraper/src/LocalParser.py'
-#----------------------------------------------------------------
-
-#------- Java aliases -------------------------------------------
-alias compile='./scripts/compile.sh'
-alias runMine='./scripts/runMine.sh'
-alias runSmall='./scripts/runSmall.sh'
-alias runLarge='./scripts/runLarge.sh'
-alias :r='javac *.java'
-alias run='java -ea'
-alias runTurtle='java -ea -Dfile.encoding="UTF-8" -cp bin turtle.Main'
-alias testIt='java -ea bin/TestMain.class'
-#Test has to be set up in session- ie, alias test='run JavaLoopTestSuite'
+alias arm='cd /Users/lawrencejones/Desktop/Projects/arm'
+alias sesquis='cd /Users/lawrencejones/Desktop/Projects/sesquis'
+alias newpc='cd /Users/lawrencejones/Desktop/Projects/newpc'
+alias gpios='cd /Users/lawrencejones/Desktop/Projects/gpio'
+alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
+alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
 #----------------------------------------------------------------
 
 #------- Java/Coffeescript aliases ------------------------------
@@ -58,37 +32,5 @@ alias cpJquery='cp ~/jQuery_1_9.js ./jQuery.min.js'
 #------- PostgreSQL ---------------------------------------------
 alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias push-live='git push heroku restructure:master'
 #----------------------------------------------------------------
 
-#------- Editing of .profile file and refresh command -----------
-alias profile='vim ~/.profile'
-alias aliases='vim ~/.aliases'
-#----------------------------------------------------------------
-alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
-alias livehack='cd /Users/lawrencejones/Desktop/Projects/LiveHack'
-alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
-alias heronshaw='cd /Users/lawrencejones/Desktop/Projects/heronshaw'
-alias build='./.build.sh'
-alias rails-aliases='source ~/.rails_aliases'
-alias arm='cd /Users/lawrencejones/Desktop/Projects/arm'
-alias migrate-test='rake environment RAILS_ENV=test db:migrate'
-alias sesquis='cd /Users/lawrencejones/Desktop/Projects/sesquis'
-alias cdir='source ~/.cdir.sh'
-alias listpath='echo $PATH | tr ":" "\n"'
-alias connect='ssh pi@$pi'
-alias setPi='~/.pi_set.sh'
-alias newpc='cd /Users/lawrencejones/Desktop/Projects/newpc'
-alias gpios='cd /Users/lawrencejones/Desktop/Projects/gpio'
-alias getPi='echo $pi | pbcopy'
-alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
-alias dash='cd /Users/lawrencejones/Desktop/Projects/pa-dashboard'
-
-#------- Add color aliases --------------------------------------
-alias red='echo -e $RED'
-alias green='echo -e $GREEN'
-alias blue='echo -e $BLUE'
-alias screen='screen-4.0.3'
-
-alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
-alias ls='ls -l'
