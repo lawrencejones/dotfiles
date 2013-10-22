@@ -1,4 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/sesquis/app/assets/javascripts/services'
-let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/sesquis/app/assets/javascripts'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/sesquis/app/assets/javascripts/controllers'
+let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/gpio/src/i2c'
+let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Imperial/02-SecondYear/Laboratory_2/02-C++Enigma/cenigma_lmj112/src'
+let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Imperial/02-SecondYear/Laboratory_2/02-C++Enigma/cenigma_lmj112'
+let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Imperial/02-SecondYear/Laboratory_2/02-C++Enigma/cenigma_lmj112/src'

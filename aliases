@@ -10,6 +10,7 @@ alias ls='ls -l'
 alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
 alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
+alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -23,6 +24,7 @@ alias newpc='cd /Users/lawrencejones/Desktop/Projects/newpc'
 alias gpios='cd /Users/lawrencejones/Desktop/Projects/gpio'
 alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
 alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
+alias labs='cd /Users/lawrencejones/Desktop/Labs'
 #----------------------------------------------------------------
 
 #------- Java/Coffeescript aliases ------------------------------
@@ -34,3 +36,10 @@ alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/ser
 alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 #----------------------------------------------------------------
 
+#------- Music Daemon Controls ----------------------------------
+alias connect='ssh pi@$pi'
+alias mpc='mpc -h $pi'
+alias ncm='ncmpcpp -h $pi'
+#----------------------------------------------------------------
+
+alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"
