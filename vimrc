@@ -12,7 +12,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 filetype indent on
-au FileType ruby set tabstop=2
 au FileType make set noexpandtab
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+") Force syntax highlighting of javascript for pegjs files
+au BufReadPost *.pegjs set syntax=javascript
+") Force 256 colours
+set t_Co=256

@@ -1,8 +1,8 @@
 #FILE LOCATION ~/.profile
 
 #------- Editing of .profile file and refresh command -----------
-alias profile='vim ~/.profile'
-alias aliases='vim ~/.aliases'
+alias profile='vim ~/.profile && source ~/.profile'
+alias aliases='vim ~/.aliases && source ~/.aliases'
 #----------------------------------------------------------------
 
 #------- Utilities ----------------------------------------------
@@ -11,6 +11,7 @@ alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
 alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
+alias git-init='git init && echo ".DS_Store" > .gitignore'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -24,6 +25,7 @@ alias newpc='cd /Users/lawrencejones/Desktop/Projects/newpc'
 alias gpios='cd /Users/lawrencejones/Desktop/Projects/gpio'
 alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
 alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
+alias wacc='cd /Users/lawrencejones/Desktop/Projects/wacc'
 alias labs='cd /Users/lawrencejones/Desktop/Labs'
 #----------------------------------------------------------------
 
