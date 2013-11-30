@@ -12,6 +12,8 @@ alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
+alias git='git-guard'
+alias rm='coffee ~/.scripts/rm-block'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -42,6 +44,10 @@ alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias connect='ssh pi@$pi'
 alias mpc='mpc -h $pi'
 alias ncm='ncmpcpp -h $pi'
+#----------------------------------------------------------------
+
+#------- Rails Aliases ------------------------------------------
+alias app-root='cd $(get-app-root)'
 #----------------------------------------------------------------
 
 alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"

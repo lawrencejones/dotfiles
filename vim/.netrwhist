@@ -1,9 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/sesquis/db'
-let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/sesquis/db/seeds'
-let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/jQueryTimeline/scripts'
-let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/wacc/src'
-let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/wacc/examples/valid/basic'
-let g:netrw_dirhist_6='/Users/lawrencejones/Desktop/Projects/wacc/examples/valid'
-let g:netrw_dirhist_7='/Users/lawrencejones/Desktop/Projects/wacc/examples/valid/array'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/sesquis/app/views'
+let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/sesquis/app/views/bookings'
+let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/sesquis/app/assets/javascripts/controllers'
+let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/sesquis/app/views/search'
+let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/sesquis/app/views/bookings'
