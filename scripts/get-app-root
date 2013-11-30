@@ -1,0 +1,14 @@
+#!/bin/sh
+
+i=0
+initial=`pwd`
+while [ $i -lt 10 ]
+do
+  if [ -d 'app' ]
+  then
+    echo `pwd`
+    exit
+  fi
+  cd .. && i=$[$i +1]
+done
+echo $initial

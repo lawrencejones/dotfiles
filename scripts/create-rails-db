@@ -1,0 +1,12 @@
+#!/bin/sh
+echo 'Database name...'
+read name
+echo 'Database encoding...'
+read enc
+echo 'Database owner...'
+read own
+echo 'Database user...'
+read usr
+
+createdb -e -E $enc -l 'C' -O$own -w -U$usr -Ttemplate0 $name
+

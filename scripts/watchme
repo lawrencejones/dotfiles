@@ -1,0 +1,22 @@
+#!/usr/bin/env coffee
+# Watcher scripts. Driving me nuts with inotify bollocks
+
+fs = require 'fs'
+exec = require('child_process').exec
+# Reformat args
+args = process.argv[2..]
+try
+  cmd = args[args.indexOf('-r') + 1..].join ' '
+catch e
+  process.stderr.write 'Invalid args'
+  exit 1
+
+for f in args
+  if f == '-r' then break
+  fs.watch f, {persistent: true}, (event, filename) ->
+    exec "#{cmd}", (err, stdout, stderr) ->
+      process.stdout.write stdout
+      if stderr != ''
+        process.stdout.write ' >> stderr below'
+        process.stderr.write stderr
+   

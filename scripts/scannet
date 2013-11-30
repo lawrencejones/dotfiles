@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ifconfig | grep broadcast | awk '{ print $NF }' | \
+xargs ping -c 1 1>&2 >/dev/null && echo; arp -a | \
+grep -iv "incomplete"| awk -F'[()]' '{ print $2 }'; echo
