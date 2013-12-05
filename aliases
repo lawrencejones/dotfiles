@@ -6,14 +6,14 @@ alias aliases='vim ~/.aliases && source ~/.aliases'
 #----------------------------------------------------------------
 
 #------- Utilities ----------------------------------------------
-alias ls='ls -l'
+alias ls='ls -lh'
 alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
 alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias git='git-guard'
-alias rm='coffee ~/.scripts/rm-block'
+alias rm='node ~/.scripts/rm-block.js'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

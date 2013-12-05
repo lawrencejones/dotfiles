@@ -6,17 +6,21 @@ path = require 'path'
 exec = require('child_process').exec
 # Reformat args
 args = process.argv[2..]
-files = []; rf = 1 < args.reduce ((a, c) ->
+[files, flags] = [[],[]]
+rf = 1 < args.reduce ((a, c) ->
   if c == '-r' or c == '-f' then a++
-  else files.push c if not /-.*/.test c
+  else if c == '-rf' then a += 2
+  else if not /-.*/.test c then flags.push c
+  else files.push c
   a), 0
 
 # Takes files to proxy to rm
 confirmed = []; rm = ->
   cmd = 'rm '
   if rf then cmd += '-rf'
-  exec "#{cmd} #{confirmed.join(' ')}", (err, stdout, stderr) ->
-    process.stderr.write stderr if stderr is not ''
+  exec "#{cmd} #{flags.join(' ')} #{confirmed.join(' ')}", (err, streams...) ->
+    for s in streams
+      process.stdout.write s
   
 # Prompt for confirmation
 prompt = (fname, cb) ->
