@@ -76,5 +76,5 @@ fi
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
 # Source aliases
-source ~/.bash-aliases
+source ~/.bash_aliases
 
