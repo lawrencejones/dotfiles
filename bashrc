@@ -67,11 +67,5 @@ fi
 export PATH="$HOME/.scripts:$PATH"
 
 # Source aliases
-source ~/.aliases
-
-# Standard pi ip address
-export pi='192.168.0.6'
-
-# Set port
-export PORT=3050
+source ~/.bash-aliases
 
