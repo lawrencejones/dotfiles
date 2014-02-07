@@ -10,7 +10,7 @@ args = process.argv[2..]
 rf = 1 < args.reduce ((a, c) ->
   if c == '-r' or c == '-f' then a++
   else if c == '-rf' then a += 2
-  else if not /-.*/.test c then flags.push c
+  else if /-.+/.test c then flags.push c
   else files.push c
   a), 0
 

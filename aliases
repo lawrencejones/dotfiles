@@ -6,14 +6,15 @@ alias aliases='vim ~/.aliases && source ~/.aliases'
 #----------------------------------------------------------------
 
 #------- Utilities ----------------------------------------------
-alias ls='ls -lh'
+alias ll='ls -lh'
 alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
 alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
-alias git='git-guard'
-alias rm='node ~/.scripts/rm-block.js'
+alias rm='coffee ~/.scripts/rm-block/rm-block.coffee'
+alias find='gfind'
+alias tmux='tmux -2' # colors!!!
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -29,6 +30,7 @@ alias gyro='cd /Users/lawrencejones/Desktop/Projects/Virtual-Gyroscope'
 alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
 alias wacc='cd /Users/lawrencejones/Desktop/Projects/wacc'
 alias labs='cd /Users/lawrencejones/Desktop/Labs'
+alias dirpintos='cd /Users/lawrencejones/Desktop/Projects/pintos'
 #----------------------------------------------------------------
 
 #------- Java/Coffeescript aliases ------------------------------

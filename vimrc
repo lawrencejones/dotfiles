@@ -11,6 +11,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set ruler
 filetype indent on
 filetype on
 au FileType make set noexpandtab
@@ -32,3 +33,9 @@ let g:rails_default_file='config/database.yml'
 ") Allow syntax completion
 filetype plugin on
 set omnifunc=syntaxcomplete
+") Set foldmethod
+au BufRead,BufNewFile *.pro set syntax=prolog
+") Vim tagbar shortcut
+let g:tagbar_left=1
+autocmd VimEnter *.c TagbarOpen
+nmap <F8> :TagbarToggle<CR>
