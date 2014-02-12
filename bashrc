@@ -3,7 +3,10 @@
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin 
-PATH=$PATH:/usr/local/sbin
+PATH=/usr/local/sbin:$PATH
+# Add pintos toolchain
+PATH=$PATH:/usr/local/i386-elf-gcc/bin
+PATH=$PATH:/usr/local/pintos-utils
 # Add my scripts to the path
 export PATH="$HOME/.scripts:$PATH"
 

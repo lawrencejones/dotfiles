@@ -37,5 +37,6 @@ set omnifunc=syntaxcomplete
 au BufRead,BufNewFile *.pro set syntax=prolog
 ") Vim tagbar shortcut
 let g:tagbar_left=1
-autocmd VimEnter *.c TagbarOpen
+autocmd VimEnter set tags?
+")autocmd VimEnter *.c TagbarOpen
 nmap <F8> :TagbarToggle<CR>
