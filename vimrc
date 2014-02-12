@@ -40,3 +40,5 @@ let g:tagbar_left=1
 autocmd VimEnter set tags?
 ")autocmd VimEnter *.c TagbarOpen
 nmap <F8> :TagbarToggle<CR>
+") Configure coffeescript errors
+let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']

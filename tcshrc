@@ -8,5 +8,5 @@ set LSCOLORS=GxFxCxDxBxegedabagaced
 alias ls ls -F --color=auto
 
 # Source aliases
-source ~/.aliases
+source ~/.tcsh_aliases
 
