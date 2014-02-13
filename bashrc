@@ -39,10 +39,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# Set to the debian colors
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\'
-PS1=$PS1'[\033[00m\]\[\033[01;34m\]\w \$\[\033[00m\] '
-
 # Set the ls folder and file color support
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -52,6 +48,28 @@ export BLUE="\x1b[34m"
 export RED="\x1b[31m"
 export GREEN="\x1b[32m"
 export CLRCOL="\x1b[0m"
+
+### CONFIGURE PROMPT ###########################################################
+_dynpath()
+{
+  #   How many characters of the $PWD should be kept
+  local pwdmaxlen=30
+  #   Indicator that there has been directory truncation:
+  local trunc_symbol="..."
+  if [ ${#PWD} -gt $pwdmaxlen ]
+  then
+    local pwdoffset=$(( ${#PWD} - $pwdmaxlen ))
+    newPWD=`echo ${trunc_symbol}${PWD:$pwdoffset:$pwdmaxlen} | sed 's/^\.\.\.\([^/]*\)/.../g'`
+  else
+    newPWD=${PWD}
+  fi
+  echo $newPWD
+}
+# Set to the debian colors
+PS1='\[\033[01;32m\]\u@\h\'
+PS1=$PS1'[\033[00m\]\[\033[01;34m\] $(_dynpath)'
+PS1=$PS1'\[\033[01;31m\]$(__git_ps1) \[\033[01;37m\]\$\[\033[00m\] '
+
 
 ### CONFIGURE LS AND GREP ######################################################
 # Enable grep and ls color output
