@@ -42,3 +42,5 @@ autocmd VimEnter set tags?
 nmap <F8> :TagbarToggle<CR>
 ") Configure coffeescript errors
 let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
+") Change swapfile location for out of source
+set directory=~/.vim/swapfiles//

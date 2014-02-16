@@ -3,8 +3,8 @@ prefix = /usr/local
 email = lmj112@ic.ac.uk
 
 [_token]
-AuthSession = c2hhcmVkX3B0cjo1MkZBNDk2QTpriHwsDStbxhiANNmp2bMeUSQhHQ
+AuthSession = c2hhcmVkX3B0cjo1MkZEMTNCNzrrUXD2qWOsKGsVc5H4AuIlOB2mvw
 version = 1
 path = /
 httponly = true
-expires = 1423670512942
+expires = 1423853367968

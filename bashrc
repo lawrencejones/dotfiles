@@ -43,33 +43,15 @@ fi
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Save the rgb color escape codes for scripts
-export BLUE="\x1b[34m"
-export RED="\x1b[31m"
-export GREEN="\x1b[32m"
-export CLRCOL="\x1b[0m"
-
-### CONFIGURE PROMPT ###########################################################
-_dynpath()
-{
-  #   How many characters of the $PWD should be kept
-  local pwdmaxlen=30
-  #   Indicator that there has been directory truncation:
-  local trunc_symbol="..."
-  if [ ${#PWD} -gt $pwdmaxlen ]
-  then
-    local pwdoffset=$(( ${#PWD} - $pwdmaxlen ))
-    newPWD=`echo ${trunc_symbol}${PWD:$pwdoffset:$pwdmaxlen} | sed 's/^\.\.\.\([^/]*\)/.../g'`
-  else
-    newPWD=${PWD}
-  fi
-  echo $newPWD
-}
-# Set to the debian colors
-PS1='\[\033[01;32m\]\u@\h\'
-PS1=$PS1'[\033[00m\]\[\033[01;34m\] $(_dynpath)'
-PS1=$PS1'\[\033[01;31m\]$(__git_ps1) \[\033[01;37m\]\$\[\033[00m\] '
-
+# Save the rgb color escape codes
+export    BLUE=$'\e[01;34m'
+export     RED=$'\e[01;31m'
+export   GREEN=$'\e[32m'
+export       D=$'\e[37;40m'
+export    PINK=$'\e[35;40m'
+export   GREEN=$'\e[32;40m'
+export  ORANGE=$'\e[33;40m'
+export    GREY=$'\e[33;00m'
 
 ### CONFIGURE LS AND GREP ######################################################
 # Enable grep and ls color output
@@ -97,5 +79,6 @@ fi
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
 # Source aliases
+source ~/.bash_ps1
 source ~/.bash_aliases
 
