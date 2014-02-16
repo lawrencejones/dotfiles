@@ -28,6 +28,10 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 ### CONFIGURE TERMINAL COLORS ##################################################
+# Set the theme name
+export theme="molokai"  # keep theme choices up to date
+source ~/.colors/colors.$theme
+
 # Set terminal to color on
 force_color_prompt=yes
 # Double check color support#
@@ -39,30 +43,24 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+### CONFIGURE LS AND GREP ######################################################
 # Set the ls folder and file color support
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
-# Save the rgb color escape codes
-export    BLUE=$'\e[01;34m'
-export     RED=$'\e[01;31m'
-export   GREEN=$'\e[32m'
-export       D=$'\e[37;40m'
-export    PINK=$'\e[35;40m'
-export   GREEN=$'\e[32;40m'
-export  ORANGE=$'\e[33;40m'
-export    GREY=$'\e[33;00m'
-
-### CONFIGURE LS AND GREP ######################################################
-# Enable grep and ls color output
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors &&
-      eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+# Verify we have dircolors
+if [ -n "$(gdircolors --version 2>/dev/null)" ];
+then
+  [ -n "$(gls --version 2>/dev/null)" ] && alias ls='gls --color=always'
+  test -r ~/.dircolors/dircolors.$theme &&
+    eval "$(gdircolors -b ~/.dircolors/dircolors.$theme)" || eval "$(dircolors -b)"
+else
+  # Default ls and colors
+  alias ls='ls --color=auto'
+  export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 
 ### FIX TERMINAL ENCODING ######################################################
 # Fix terminal encoding

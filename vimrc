@@ -44,3 +44,5 @@ nmap <F8> :TagbarToggle<CR>
 let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 ") Change swapfile location for out of source
 set directory=~/.vim/swapfiles//
+") Disable deleted coloring
+set t_ut=
