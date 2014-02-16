@@ -46,3 +46,7 @@ let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 set directory=~/.vim/swapfiles//
 ") Disable deleted coloring
 set t_ut=
+") Load in scripts
+so $HOME/.vim/functions/c_prototype
+") Turn on numbers
+set nu
