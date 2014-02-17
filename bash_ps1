@@ -17,12 +17,13 @@ _trunc_path()
 }
 _pwd_ps1()
 {
-  #/projects/sesquis/app
-  local wd=$PWD
+  # -P to resolve symlinks
+  local wd=`pwd -P`
   local git_root=`git rev-parse --show-toplevel 2>/dev/null`
-  if [ -n "$git_root" ]
+  if [ -n "$git_root" ];
   then # ON GIT
-    wd='...'${wd#$(dirname $git_root)}
+    local basedir=`dirname $git_root`
+    wd='...'${wd#$basedir}
   fi
   echo -e `_trunc_path "$wd"`
 }
