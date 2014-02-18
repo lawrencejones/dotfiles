@@ -46,6 +46,7 @@ fi
 ### CONFIGURE LS AND GREP ######################################################
 # Set the ls folder and file color support
 export CLICOLOR=1
+export   CLRCOL=$'\e[0m'
 # Verify we have dircolors
 if [ -n "$(gdircolors --version 2>/dev/null)" ];
 then

@@ -34,5 +34,7 @@ _git_ps1()
 }
 
 # Set to the debian colors
-PS1='${PINK}\u ${D}at ${ORANGE}\h ${D}in ${GREEN}$(_pwd_ps1)$(_git_ps1) \n${D}$ ${GREY}'
+PS1='\[${PINK}\]\u \[${D}\]at \[${ORANGE}\]\h '
+PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)$(_git_ps1) \n'
+PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'
 

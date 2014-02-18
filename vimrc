@@ -14,6 +14,7 @@ set expandtab
 set ruler
 filetype indent on
 filetype on
+au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make
 au FileType make set noexpandtab
 ") Force syntax highlighting of javascript for pegjs files
 au BufReadPost *.pegjs set syntax=javascript
