@@ -15,3 +15,5 @@ alias ls ls -F --color=auto
 # Source aliases
 source ~/.tcsh_aliases
 
+# Add lab pintos utils to path
+setenv PATH /vol/lab/secondyear/bin/:$PATH
