@@ -12,9 +12,9 @@ alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
-alias rm='coffee ~/.scripts/rm-block/rm-block.coffee'
 alias find='gfind'
 alias tmux='tmux -2' # colors!!!
+alias post-json='curl -X POST -H "Content-Type: application/json"'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -31,6 +31,7 @@ alias c-tools='cd /Users/lawrencejones/Desktop/Projects/c-tools'
 alias wacc='cd /Users/lawrencejones/Desktop/Projects/wacc'
 alias labs='cd /Users/lawrencejones/Desktop/Labs'
 alias dirpintos='cd /Users/lawrencejones/Desktop/Projects/pintos'
+alias cgcu='cd ~/Projects/cgcu-scores'
 #----------------------------------------------------------------
 
 #------- Java/Coffeescript aliases ------------------------------

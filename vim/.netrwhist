@@ -1,4 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/pintos/src/threads'
-let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/pintos/src'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/footsy/web'
+let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/footsy/web/footsy'
+let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/footsy/web'
+let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/footsy/web/footsy'
+let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/footsy/web/footsy/controllers'
+let g:netrw_dirhist_6='/Users/lawrencejones/Desktop/Projects/pintos/src'
+let g:netrw_dirhist_7='/Users/lawrencejones/Desktop/Projects/pintos/src/devices'
+let g:netrw_dirhist_8='/Users/lawrencejones/Desktop/Projects/pintos/src'
+let g:netrw_dirhist_9='/Users/lawrencejones/Desktop/Projects/pintos/src/threads'

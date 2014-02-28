@@ -77,6 +77,8 @@ if [ $(uname) == "Darwin" ]; then
 fi
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
+# Source variables
+source ~/.bash_vars
 # Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases

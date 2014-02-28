@@ -51,3 +51,8 @@ set t_ut=
 so $HOME/.vim/functions/c_prototype
 ") Turn on numbers
 set nu
+") Enable mouse scrolling, pane selection
+set mouse=a
+
+") Enable yanking to system clipboard
+map <leader> y('<,'>! pbcopy; pbpaste)
