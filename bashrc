@@ -23,8 +23,8 @@ fi
 
 ### BASH AUTOCOMPLETION CONFIG #################################################
 # Support bash autocompletion
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+    . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
 ### CONFIGURE TERMINAL COLORS ##################################################
