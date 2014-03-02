@@ -15,6 +15,7 @@ set ruler
 filetype indent on
 filetype on
 au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make
+au BufRead,BufNewFile package.json set ft=javascript
 au FileType make set noexpandtab
 ") Force syntax highlighting of javascript for pegjs files
 au BufReadPost *.pegjs set syntax=javascript
@@ -56,3 +57,6 @@ set mouse=a
 
 ") Enable yanking to system clipboard
 map <leader> y('<,'>! pbcopy; pbpaste)
+
+") Turn gitgutter on
+autocmd BufRead * GitGutterSignsEnable
