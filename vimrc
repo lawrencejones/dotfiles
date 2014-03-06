@@ -39,9 +39,9 @@ set omnifunc=syntaxcomplete
 au BufRead,BufNewFile *.pro set syntax=prolog
 ") Vim tagbar shortcut
 let g:tagbar_left=1
-autocmd VimEnter set tags?
 ")autocmd VimEnter *.c TagbarOpen
 nmap <F8> :TagbarToggle<CR>
+autocmd BufRead * set tags=./tags,tags;$HOME
 ") Configure coffeescript errors
 let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 ") Change swapfile location for out of source

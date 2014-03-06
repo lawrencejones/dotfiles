@@ -7,6 +7,8 @@ PATH=/usr/local/sbin:$PATH
 # Add pintos toolchain
 PATH=$PATH:/usr/local/i386-elf-gcc/bin
 PATH=$PATH:/usr/local/pintos-utils
+# Add sisctus
+PATH=$PATH:/usr/local/sicstus4.2.3/bin
 # Add my scripts to the path
 export PATH="$HOME/.scripts:$PATH"
 
