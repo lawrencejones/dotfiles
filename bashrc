@@ -71,17 +71,15 @@ export LC_ALL="en_GB.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANG="en_GB.UTF-8"
 
-### C COMPILER SETTINGS ########################################################
-# Set C compiler settings for mac
-if [ $(uname) == "Darwin" ]; then
-  export CC='gcc-4.7'
-  export MAC='-Qunused-arguments'
-fi
-
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
 # Source variables
 source ~/.bash_vars
 # Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases
+
+# Well duh
+export EDITOR=vim
+
+export PERSIST=true
 

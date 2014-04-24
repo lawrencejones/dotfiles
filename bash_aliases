@@ -15,6 +15,12 @@ alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias find='gfind'
 alias tmux='tmux -2' # colors!!!
 alias post-json='curl -X POST -H "Content-Type: application/json"'
+alias pintos='pintos -v'
+alias pmkdsk='pintos-mkdisk filesys.dsk --filesys-size=2 && pintos-mkdisk swap.dsk --swap-size=2'
+alias nousers='coffee ~/.scripts/pull-cate-users.coffee'
+alias doc-mongo='mongo dbh75.mongolab.com:27757/heroku_app23829204 -u heroku_app23829204 -p q66630pmpsqbbpv2214ung11l5'
+alias pushh='git push heroku'
+alias twoup='lpr -o number-up=2 -o page-border=single'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
