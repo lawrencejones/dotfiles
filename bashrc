@@ -11,6 +11,8 @@ PATH=$PATH:/usr/local/pintos-utils
 PATH=$PATH:/usr/local/sicstus4.2.3/bin
 # Add my scripts to the path
 export PATH="$HOME/.scripts:$PATH"
+# Make vim default
+export EDITOR=vim
 
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
 # Load in the RVM
@@ -25,8 +27,11 @@ fi
 
 ### BASH AUTOCOMPLETION CONFIG #################################################
 # Support bash autocompletion
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+if type brew 2>/dev/null;
+then
+  if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
     . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+  fi
 fi
 
 ### CONFIGURE TERMINAL COLORS ##################################################
@@ -84,4 +89,3 @@ source ~/.bash_vars
 # Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases
-
