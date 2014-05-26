@@ -1,0 +1,11 @@
+function! FixAng()
+  execute '%s/&lpar;/(/g'
+  execute '%s/&rpar;/)/g'
+  execute '%s/&sol;/\//g'
+  execute '%s/&period;//g'
+  execute '%s/&colon;/;/g'
+  execute '%s/&lcub;/{/g'
+  execute '%s/&rcub;/}/g'
+  execute '%s/&quest;/?/g'
+endfunction
+

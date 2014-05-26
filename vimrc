@@ -48,8 +48,11 @@ let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 set directory=~/.vim/swapfiles//
 ") Disable deleted coloring
 set t_ut=
+
 ") Load in scripts
 so $HOME/.vim/functions/c_prototype
+so $HOME/.vim/functions/fix_ang
+
 ") Turn on numbers
 set nu
 ") Enable mouse scrolling, pane selection
@@ -60,3 +63,24 @@ map <leader> y('<,'>! pbcopy; pbpaste)
 
 ") Turn gitgutter on
 autocmd BufRead * GitGutterSignsEnable
+
+") Put filepath in status
+set statusline+=%F
+set laststatus=2
+
+") Configure coffeetags
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
+endif

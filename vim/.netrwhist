@@ -1,2 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/classy-cate/web/exams'
+let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/classy-cate/app/exams'
+let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/classy-cate/app'
+let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/classy-cate/web/exercises'
+let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/classy-cate/app/exams'
+let g:netrw_dirhist_6='/Users/lawrencejones/dotfiles/colors'
+let g:netrw_dirhist_7='/Users/lawrencejones'
+let g:netrw_dirhist_8='/Users/lawrencejones/.colors'
