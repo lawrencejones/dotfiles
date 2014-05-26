@@ -82,4 +82,10 @@ source ~/.bash_aliases
 export EDITOR=vim
 
 export PERSIST=true
+export DOCVM=cvm-g1327131.doc.ic.ac.uk
 
+# Nodetime config
+export NODETIME_APP_NAME='Dev Server'
+export NODETIME_ACCOUNT_KEY='c66bd24ce2053c40a1857ac18034f5cb021d8a37'
+
+export PORT=4567

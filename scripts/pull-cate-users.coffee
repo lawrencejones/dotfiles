@@ -82,6 +82,8 @@ count = Object.keys(users).length
 
 request 'https://doc-exams.herokuapp.com/users', (err, data, body) ->
   logins = new Array()
+  fs.appendFile '/Users/lawrencejones/.scripts/users.log', logins.join('\n'), (err) ->
+    console.error 'ERR' if err
   for l in JSON.parse body
     if users[l]? then users[l].lastseen = Date.now()
     else logins.push l
