@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+if ARGV.length == 1 and ARGV[0] == 'push'
+  puts 'DO NOT JUST PUSH'
+  puts 'Are you sure you wish to continue?'
+  input = $stdin.gets
+  if not input =~ /y/i
+    exit 1
+  end
+end
+
+system "/usr/local/bin/git #{ARGV.join ' '}"

@@ -1,0 +1,32 @@
+function! GenPrototypes(reg)
+  let fs=[]
+  let l:space = '\_s\{-}'
+  let l:keywd = '\(\(\w\+\s\+\)\+\)' . l:space ") #1
+  let l:rtype = '\(\w\+\)'           . l:space ") #3
+  let l:fname = '\(\w\+\)'           . l:space ") #4
+  let l:parms = '\((.*)\)'           . l:space ") #5
+  let l:block = '\({\_.\{-}}\)'
+  let l:regex = l:keywd . l:rtype
+  \           . l:fname . l:parms
+  \           . l:block
+  execute "normal /^" . l:regex . "/ge\<CR>"
+  %s//\=len(add(fs, ( submatch(1) .
+  \                   submatch(3) . " " .
+  \                   submatch(4) . " " .
+  \                   submatch(5) . ';' ))) ? submatch(0) : ''/ge
+  let reg = empty(a:reg) ? 'f' : a:reg
+  let l:joined = join(fs, "\n") . "\n"
+  execute "let @".reg." = system(\"column -t\", l:joined)"
+endfunction
+command! -register GenPrototypes call GenPrototypes(<q-reg>)
+
+function! InsertPrototypes(line)
+  if a:0 > 0
+    let line = a:line
+  else
+    let line = 0
+  end
+  call GenPrototypes('x')
+  execute "normal! ".line.'gg | "fP'
+endfunction
+command! -register InsertPrototypes call InsertPrototypes(<q-args>)

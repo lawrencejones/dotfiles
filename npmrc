@@ -1,0 +1,10 @@
+_auth = c2hhcmVkX3B0cjoxMDlFMDBhMjQ4
+prefix = /usr/local
+email = lmj112@ic.ac.uk
+
+[_token]
+AuthSession = c2hhcmVkX3B0cjo1MzA4RTEzQzpiC2XpHYvNkCR4n0-IHcBKkMbPhg
+version = 1
+path = /
+httponly = true
+expires = 1424626876937

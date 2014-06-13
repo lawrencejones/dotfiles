@@ -1,0 +1,42 @@
+### CONFIGURE PROMPT ###########################################################
+_trunc_path()
+{
+  #   How many characters of the $PWD should be kept
+  local pwdmaxlen=30
+  local wd=$1
+  #   Indicator that there has been directory truncation:
+  local trunc_symbol="..."
+  if [ "${#wd}" -gt $pwdmaxlen ]
+  then
+    local pwdoffset=$(( ${#wd} - $pwdmaxlen ))
+    newPWD=`echo -e ${trunc_symbol}${wd:$pwdoffset:$pwdmaxlen} | sed 's/^\.\.\.\([^/]*\)/.../g'`
+  else
+    newPWD=$wd
+  fi
+  echo -e $newPWD
+}
+_pwd_ps1()
+{
+  # -P to resolve symlinks
+  local wd=`pwd -P`
+  local git_root=`git rev-parse --show-toplevel 2>/dev/null`
+  if [ -n "$git_root" ];
+  then # ON GIT
+    local basedir=`dirname $git_root`
+    wd='...'${wd#$basedir}
+  fi
+  echo -e `_trunc_path "$wd"`
+}
+_git_ps1()
+{
+  local branch=$(git branch 2>/dev/null | ggrep -oP '(?<=\*\s).*')
+  [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
+}
+
+# Set to the debian colors
+PS1='\[${PINK}\]\u '                          # username
+# PS1=$PS1' \[${D}\]at \[${ORANGE}\]\h '        # hostname
+PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # prwrkdir
+PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
+PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'  # $ > grey
+
