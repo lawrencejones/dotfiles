@@ -15,7 +15,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
 Plugin 'wincent/Command-T'
-Plugin 'skammer/vim-css-color'
 
 call vundle#end()
 
