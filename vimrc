@@ -15,6 +15,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
 Plugin 'wincent/Command-T'
+Plugin 'ap/vim-css-color'
 
 call vundle#end()
 
@@ -53,6 +54,7 @@ set statusline+=%F                " Put filepath in status
 set laststatus=2                  " Set status to visible
 set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
+set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
 autocmd BufRead * set tags=./tags,tags;$HOME  " Look for tags
 
