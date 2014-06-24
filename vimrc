@@ -121,3 +121,35 @@ if executable('coffeetags')
 endif
 
 
+" --------------- Apiary Preferences ------------------------------------------
+
+" Configures extra highlighting for my apib extensions of MODEL and INCLUDE
+function! HighlightApibExt()
+
+  syn clear " Initially clear syntax
+
+  " Keywords (MODEL | INCLUDE)
+  syn keyword apibKeywords MODEL INCLUDE
+  hi def link apibKeywords Type
+
+  " Path following keywords
+  syn match modelName /\(MODEL\|INCLUDE\|FORMAT\|HOST\)\@<= [^\]]\+/ display
+  hi def link modelName Exception
+
+  " Set preprocessor directives to white
+  syn match preprocessorDirectives /\[[^\]]\+\]([^)]\+)/ contains=apibKeywords,modelName display
+  hi def link preprocessorDirectives Normal
+
+  " Change standard text to comment level
+  syn match bodyText /^[^#].\+/ contains=apibKeywords,modelName,preprocessorDirectives display
+  hi def link bodyText Comment
+
+  " Top level keys
+  syn keyword topLevel FORMAT HOST
+  hi def link topLevel Constant
+
+
+endfunction
+
+autocmd BufNewFile,BufRead *.apib call HighlightApibExt()
+
