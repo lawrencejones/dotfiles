@@ -35,7 +35,7 @@ _git_ps1()
 
 # Set to the debian colors
 PS1='\[${PINK}\]\u '                          # username
-# PS1=$PS1' \[${D}\]at \[${ORANGE}\]\h '        # hostname
+PS1=$PS1' \[${D}\]at \[${ORANGE}\]\h '        # hostname
 PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # prwrkdir
 PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
 PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'  # $ > grey
