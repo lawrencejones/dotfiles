@@ -1,4 +1,0 @@
-#!/bin/sh
-
-ifconfig | grep inet | perl -nle 'm/inet ([^ ]*)/; print $1' | grep 192.* | pbcopy
-pbpaste
