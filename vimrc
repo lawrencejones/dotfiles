@@ -152,4 +152,5 @@ function! HighlightApibExt()
 endfunction
 
 autocmd BufNewFile,BufRead *.apib call HighlightApibExt()
+autocmd BufNewFile,BufRead *.apib set shiftwidth=4
 
