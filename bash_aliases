@@ -12,7 +12,6 @@ alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
-alias find='gfind'
 alias tmux='tmux -2' # colors!!!
 alias post-json='curl -X POST -H "Content-Type: application/json"'
 alias pintos='pintos -v'
