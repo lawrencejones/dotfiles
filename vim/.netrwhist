@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/lawrencejones/Desktop/Projects/sesquis/web'
-let g:netrw_dirhist_2='/Users/lawrencejones/Desktop/Projects/sesquis/web/auth'
-let g:netrw_dirhist_3='/Users/lawrencejones/Desktop/Projects/sesquis/app'
-let g:netrw_dirhist_4='/Users/lawrencejones/Desktop/Projects/sesquis/app/views'
-let g:netrw_dirhist_5='/Users/lawrencejones/Desktop/Projects/sesquis/app/views/posts'
-let g:netrw_dirhist_6='/Users/lawrencejones/Desktop/Projects/grep-doc/docs/lib'

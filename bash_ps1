@@ -29,7 +29,7 @@ _pwd_ps1()
 }
 _git_ps1()
 {
-  local branch=$(git branch 2>/dev/null | ggrep -oP '(?<=\*\s).*')
+  local branch=$(git branch 2>/dev/null | grep -oP '(?<=\*\s).*')
   [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
 }
 
