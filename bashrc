@@ -62,7 +62,6 @@ then
     eval "$(gdircolors -b ~/.dircolors/dircolors.$theme)" || eval "$(dircolors -b)"
 else
   # Default ls and colors
-  alias ls='ls --color=auto'
   export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
 alias grep='grep --color=auto'

@@ -16,6 +16,9 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
 Plugin 'wincent/Command-T'
 Plugin 'ap/vim-css-color'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'bronson/vim-trailing-whitespace'
 
 call vundle#end()
 
@@ -154,3 +157,18 @@ endfunction
 autocmd BufNewFile,BufRead *.apib call HighlightApibExt()
 autocmd BufNewFile,BufRead *.apib set shiftwidth=4
 
+" --------------- Java Proferences --------------------------------------------
+
+function! SetupJava()
+
+  " Set folding to indent, and hopefully display only
+  " top level class names and method sigs.
+  set foldlevel=1
+  set foldmethod=indent
+
+  " Enable autocompletion with C-n
+  set complete=.,w,b,u,t,i
+
+endfunction
+
+autocmd BufNewFile,BufRead *.java call SetupJava()
