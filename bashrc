@@ -46,7 +46,13 @@ else
   # Default ls and colors
   export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
-alias grep='grep --color=auto'
+
+# If we have gnu-grep
+if [ -n "$(ggrep --version 2>/dev/null)" ];
+then
+  alias grep='ggrep --color=auto'
+fi
+
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 

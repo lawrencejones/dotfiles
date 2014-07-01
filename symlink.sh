@@ -25,7 +25,7 @@ for f in `ls | grep -iv "symlink"`; do
     ln -s $dir/$f ~/.$f
 done
 
-echo "Cloning vundle"
-git clone https://github.com/gmarik/Vundle.git $dir/vim/bundle/
+echo Installing vundle...
+git clone https://github.com/gmarik/Vundle.git $dir/vim/bundle/Vundle.git
 
 echo Done!
