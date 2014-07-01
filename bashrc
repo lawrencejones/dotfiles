@@ -2,12 +2,17 @@
 
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting
-PATH=$PATH:$HOME/.rvm/bin 
+PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/sbin:$PATH
 
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
 # Load in the RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 
 # Add npm locations to path if node exists
 if [ $(type node >/dev/null; echo $?) == "0" ]; then
