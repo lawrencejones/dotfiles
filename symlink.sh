@@ -26,6 +26,6 @@ for f in `ls | grep -iv "symlink"`; do
 done
 
 echo Installing vundle...
-git clone https://github.com/gmarik/Vundle.git $dir/vim/bundle/Vundle.git
+git clone https://github.com/gmarik/Vundle.vim $dir/vim/bundle/Vundle.vim
 
 echo Done!
