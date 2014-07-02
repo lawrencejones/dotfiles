@@ -1,10 +1,13 @@
 #!/bin/sh
 
+# Source amazon enhancements
+ENV_IMP="/apollo/env/envImprovement/var/bashrc"
+[ -s $ENV_IMP ] && source $ENV_IMP  # This loads nvm
+
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/sbin:$PATH
-PATH=/apollo/env/SDETools/bin:$PATH
 
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
 # Load in the RVM
@@ -64,8 +67,10 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
+
 # Source variables
 source ~/.bash_vars
+
 # Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases
