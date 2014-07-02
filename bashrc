@@ -4,6 +4,7 @@
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/sbin:$PATH
+PATH=/apollo/env/SDETools/bin:$PATH
 
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
 # Load in the RVM
@@ -15,7 +16,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Add npm locations to path if node exists
-if [ $(type node >/dev/null; echo $?) == "0" ]; then
+if [ -n "$(node --version 2>/dev/null)" ]; then
   export NODE_PATH="/usr/local/lib/node_modules:/usr/local/lib/node:$NODE_PATH"
   export PATH="/usr/local/share/npm/bin:$PATH"
   export PATH="/usr/local/bin/npm:$PATH"
