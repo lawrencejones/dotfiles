@@ -55,7 +55,7 @@ alias ncm='ncmpcpp -h $pi'
 #----------------------------------------------------------------
 
 #------- Rails Aliases ------------------------------------------
-alias app-root='cd $(get-app-root)'
+alias app-root='cd $(~/.scripts/get-app-root)'
 #----------------------------------------------------------------
 
 alias gs='git status'
