@@ -166,6 +166,10 @@ function! SetupJava()
   set foldlevel=1
   set foldmethod=indent
 
+  " Adjust tab spacing to 4 spaces
+  set shiftwidth=4
+  set tabstop=4
+
   " Enable autocompletion with C-n
   set complete=.,w,b,u,t,i
 
