@@ -62,7 +62,7 @@ then
   alias grep='ggrep --color=auto'
 fi
 
-alias ls='ls --color'
+alias ls='ls -G'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
