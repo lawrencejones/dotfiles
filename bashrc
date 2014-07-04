@@ -9,6 +9,9 @@ ENV_IMP="/apollo/env/envImprovement/var/bashrc"
 PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/sbin:$PATH
 
+# Enable spell checking for commands
+shopt -s cdspell
+
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
 # Load in the RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
