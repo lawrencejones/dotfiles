@@ -14,8 +14,11 @@ PATH=/usr/local/sbin:$PATH
 cmds="ls grep find dircolors"
 for cmd in $cmds
 do
-  which g$cmd >/dev/null 2>/dev/null && alias $cmd="g$cmd"
+  $(which g$cmd >/dev/null 2>/dev/null) && alias $cmd="g$cmd"
 done
+
+# Enable spell checking for commands
+shopt -s cdspell
 
 ### CONFIGURE TERMINAL COLORS ##################################################
 # Set the ls folder and file color support
@@ -56,7 +59,7 @@ fi
 # If supported, then run dircolors
 if [[ $(dircolors 2>/dev/null) ]];
 then
-  gls --color=always &>/dev/null && alias ls='gls --color=always'
+  $(gls --color=always &>/dev/null) && alias ls='gls --color=always'
   test -r ~/.dircolors/dircolors.$theme &&
     eval "$(dircolors -b ~/.dircolors/dircolors.$theme)" || eval "$(dircolors -b)"
 else
