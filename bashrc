@@ -61,7 +61,7 @@ if [[ $(dircolors 2>/dev/null) ]];
 then
   $(gls --color=always &>/dev/null) && alias ls='gls --color=always'
   test -r ~/.dircolors/dircolors.$theme &&
-    eval "$(dircolors -b ~/.dircolors/dircolors.$theme)" || eval "$(dircolors -b)"
+    eval "$(dircolors -b ~/.dircolors/dircolors.$theme &>/dev/null)" || eval "$(dircolors -b)"
 else
   # Default ls and colors
   export LSCOLORS=GxFxCxDxBxegedabagaced
