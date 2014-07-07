@@ -3,6 +3,10 @@
 ### SOURCE AMAZON ENHANCEMENTS #################################################
 ENV_IMP="/apollo/env/envImprovement/var/bashrc"
 [ -s $ENV_IMP ] && source $ENV_IMP  # This loads nvm
+PATH=$PATH:/apollo/env/HardyTools/bin
+
+# Setup brazil runtime exec alias
+alias br='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-runtime-exec'
 
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting

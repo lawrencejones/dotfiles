@@ -37,6 +37,8 @@ alias wacc='cd /Users/lawrencejones/Desktop/Projects/wacc'
 alias labs='cd /Users/lawrencejones/Desktop/Labs'
 alias dirpintos='cd /Users/lawrencejones/Desktop/Projects/pintos'
 alias cgcu='cd ~/Projects/cgcu-scores'
+alias hardy='cd /workplace/lawrjone/HardyTools'
+alias site='cd /workplace/lawrjone/HardyTools/src/HardyToolsWebsite/rails-root'
 #----------------------------------------------------------------
 
 #------- Java/Coffeescript aliases ------------------------------
