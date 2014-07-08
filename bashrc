@@ -8,6 +8,12 @@ PATH=$PATH:/apollo/env/HardyTools/bin
 # Setup brazil runtime exec alias
 alias br='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-runtime-exec'
 
+# Alias jruby/rake commands for dev box
+alias jruby='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby'
+alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/rake'
+alias jirb='$(brazil-bootstrap)/jruby1.7.x/dist/bin/irb'
+alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $(brazil-bootstrap)/jruby1.7.x/ruby/gems/shared/bin/rails'
+
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.rvm/bin
