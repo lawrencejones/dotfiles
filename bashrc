@@ -19,6 +19,9 @@ alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $(brazil-bootstrap)/
 PATH=$PATH:$HOME/.rvm/bin
 PATH=/usr/local/sbin:$PATH
 
+# Add selecta to path for vim
+PATH=$PATH:$HOME/.vim/bundle/selecta
+
 ### SELECT GNU COMMANDS ########################################################
 # For those commands that require a g prefix, select if exist
 cmds="ls grep find dircolors"
@@ -79,6 +82,9 @@ fi
 
 # If we have gnu-grep
 $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
+
+# Force color output in tree
+alias tree='tree -C'
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
 

@@ -7,14 +7,14 @@ call vundle#begin()
 
 " --------------- Plugins installed -------------------------------------------
 
-Plugin 'gmarik/Vundle.vim' 
+Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
-Plugin 'wincent/Command-T'
+Plugin 'garybernhardt/selecta' " Ruby script
 Plugin 'ap/vim-css-color'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
@@ -176,3 +176,27 @@ function! SetupJava()
 endfunction
 
 autocmd BufNewFile,BufRead *.java call SetupJava()
+
+" --------------- Selecta Configuration ---------------------------------------
+
+" Run a given vim command on the results of fuzzy selecting from a given shell
+" command. See usage below.
+function! SelectaCommand(choice_command, selecta_args, vim_command)
+  try
+    silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+  catch /Vim:Interrupt/
+    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " leftovers from selecta on the screen
+    redraw!
+    return
+  endtry
+  redraw!
+  exec a:vim_command . " " . selection
+endfunction
+
+" Find all files in all non-dot directories starting in the working directory.
+" Fuzzy select one of those. Open the selected file with :e.
+nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+
+
