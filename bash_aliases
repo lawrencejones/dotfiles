@@ -60,5 +60,11 @@ alias ncm='ncmpcpp -h $pi'
 alias app-root='cd $(~/.scripts/get-app-root)'
 #----------------------------------------------------------------
 
+#------- Git Aliases --------------------------------------------
 alias gs='git status'
+alias ga='git add -A'
+alias gc='git commit -a'
+alias gac='git add -A :/ && git commit -a'
+#----------------------------------------------------------------
+
 alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"

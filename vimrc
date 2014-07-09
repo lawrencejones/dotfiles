@@ -38,7 +38,7 @@ set t_Co=256 " Force 256 colors
 " --------------- Indentation and Formatting ----------------------------------
 
 set autoindent      " Copy indent from current line when starting a new one
-set smartindent     " Smart autoindenting when starting a new line 
+set smartindent     " Smart autoindenting when starting a new line
 set smarttab        " <Tab> depends on the value of 'shiftwidth'
 set expandtab       " Use appropriate numebr of spaces rather than tab
 set shiftround      " Round indent to multiple of shiftwidth
@@ -60,6 +60,21 @@ set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
 autocmd BufRead * set tags=./tags,tags;$HOME  " Look for tags
+autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+
+" --------------- ColorColumn Toggling ----------------------------------------
+
+" Alternately toggles a color column on or off. Mapped to leader
+" key c.
+function! g:ToggleColorColumn()
+  if &colorcolumn != ''
+    setlocal colorcolumn&
+  else
+    setlocal colorcolumn=80
+  endif
+endfunction
+
+nnoremap <leader>c :call g:ToggleColorColumn()<CR>
 
 " --------------- Searching Settings ------------------------------------------
 
@@ -67,7 +82,6 @@ set hlsearch        " highlight all matches of a search pattern
 set incsearch       " Show where the pattern, while typying a search command
 set smartcase       " Override 'ignorecase' for upper case search patterns
 set ignorecase      " Ignore case of normal letters
-
 
 " --------------- Filetype Preferences ----------------------------------------
 
@@ -95,11 +109,11 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 " --------------- General Shortcuts -------------------------------------------
 
 " Enable yanking to system clipboard
-map <leader> y('<,'>! pbcopy; pbpaste) 
+map <leader>y('<,'>! pbcopy; pbpaste)
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
 " Map space to toggle current fold
-noremap <Space> za  
+noremap <Space> za
 
 " --------------- Coffee-Script Preferences -----------------------------------
 
@@ -122,7 +136,6 @@ if executable('coffeetags')
         \ }
         \ }
 endif
-
 
 " --------------- Apiary Preferences ------------------------------------------
 
@@ -182,6 +195,7 @@ autocmd BufNewFile,BufRead *.java call SetupJava()
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
+
   try
     silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
   catch /Vim:Interrupt/
@@ -192,6 +206,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   endtry
   redraw!
   exec a:vim_command . " " . selection
+
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
