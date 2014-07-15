@@ -7,7 +7,10 @@ call vundle#begin()
 
 " --------------- Plugins installed -------------------------------------------
 
+" Allow vundle to manage itself
 Plugin 'gmarik/Vundle.vim'
+
+" Bundle manifest
 Plugin 'scrooloose/syntastic'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
