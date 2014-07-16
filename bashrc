@@ -82,6 +82,9 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
 fi
 
 ### CONFIGURE LS AND GREP ######################################################
+# Alias ls colors if supported
+$(ls --color=always &>/dev/null) && alias ls='ls --color=always'
+
 # If supported, then run dircolors
 if [[ $(dircolors 2>/dev/null) ]];
 then
