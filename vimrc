@@ -95,7 +95,7 @@ au BufRead,BufNewFile *.pro set syntax=prolog " Detect prolog
 " --------------- GitGutter Plugin Settings -----------------------------------
 
 let g:gitgutter_enabled = 0             " Start by default
-autocmd BufRead * GitGutterSignsEnable  " Turn gitgutter on
+autocmd BufRead * GitGutterEnable       " Turn gitgutter on
 
 " Enabled/Disabled GitGutter with '\g'
 map <Leader>g :GitGutterToggle<CR>
