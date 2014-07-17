@@ -210,7 +210,12 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find * -path .git -o -path node_modules -o -prune -type f", "", ":e")<cr>
+nnoremap <leader>t :call SelectaCommand("find . \\(
+      \ -path ./.git -o
+      \ -path ./node_modules -o
+      \ -path ./logs -o
+      \ -path ./tmp
+      \ \\) -prune -o -type f", "", ":e")<cr>
 
 
 
