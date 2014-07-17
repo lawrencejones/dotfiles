@@ -18,7 +18,7 @@ Plugin 'garybernhardt/selecta' " Ruby script
 Plugin 'ap/vim-css-color'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'bronson/vim-trailing-whitespace'
+" Plugin 'bronson/vim-trailing-whitespace'
 
 call vundle#end()
 
@@ -59,8 +59,7 @@ set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
-autocmd BufRead * set tags=./tags,tags;$HOME  " Look for tags
-autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 
 " --------------- ColorColumn Toggling ----------------------------------------
 
@@ -211,7 +210,7 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find * -type f", "", ":e")<cr>
+nnoremap <leader>t :call SelectaCommand("find * -path .git -o -path node_modules -o -prune -type f", "", ":e")<cr>
 
 
 
