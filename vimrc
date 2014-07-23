@@ -18,7 +18,7 @@ Plugin 'garybernhardt/selecta' " Ruby script
 Plugin 'ap/vim-css-color'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
-" Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'mintplant/vim-literate-coffeescript'
 
 call vundle#end()
 
