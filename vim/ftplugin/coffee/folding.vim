@@ -41,3 +41,4 @@ function! GetCoffeeFold(lnum)
   endif
 
 endfunction
+
