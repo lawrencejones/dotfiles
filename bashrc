@@ -12,11 +12,12 @@ then
 
   # Setup brazil runtime exec alias
   alias br='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-runtime-exec'
+  alias brazil-third-party-tool='/apollo/env/BrazilThirdPartyTool/bin/brazil-third-party-tool'
 
 fi
 
 # If brazil is available
-if [ -n "$(brazil-bootstrap 2>/dev/null)" ];
+if [ -n "$(brazil-bootstrap --help 2>/dev/null)" ];
 then
 
   # Alias jruby/rake commands for dev box
