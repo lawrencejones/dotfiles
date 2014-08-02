@@ -7,7 +7,7 @@ if [ -d /apollo/env/SDETools ];
 then
 
   ENV_IMP="/apollo/env/envImprovement/var/bashrc"
-  [ -s $ENV_IMP ] && source $ENV_IMP  # This loads nvm
+  [ -s $ENV_IMP ] && source $ENV_IMP
   PATH=$PATH:/apollo/env/HardyTools/bin
 
   # Setup brazil runtime exec alias
@@ -34,6 +34,10 @@ PATH=/usr/local/sbin:$PATH
 
 # Add selecta to path for vim
 PATH=$PATH:$HOME/.vim/bundle/selecta
+
+# Loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 ### SELECT GNU COMMANDS ########################################################
 # For those commands that require a g prefix, select if exist
@@ -103,6 +107,12 @@ $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
 alias tree='tree -C'
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
+
+# If brew is installed, and bash completion found, then load it!
+$(brew --prefix &>/dev/null) &&
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 
 # Source variables
 source ~/.bash_vars
