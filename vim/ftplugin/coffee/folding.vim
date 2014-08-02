@@ -6,6 +6,7 @@ function! IndentLevel(lnum)
 endfunction
 
 function! NextNonBlankLine(lnum)
+
   let numlines = line('$')
   let current = a:lnum + 1
 
@@ -20,6 +21,7 @@ function! NextNonBlankLine(lnum)
   endwhile
 
   return -2
+
 endfunction
 
 

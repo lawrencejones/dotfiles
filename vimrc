@@ -5,6 +5,10 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Source ninja
+let ninja_file=expand('/apollo/env/envImprovement/var/vimruntimehook')
+if filereadable(ninja_file) | exec "source " . ninja_file | endif
+
 " --------------- Plugins installed -------------------------------------------
 
 Plugin 'gmarik/Vundle.vim'
@@ -75,7 +79,7 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 
-nnoremap <leader>c :call g:ToggleColorColumn()<CR>
+nnoremap <leader>C :call g:ToggleColorColumn()<CR>
 
 " --------------- Searching Settings ------------------------------------------
 
@@ -113,11 +117,23 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 map <leader>y('<,'>! pbcopy; pbpaste)
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
-" Map space to toggle current fold
-noremap <Space> za
 
 " --------------- Folding! ----------------------------------------------------
 
+" Map space to toggle current fold
+noremap <Space> za
+
+" Turn foldcolumn viewing on for a fold visualization
+nnoremap <leader>f :call FoldColumnToggle()<cr>
+function! FoldColumnToggle()
+  if &foldcolumn
+    setlocal foldcolumn=0
+  else
+    setlocal foldcolumn=4
+  endif
+endfunction
+
+" Configure fold status text
 if has("folding")
 
   set foldtext=MyFoldText()
@@ -243,6 +259,19 @@ autocmd BufNewFile,BufRead *.java call SetupJava()
 
 " --------------- Selecta Configuration ---------------------------------------
 
+function! SetupRuby()
+
+  " Configure syntax folding, with base foldlevel
+  set foldmethod=syntax
+  set foldlevel=1
+
+endfunction
+
+autocmd BufNewFile,BufRead *.rb call SetupRuby()
+autocmd BufNewFile,BufRead *_spec.rb set ft=ruby.rspec
+
+" --------------- Selecta Configuration ---------------------------------------
+
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
@@ -269,6 +298,5 @@ nnoremap <leader>t :call SelectaCommand("find . \\(
       \ -path ./tmp -o
       \ -path ./public
       \ \\) -prune -o -type f", "", ":e")<cr>
-
 
 
