@@ -5,6 +5,10 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Source ninja
+let ninja_file=expand('/apollo/env/envImprovement/var/vimruntimehook')
+if filereadable(ninja_file) | exec "source " . ninja_file | endif
+
 " --------------- Plugins installed -------------------------------------------
 
 " Allow vundle to manage itself
@@ -21,7 +25,8 @@ Plugin 'garybernhardt/selecta' " Ruby script
 Plugin 'ap/vim-css-color'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'mintplant/vim-literate-coffeescript'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -35,8 +40,9 @@ let g:tagbar_left=1           " Vim tagbar shortcut
 colorscheme molokai
 let g:molokai_original = 1
 
-set t_ut=    " Disable deleted coloring
-set t_Co=256 " Force 256 colors
+set t_ut=             " Disable deleted coloring
+set t_Co=256          " Force 256 colors
+syn sync fromstart    " Calculate syntax colors from start of file
 
 " --------------- Indentation and Formatting ----------------------------------
 
@@ -62,8 +68,7 @@ set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
-autocmd BufRead * set tags=./tags,tags;$HOME  " Look for tags
-autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 
 " --------------- ColorColumn Toggling ----------------------------------------
 
@@ -77,7 +82,7 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 
-nnoremap <leader>c :call g:ToggleColorColumn()<CR>
+nnoremap <leader>C :call g:ToggleColorColumn()<CR>
 
 " --------------- Searching Settings ------------------------------------------
 
@@ -98,7 +103,7 @@ au BufRead,BufNewFile *.pro set syntax=prolog " Detect prolog
 " --------------- GitGutter Plugin Settings -----------------------------------
 
 let g:gitgutter_enabled = 0             " Start by default
-autocmd BufRead * GitGutterSignsEnable  " Turn gitgutter on
+autocmd BufRead * GitGutterEnable       " Turn gitgutter on
 
 " Enabled/Disabled GitGutter with '\g'
 map <Leader>g :GitGutterToggle<CR>
@@ -115,8 +120,70 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 map <leader>y('<,'>! pbcopy; pbpaste)
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
+
+" --------------- Folding! ----------------------------------------------------
+
 " Map space to toggle current fold
 noremap <Space> za
+
+" Turn foldcolumn viewing on for a fold visualization
+nnoremap <leader>f :call FoldColumnToggle()<cr>
+function! FoldColumnToggle()
+  if &foldcolumn
+    setlocal foldcolumn=0
+  else
+    setlocal foldcolumn=4
+  endif
+endfunction
+
+" Configure fold status text
+if has("folding")
+
+  set foldtext=MyFoldText()
+
+  function! MyFoldText()
+
+    " for now, just don't try if version isn't 7 or higher
+    if v:version < 701
+      return foldtext()
+    endif
+
+    " clear fold from fillchars to set it up the way we want later
+    let &l:fillchars = substitute(&l:fillchars,',\?fold:.','','gi')
+    let l:numwidth = (v:version < 701 ? 8 : &numberwidth)
+
+    if &fdm=='diff'
+      let l:linetext=''
+      let l:foldtext='---------- '.(v:foldend-v:foldstart+1).' lines the same ----------'
+      let l:align = winwidth(0)-&foldcolumn-(&nu ? Max(strlen(line('$'))+1, l:numwidth) : 0)
+      let l:align = (l:align / 2) + (strlen(l:foldtext)/2)
+
+      " note trailing space on next line
+      setlocal fillchars+=fold:\ 
+
+    elseif !exists('b:foldpat') || b:foldpat==0
+      let l:foldtext = ' '.(v:foldend-v:foldstart).' lines folded'.v:folddashes.'|'
+      let l:endofline = (&textwidth>0 ? &textwidth : 80)
+      let l:linetext = strpart(getline(v:foldstart),0,l:endofline-strlen(l:foldtext))
+      let l:align = l:endofline-strlen(l:linetext)
+      setlocal fillchars+=fold:-
+
+    elseif b:foldpat==1
+      let l:align = winwidth(0)-&foldcolumn-(&nu ? Max(strlen(line('$'))+1, l:numwidth) : 0)
+      let l:foldtext = ' '.v:folddashes
+      let l:linetext = substitute(getline(v:foldstart),'\s\+$','','')
+      let l:linetext .= ' ---'.(v:foldend-v:foldstart-1).' lines--- '
+      let l:linetext .= substitute(getline(v:foldend),'^\s\+','','')
+      let l:linetext = strpart(l:linetext,0,l:align-strlen(l:foldtext))
+      let l:align -= strlen(l:linetext)
+      setlocal fillchars+=fold:-
+    endif
+
+    return printf('%s%*s', l:linetext, l:align, l:foldtext)
+
+  endfunction
+
+endif
 
 " --------------- Coffee-Script Preferences -----------------------------------
 
@@ -195,6 +262,19 @@ autocmd BufNewFile,BufRead *.java call SetupJava()
 
 " --------------- Selecta Configuration ---------------------------------------
 
+function! SetupRuby()
+
+  " Configure syntax folding, with base foldlevel
+  set foldmethod=syntax
+  set foldlevel=1
+
+endfunction
+
+autocmd BufNewFile,BufRead *.rb call SetupRuby()
+autocmd BufNewFile,BufRead *_spec.rb set ft=ruby.rspec
+
+" --------------- Selecta Configuration ---------------------------------------
+
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
@@ -214,7 +294,12 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find * -type f \( -path .git -o -path node_modules \) -prune -o", "", ":e")<cr>
-
+nnoremap <leader>t :call SelectaCommand("find . \\(
+      \ -path ./.git -o
+      \ -path ./node_modules -o
+      \ -path ./logs -o
+      \ -path ./tmp -o
+      \ -path ./public
+      \ \\) -prune -o -type f", "", ":e")<cr>
 
 

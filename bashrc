@@ -12,11 +12,13 @@ then
 
   # Setup brazil runtime exec alias
   alias br='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-runtime-exec'
+  alias bt='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-test-exec'
+  alias brazil-third-party-tool='/apollo/env/BrazilThirdPartyTool/bin/brazil-third-party-tool'
 
 fi
 
 # If brazil is available
-if [ -n "$(brazil-bootstrap 2>/dev/null)" ];
+if [ -n "$(brazil-bootstrap --help 2>/dev/null)" ];
 then
 
   # Alias jruby/rake commands for dev box
@@ -24,6 +26,7 @@ then
   alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/rake'
   alias jirb='$(brazil-bootstrap)/jruby1.7.x/dist/bin/irb'
   alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $(brazil-bootstrap)/jruby1.7.x/ruby/gems/shared/bin/rails'
+  alias guard-rspec='brazil-test-exec guard start -P rspec'
 
 fi
 
@@ -82,6 +85,9 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
 fi
 
 ### CONFIGURE LS AND GREP ######################################################
+# Alias ls colors if supported
+$(ls --color=always &>/dev/null) && alias ls='ls --color=always'
+
 # If supported, then run dircolors
 if [[ $(dircolors 2>/dev/null) ]];
 then

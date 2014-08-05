@@ -1,0 +1,11 @@
+[user]
+	name = Lawrence Jones
+	email = lawrjone@amazon.com
+[push]
+	default = matching
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[github]
+	user = LawrenceJones
+[ghi]
+	token = !security find-internet-password -a LawrenceJones -s github.com -l 'ghi token' -w
