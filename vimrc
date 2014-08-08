@@ -62,6 +62,7 @@ set shiftwidth=2    " Values used by smarttab setting
 set nu                            " Turn on numbers
 set ruler                         " Show line and col
 set mouse=a                       " Enable mouse scrolling, pane selection
+set nobackup                      " Prevents potential slow write
 set statusline+=%F                " Put filepath in status
 set laststatus=2                  " Set status to visible
 set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
@@ -69,6 +70,9 @@ set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
 autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
+let g:syntastic_mode_map = {
+  \ "mode": "active",
+  \ "passive_filetypes": ["haml", "scss", "sass"] }
 
 " --------------- ColorColumn Toggling ----------------------------------------
 
