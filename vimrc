@@ -92,7 +92,6 @@ set ignorecase      " Ignore case of normal letters
 
 au FileType make set noexpandtab  " Prevent expandtab in makefiles
 au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make " Set filetype
-au BufRead,BufNewFile Jakefile.* set fdm=marker " Set marker foldmethod jake
 au BufRead,BufNewFile package.json set ft=javascript  " Force JSON hl
 au BufReadPost *.pegjs set syntax=javascript  " Force JS hl
 au BufRead,BufNewFile *.pro set syntax=prolog " Detect prolog
