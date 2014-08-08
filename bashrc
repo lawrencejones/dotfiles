@@ -43,6 +43,9 @@ PATH=/usr/local/sbin:$PATH
 # Add selecta to path for vim
 PATH=$PATH:$HOME/.vim/bundle/selecta
 
+# Add brew path
+PATH=/usr/local/bin:$PATH
+
 # Loads nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
