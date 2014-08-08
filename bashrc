@@ -21,11 +21,16 @@ fi
 if [ -n "$(brazil-bootstrap --help 2>/dev/null)" ];
 then
 
+  # Allow faster compilation
+  export jRubyFlags='-J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1'
+
+  # Slow commands, speed with faster compilation
+  alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rake'
+  alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rails'
+
   # Alias jruby/rake commands for dev box
   alias jruby='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby'
-  alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/rake'
   alias jirb='$(brazil-bootstrap)/jruby1.7.x/dist/bin/irb'
-  alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $(brazil-bootstrap)/jruby1.7.x/ruby/gems/shared/bin/rails'
   alias guard-rspec='brazil-test-exec guard start -P rspec'
 
 fi
