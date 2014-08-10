@@ -7,7 +7,7 @@ if [ -d /apollo/env/SDETools ];
 then
 
   ENV_IMP="/apollo/env/envImprovement/var/bashrc"
-  [ -s $ENV_IMP ] && source $ENV_IMP  # This loads nvm
+  [ -s $ENV_IMP ] && source $ENV_IMP
   PATH=$PATH:/apollo/env/HardyTools/bin
 
   # Setup brazil runtime exec alias
@@ -21,11 +21,16 @@ fi
 if [ -n "$(brazil-bootstrap --help 2>/dev/null)" ];
 then
 
+  # Allow faster compilation
+  export jRubyFlags='-J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1'
+
+  # Slow commands, speed with faster compilation
+  alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rake'
+  alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rails'
+
   # Alias jruby/rake commands for dev box
   alias jruby='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby'
-  alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/rake'
   alias jirb='$(brazil-bootstrap)/jruby1.7.x/dist/bin/irb'
-  alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $(brazil-bootstrap)/jruby1.7.x/ruby/gems/shared/bin/rails'
   alias guard-rspec='brazil-test-exec guard start -P rspec'
 
 fi
@@ -37,6 +42,10 @@ PATH=/usr/local/sbin:$PATH
 
 # Add selecta to path for vim
 PATH=$PATH:$HOME/.vim/bundle/selecta
+
+# Loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 ### SELECT GNU COMMANDS ########################################################
 # For those commands that require a g prefix, select if exist
@@ -106,6 +115,12 @@ $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
 alias tree='tree -C'
 
 ### SOURCE ANY EXTERNAL SCRIPTS ################################################
+
+# If brew is installed, and bash completion found, then load it!
+$(brew --prefix &>/dev/null) &&
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
 
 # Source variables
 source ~/.bash_vars
