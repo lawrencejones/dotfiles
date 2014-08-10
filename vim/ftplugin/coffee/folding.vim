@@ -1,4 +1,5 @@
 setlocal foldmethod=expr
+setlocal foldlevel=1
 setlocal foldexpr=GetCoffeeFold(v:lnum)
 
 function! IndentLevel(lnum)

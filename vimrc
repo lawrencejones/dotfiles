@@ -44,6 +44,9 @@ set t_ut=             " Disable deleted coloring
 set t_Co=256          " Force 256 colors
 syn sync fromstart    " Calculate syntax colors from start of file
 
+" Forces a syntax hl refresh
+nnoremap <leader>S :syn sync fromstart<CR>
+
 " --------------- Indentation and Formatting ----------------------------------
 
 set autoindent      " Copy indent from current line when starting a new one
