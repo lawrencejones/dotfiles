@@ -1,6 +1,10 @@
+# Github and services ######################################
+
 Host github.com
   Hostname ssh.github.com
   Port 443
+
+# Imperial DoC #############################################
 
 Host doc
   Hostname shell1.doc.ic.ac.uk
@@ -17,18 +21,22 @@ Host *.doc
   User lmj112
   ProxyCommand ssh -q doc nc -q0 %h.ic.ac.uk 22
 
-Host sesquis
-  Hostname sesquis.noip.me
-  User lawrencejones
+# Sesquis ##################################################
 
-Host sesquis.dev
-  Hostname ec2-54-191-175-14.us-west-2.compute.amazonaws.com
+Host sesquis.beta
+  Hostname ec2-54-191-173-178.us-west-2.compute.amazonaws.com
+  User ubuntu
   IdentityFile ~/.ssh/keys/lawr_key.pem
 
-Host vm.amazon
+# AWS Instances ############################################
+
+# Amazon ###################################################
+
+Host amazon.vm
   Hostname lawrjone-1.desktop.amazon.com
   User lawrjone
 
-Host ubuntu.amazon
+Host amazon.ubuntu
   Hostname ud43d7e417eed53b2a10d
   User lawrjone
+
