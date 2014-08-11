@@ -4,6 +4,7 @@ _trunc_path()
   #   How many characters of the $PWD should be kept
   local pwdmaxlen=30
   local wd=$1
+
   #   Indicator that there has been directory truncation:
   local trunc_symbol="..."
   if [ "${#wd}" -gt $pwdmaxlen ]
@@ -17,8 +18,9 @@ _trunc_path()
 }
 _pwd_ps1()
 {
-  # -P to resolve symlinks
-  local wd=`pwd -P`
+  # Include -P to resolve symlinks
+  local wd=`pwd` # -P`
+
   local git_root=`git rev-parse --show-toplevel 2>/dev/null`
   if [ -n "$git_root" ];
   then # ON GIT
