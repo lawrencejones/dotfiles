@@ -1,39 +1,7 @@
 #!/bin/sh
 
 ### SOURCE AMAZON ENHANCEMENTS #################################################
-
-# If SDETools is deployed
-if [ -d /apollo/env/SDETools ];
-then
-
-  ENV_IMP="/apollo/env/envImprovement/var/bashrc"
-  [ -s $ENV_IMP ] && source $ENV_IMP
-  PATH=$PATH:/apollo/env/HardyTools/bin
-
-  # Setup brazil runtime exec alias
-  alias br='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-runtime-exec'
-  alias bt='LD_LIBRARY_PATH=$(brazil-path run.lib) /apollo/env/SDETools/bin/brazil-test-exec'
-  alias brazil-third-party-tool='/apollo/env/BrazilThirdPartyTool/bin/brazil-third-party-tool'
-
-fi
-
-# If brazil is available
-if [ -n "$(brazil-bootstrap --help 2>/dev/null)" ];
-then
-
-  # Allow faster compilation
-  export jRubyFlags='-J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1'
-
-  # Slow commands, speed with faster compilation
-  alias jrake='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rake'
-  alias jrails='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby $jRubyFlags -S rails'
-
-  # Alias jruby/rake commands for dev box
-  alias jruby='$(brazil-bootstrap)/jruby1.7.x/dist/bin/jruby'
-  alias jirb='$(brazil-bootstrap)/jruby1.7.x/dist/bin/irb'
-  alias guard-rspec='brazil-test-exec guard start -P rspec'
-
-fi
+[ -e ~/.amazonrc ] && source ~/.amazonrc
 
 ### PATH CONFIGURATION #########################################################
 # Add RVM to PATH for scripting
