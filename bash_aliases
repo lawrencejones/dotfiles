@@ -3,6 +3,7 @@
 #------- Editing of .profile file and refresh command -----------
 alias profile='vim ~/.profile && source ~/.profile'
 alias aliases='vim ~/.bash_aliases && source ~/.bash_aliases'
+alias dotfiles='cd ~/dotfiles'
 #----------------------------------------------------------------
 
 #------- Utilities ----------------------------------------------

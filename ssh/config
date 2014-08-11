@@ -1,10 +1,11 @@
-Host vm.amazon
-  Hostname lawrjone-1.desktop.amazon.com
-  User lawrjone
+Host github.com
+  Hostname ssh.github.com
+  Port 443
 
-Host ubuntu.amazon
-  Hostname ud43d7e417eed53b2a10d
-  User lawrjone
+Host doc
+  Hostname shell1.doc.ic.ac.uk
+  User lmj112
+  ServerAliveInterval 300
 
 Host docvm
   Hostname cvm-g1327131.doc.ic.ac.uk
@@ -13,10 +14,21 @@ Host docvm
   ProxyCommand ssh -q doc nc -q0 %h 22
 
 Host *.doc
+  User lmj112
   ProxyCommand ssh -q doc nc -q0 %h.ic.ac.uk 22
 
-RemoteForward 2224 127.0.0.1:2224
+Host sesquis
+  Hostname sesquis.noip.me
+  User lawrencejones
 
 Host sesquis.dev
   Hostname ec2-54-191-175-14.us-west-2.compute.amazonaws.com
-  IdentityFile ~/.ssh/sesquis_key.pem
+  IdentityFile ~/.ssh/keys/lawr_key.pem
+
+Host vm.amazon
+  Hostname lawrjone-1.desktop.amazon.com
+  User lawrjone
+
+Host ubuntu.amazon
+  Hostname ud43d7e417eed53b2a10d
+  User lawrjone

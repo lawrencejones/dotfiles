@@ -44,6 +44,9 @@ set t_ut=             " Disable deleted coloring
 set t_Co=256          " Force 256 colors
 syn sync fromstart    " Calculate syntax colors from start of file
 
+" Forces a syntax hl refresh
+nnoremap <leader>S :syn sync fromstart<CR>
+
 " --------------- Indentation and Formatting ----------------------------------
 
 set autoindent      " Copy indent from current line when starting a new one
@@ -97,11 +100,12 @@ set ignorecase      " Ignore case of normal letters
 
 " --------------- Filetype Preferences ----------------------------------------
 
-au FileType make set noexpandtab  " Prevent expandtab in makefiles
-au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make " Set filetype
-au BufRead,BufNewFile package.json set ft=javascript  " Force JSON hl
-au BufReadPost *.pegjs set syntax=javascript  " Force JS hl
-au BufRead,BufNewFile *.pro set syntax=prolog " Detect prolog
+au FileType make set noexpandtab                " Force tabs in makefiles
+au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make    " Set filetype
+au BufRead,BufNewFile package.json set ft=javascript          " Force JSON hl
+au BufReadPost *.pegjs set syntax=javascript    " Force JS hl
+au BufRead,BufNewFile *.pro set syntax=prolog   " Detect prolog
+au BufRead,BufNewFile Gemfile set ft=ruby       " Set ruby syntax for Gemfiles
 
 " --------------- GitGutter Plugin Settings -----------------------------------
 
