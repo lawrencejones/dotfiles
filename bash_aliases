@@ -22,6 +22,7 @@ alias doc-mongo='mongo dbh75.mongolab.com:27757/heroku_app23829204 -u heroku_app
 alias pushh='git push heroku'
 alias twoup='lpr -o number-up=2 -o page-border=single'
 alias tmux-attach='tmux attach-session -t'
+alias mocha='mocha --compilers coffee:coffee-script/register'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
