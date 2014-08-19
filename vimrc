@@ -16,6 +16,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Bundle manifest
 Plugin 'scrooloose/syntastic'
+Plugin 'slim-template/vim-slim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
 Plugin 'airblade/vim-gitgutter'
