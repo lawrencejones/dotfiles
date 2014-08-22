@@ -40,3 +40,6 @@ Host amazon.ubuntu
   Hostname ud43d7e417eed53b2a10d
   User lawrjone
 
+Host amazon.mbp
+  Hostname 14109fce33b9.ant.amazon.com
+  User lawrjone
