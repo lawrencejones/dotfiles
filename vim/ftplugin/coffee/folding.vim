@@ -28,10 +28,6 @@ endfunction
 
 function! GetCoffeeFold(lnum)
 
-  " if getline(a:lnum) =~? '\v^\s*$'
-  "   return '-1'
-  " endif
-
   let this_indent = IndentLevel(a:lnum)
   let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
 
