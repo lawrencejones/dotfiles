@@ -9,3 +9,7 @@
 	user = LawrenceJones
 [ghi]
 	token = !security find-internet-password -a LawrenceJones -s github.com -l 'ghi token' -w
+[amazon]
+	append-cr-url = true
+[color]
+	ui = true
