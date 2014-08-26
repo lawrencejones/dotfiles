@@ -28,6 +28,7 @@ Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'mintplant/vim-literate-coffeescript'
 Plugin 'scrooloose/nerdtree'
+Plugin 'lukaszkorecki/CoffeeTags'
 
 call vundle#end()
 
