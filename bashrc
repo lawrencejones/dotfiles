@@ -99,6 +99,9 @@ $(brew --prefix &>/dev/null) &&
 # Source variables
 source ~/.bash_vars
 
+# Source helpers
+source ~/.bash_helpers.sh
+
 # Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases

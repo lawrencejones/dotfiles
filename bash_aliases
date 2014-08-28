@@ -8,7 +8,7 @@ alias dotfiles='cd ~/dotfiles'
 
 #------- Utilities ----------------------------------------------
 alias ll='ls -lh'
-alias clr='clear; clear; clear; clear; clear; clear; clear; clear'
+alias clr='echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n " && clear'
 alias listpath='echo $PATH | tr ":" "\n"'
 alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias wifi='networksetup -setairportnetwork en0 Imperial-WPA'
