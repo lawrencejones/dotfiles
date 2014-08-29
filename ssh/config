@@ -6,20 +6,17 @@ Host github.com
 
 # Imperial DoC #############################################
 
-Host doc
+Host shell1
+  User lmj112
   Hostname shell1.doc.ic.ac.uk
-  User lmj112
-  ServerAliveInterval 300
-
-Host docvm
-  Hostname cvm-g1327131.doc.ic.ac.uk
-  User lmj112
-  ServerAliveInterval 300
-  ProxyCommand ssh -q doc nc -q0 %h 22
 
 Host *.doc
   User lmj112
-  ProxyCommand ssh -q doc nc -q0 %h.ic.ac.uk 22
+  Hostname %h.ic.ac.uk
+
+Host *.doc.ic.ac.uk
+  User lmj112
+  ProxyCommand ssh -q shell1 nc -q0 %h 22
 
 # Sesquis ##################################################
 

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+HOST=$1
+FILE=$2
+
+# Asynchronously ping host, then touch corresponding file
+((ping -c1 $HOST &>/dev/null && touch $FILE) || echo $FILE) &
