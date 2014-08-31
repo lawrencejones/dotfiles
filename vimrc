@@ -79,6 +79,12 @@ set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 
+" HARDMODE
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 let g:syntastic_mode_map = {
   \ "mode": "active",
@@ -131,7 +137,7 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 " --------------- General Shortcuts -------------------------------------------
 
 " Enable yanking to system clipboard
-map <leader>y('<,'>! pbcopy; pbpaste)
+map <leader>y('<,'>! pbcopy; pbpaste<CR>)
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
 

@@ -6,17 +6,14 @@ Host github.com
 
 # Imperial DoC #############################################
 
-Host shell1
+Host doc-shell
   User lmj112
   Hostname shell1.doc.ic.ac.uk
 
 Host *.doc
   User lmj112
   Hostname %h.ic.ac.uk
-
-Host *.doc.ic.ac.uk
-  User lmj112
-  ProxyCommand ssh -q shell1 nc -q0 %h 22
+  ProxyCommand ssh doc-shell nc %h 22
 
 # Sesquis ##################################################
 
