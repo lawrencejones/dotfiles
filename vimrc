@@ -17,6 +17,7 @@ Plugin 'gmarik/Vundle.vim'
 " Bundle manifest
 Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
+Plugin 'tpope/vim-obsession'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
 Plugin 'airblade/vim-gitgutter'
@@ -137,7 +138,12 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 " --------------- General Shortcuts -------------------------------------------
 
 " Enable yanking to system clipboard
-map <leader>y('<,'>! pbcopy; pbpaste<CR>)
+nmap <leader>P :read !pbpaste <CR>
+
+" Enable visual mode system clipboard
+vmap <C-x> :!pbcopy<CR>  
+vmap <C-c> :w !pbcopy<CR><CR> 
+
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
 
