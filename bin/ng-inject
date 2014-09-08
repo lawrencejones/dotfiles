@@ -1,0 +1,30 @@
+#!/usr/bin/env coffee
+
+# Take input from stdin
+require('readline')
+.createInterface
+  input: process.stdin
+  output: process.stdout
+.on 'line', (line) ->
+  new Injector(line)
+
+# Expands an injection line for angular unit tests into a collection
+# of $injector.get clauses. Sorts with $angular deps first.
+class Injector
+
+  constructor: (@line = process.argv[2]) ->
+    ws = @line.match(/^\s*/)
+    console.log @injection()
+    for arg in @getArgs()
+      console.log "#{ws}  #{arg} = $injector.get('#{arg}')"
+
+  injection: ->
+    @line.match(/^((.+)inject\s*)/)[0] + '($injector) ->'
+
+  getArgs: ->
+    @line
+      .match(/inject\s*\(([^\)]+)\)/)[1]
+      .split /,\s*/g
+      .sort (a,b) ->
+        if /^\$/.test(a) then -1 else 1
+
