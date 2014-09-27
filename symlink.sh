@@ -44,4 +44,10 @@ echo -e "\n...done\n"
   git clone https://github.com/gmarik/Vundle.vim $dir/vim/bundle/Vundle.vim
 )
 
+# If tpm is not installed
+[[ -d $dir/tmux/plugins/tpm ]] || (
+  echo Installing tmux plugin manager...
+  git clone https://github.com/tmux-plugins/tpm $dir/tmux/plugins/tpm
+)
+
 echo Complete!
