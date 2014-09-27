@@ -1,0 +1,12 @@
+# Checked into dotfiles source control.
+#
+# Configures default environment variables. This is loaded prior to
+# any specific vars that are configured in the ~/.env file, so set defaults
+# here and override later.
+
+# By default, set dev machine to trigger alpha
+export NODE_ENV=alpha
+
+# Standard easy-type port
+export PORT=4567
+

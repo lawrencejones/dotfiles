@@ -96,16 +96,12 @@ $(brew --prefix &>/dev/null) &&
     . $(brew --prefix)/etc/bash_completion
   fi
 
-# Source variables
-source ~/.bash_vars
+# Configure environment
+source ~/.shared_env
+[ -f ~/.env ] && source ~/.env
 
-# Source helpers
+# Bash specific
 source ~/.bash_helpers.sh
-
-# Source aliases
 source ~/.bash_ps1
 source ~/.bash_aliases
-
-# Well duh
-export EDITOR=vim
 
