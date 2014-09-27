@@ -23,6 +23,7 @@ alias pushh='git push heroku'
 alias twoup='lpr -o number-up=2 -o page-border=single'
 alias tmux-attach='tmux attach-session -t'
 alias mocha='mocha --compilers coffee:coffee-script/register'
+alias indent-pb="pbpaste | sed 's/^/    /g' | pbcopy"
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
@@ -68,6 +69,7 @@ alias gs='git status'
 alias ga='git add -A'
 alias gc='git commit -a'
 alias gac='git add -A :/ && git commit -a'
+alias gd='git diff'
 #----------------------------------------------------------------
 
 alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"

@@ -31,6 +31,9 @@ Plugin 'mintplant/vim-literate-coffeescript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lukaszkorecki/CoffeeTags'
 Plugin 'epeli/slimux'
+Plugin 'vim-scripts/genutils'
+Plugin 'LawrenceJones/vim-multiselect'
+Plugin 'ntpeters/vim-better-whitespace'
 
 call vundle#end()
 
@@ -143,6 +146,28 @@ nmap <leader>P :read !pbpaste <CR>
 " Enable visual mode system clipboard
 vmap <C-x> :!pbcopy<CR>  
 vmap <C-c> :w !pbcopy<CR><CR> 
+
+" Append yanking, store in register R[a]
+"
+" <leader>Ay - will yank the current line into append buffer
+" <leader>ay - will append the current line into buffer
+" <leader>ap - paste buffer
+
+function! ConfigureAppendYanking(reg, prefix)
+
+  let appReg = toupper(a:reg)
+  let setReg = tolower(a:reg)
+
+  for key in [ 'y', 'd' ]
+    execute "map <leader>" . toupper(a:prefix) . ' "' . setReg . key . key
+    execute "map <leader>" . tolower(a:prefix) . ' "' . appReg . key . key
+  endfor
+
+  execute "map <leader>" . tolower(a:prefix) . ' "' . a:reg . 'p'
+
+endfun
+
+call ConfigureAppendYanking('b', 'a')
 
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
@@ -367,19 +392,6 @@ autocmd BufNewFile,BufRead *.java call SetupJava()
 
 " --------------- Selecta Configuration ---------------------------------------
 
-function! SetupRuby()
-
-  " Configure syntax folding, with base foldlevel
-  set foldmethod=syntax
-  set foldlevel=1
-
-endfunction
-
-autocmd BufNewFile,BufRead *.rb call SetupRuby()
-autocmd BufNewFile,BufRead *_spec.rb set ft=ruby.rspec
-
-" --------------- Selecta Configuration ---------------------------------------
-
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
@@ -400,11 +412,12 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>t :call SelectaCommand("find . \\(
-      \ -path ./.git -o
-      \ -path ./node_modules -o
-      \ -path ./logs -o
-      \ -path ./tmp -o
-      \ -path ./public
-      \ \\) -prune -o -type f", "", ":e")<cr>
+      \ -path ./.git -or
+      \ -path ./node_modules -or
+      \ -path ./logs -or
+      \ -path ./tmp -or
+      \ -path ./public -or
+      \ -name tags
+      \ \\) -prune -or -type f -print", "", ":e")<cr>
 
 
