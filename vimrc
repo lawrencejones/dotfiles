@@ -61,7 +61,6 @@ nnoremap <leader>S :syn sync fromstart<CR>
 " --------------- Indentation and Formatting ----------------------------------
 
 set autoindent      " Copy indent from current line when starting a new one
-set smartindent     " Smart autoindenting when starting a new line
 set smarttab        " <Tab> depends on the value of 'shiftwidth'
 set expandtab       " Use appropriate numebr of spaces rather than tab
 set shiftround      " Round indent to multiple of shiftwidth
@@ -124,6 +123,10 @@ au BufReadPost *.pegjs set syntax=javascript    " Force JS hl
 au BufRead,BufNewFile *.pro set syntax=prolog   " Detect prolog
 au BufRead,BufNewFile Gemfile set ft=ruby       " Set ruby syntax for Gemfiles
 
+" --------------- Preferred Syntastic Checkers --------------------------------
+
+let g:syntastic_python_checkers = ['pep8']
+
 " --------------- GitGutter Plugin Settings -----------------------------------
 
 let g:gitgutter_enabled = 0             " Start by default
@@ -140,12 +143,16 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 
 " --------------- General Shortcuts -------------------------------------------
 
-" Enable yanking to system clipboard
+" Paste from system clipboard
 nmap <leader>P :read !pbpaste <CR>
 
-" Enable visual mode system clipboard
-vmap <C-x> :!pbcopy<CR>  
-vmap <C-c> :w !pbcopy<CR><CR> 
+" Enable cut/copy into system clipboard
+" Standard Ctrl-C/X shortcuts
+vmap <C-x> :!pbcopy<CR>
+vmap <C-c> :w !pbcopy<CR><CR>
+
+" Shortcut to destroy trailing whitespace
+nmap <leader>s :%s/\v\s+$//<CR>
 
 " Append yanking, store in register R[a]
 "
@@ -174,10 +181,10 @@ nmap <F8> :TagbarToggle<CR>
 
 " --------------- Tmux Integration --------------------------------------------
 
-if $TMUX != '' 
+if $TMUX != ''
 
   " Integrate movement between tmux/vim panes/windows
- 
+
   function! TmuxMove(direction)
 
     " Check if we are currently focusing on a edge window.
@@ -204,7 +211,7 @@ if $TMUX != ''
       exe 'wincmd ' . a:direction
     end
   endfun
- 
+
   function! TmuxSharedYank()
     " Send the contents of the 't' register to a temporary file, invoke
     " copy to tmux using load-buffer, and then to xclip
@@ -215,14 +222,13 @@ if $TMUX != ''
     call system('tmux load-buffer '.shellescape(tmpfile).';tmux show-buffer | xclip -i -selection clipboard')
     call delete(tmpfile)
   endfunction
- 
+
   function! TmuxSharedPaste()
     " Put tmux copy buffer into the t register, the mapping will handle
     " pasting into the buffer
     let @t = system('xclip -o -selection clipboard | tmux load-buffer -;tmux show-buffer')
   endfunction
- 
- 
+
   nnoremap <silent> <c-w>j :silent call TmuxMove('j')<cr>
   nnoremap <silent> <c-w>k :silent call TmuxMove('k')<cr>
   nnoremap <silent> <c-w>h :silent call TmuxMove('h')<cr>
@@ -231,24 +237,24 @@ if $TMUX != ''
   nnoremap <silent> <c-w><up> :silent call TmuxMove('k')<cr>
   nnoremap <silent> <c-w><left> :silent call TmuxMove('h')<cr>
   nnoremap <silent> <c-w><right> :silent call TmuxMove('l')<cr>
- 
+
   vnoremap <silent> <esc>y "ty:call TmuxSharedYank()<cr>
   vnoremap <silent> <esc>d "td:call TmuxSharedYank()<cr>
   nnoremap <silent> <esc>p :call TmuxSharedPaste()<cr>"tp
-  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp  
+  vnoremap <silent> <esc>p d:call TmuxSharedPaste()<cr>h"tp
 
   set clipboard= " Use this or vim will automatically put deleted text into x11 selection('*' register) which breaks the above map
- 
+
   " Quickly send text to a pane using f6
-  nnoremap <silent> <f6> :SlimuxREPLSendLine<cr>  
+  nnoremap <silent> <f6> :SlimuxREPLSendLine<cr>
   inoremap <silent> <f6> <esc>:SlimuxREPLSendLine<cr>i " Doesn't break out of insert
   vnoremap <silent> <f6> :SlimuxREPLSendSelection<cr>
- 
+
   " Quickly restart your debugger/console/webserver. Eg: if you are developing a node.js web app
   " in the 'serve.js' file you can quickly restart the server with this mapping:
   nnoremap <silent> <f5> :call SlimuxSendKeys('C-C " node serve.js" Enter')<cr>
   " Pay attention to the space before 'node', this is actually required as send-keys will eat the first key
- 
+
 endif
 
 " --------------- Folding! ----------------------------------------------------
@@ -289,7 +295,7 @@ if has("folding")
       let l:align = (l:align / 2) + (strlen(l:foldtext)/2)
 
       " note trailing space on next line
-      setlocal fillchars+=fold:\ 
+      setlocal fillchars+=fold:\
 
     elseif !exists('b:foldpat') || b:foldpat==0
       let l:foldtext = ' '.(v:foldend-v:foldstart).' lines folded'.v:folddashes.'|'
@@ -336,6 +342,11 @@ if executable('coffeetags')
         \ }
         \ }
 endif
+
+" --------------- TinyOS Preferences ------------------------------------------
+
+" Alias the NesC filetype to C
+autocmd BufRead,BufNewFile *.nc set ft=c
 
 " --------------- Apiary Preferences ------------------------------------------
 

@@ -1,3 +1,4 @@
+# vi: set ft=sh:
 # Checked into dotfiles source control.
 #
 # Configures default environment variables. This is loaded prior to
@@ -9,4 +10,20 @@ export NODE_ENV=alpha
 
 # Standard easy-type port
 export PORT=4567
+
+# For obvious reasons...
+export EDITOR=vim
+
+# To allow for standard unix compilation of TinyOS NesC
+export GCC=gcc-4.9
+export GPP=g++-4.9
+
+# Prevent python virtual env from messing with prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Configure TinyOS
+export TINYOS_ROOT_DIR="$HOME/Desktop/Projects/tinyos-main"
+export CLASSPATH=":$TINYOS_ROOT_DIR/support/sdk/java/tinyos.jar"
+export PYTHONPATH="$TINYOS_ROOT_DIR/support/sdk/python"
+export PATH="$TINYOS_ROOT_DIR/support/sdk/c:$PATH"
 

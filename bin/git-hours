@@ -50,3 +50,4 @@ print_times = (workers) ->
   for own person,mins of workers
     console.log """
     #{person}:\t#{Math.floor(mins/6)/10}hrs"""
+

@@ -3,10 +3,19 @@
 ### SOURCE AMAZON ENHANCEMENTS #################################################
 [ -e ~/.amazonrc ] && source ~/.amazonrc
 
+### SOURCE IMPERIAL CONFIG #####################################################
+# Pintos i386-elf toolchain
+PATH=$PATH:/usr/local/i386-elf-gcc/bin
+
+# Add prolog binary for sicstus
+PATH=$PATH:/usr/local/sicstus4.2.3/bin
+
 ### PATH CONFIGURATION #########################################################
-# Add RVM to PATH for scripting
-PATH=$PATH:$HOME/.rvm/bin
+
 PATH=/usr/local/sbin:$PATH
+
+# Add avr toolchain
+PATH=$PATH:/usr/local/CrossPack-AVR/bin
 
 # Add selecta to path for vim
 PATH=$PATH:$HOME/.vim/bundle/selecta
@@ -22,6 +31,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 ### SELECT GNU COMMANDS ########################################################
+
 # For those commands that require a g prefix, select if exist
 cmds="ls grep find dircolors"
 for cmd in $cmds
@@ -33,6 +43,7 @@ done
 shopt -s cdspell
 
 ### CONFIGURE TERMINAL COLORS ##################################################
+
 # Set the ls folder and file color support
 export CLICOLOR=1
 export   CLRCOL=$'\e[0m'
@@ -53,7 +64,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 ### SOURCE PACKAGE MANAGERS (RVM, NPM) #########################################
+
 # Load in the RVM
+export PATH="$HOME/.rvm/bin:$PATH"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Load NVM
@@ -68,6 +81,7 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
 fi
 
 ### CONFIGURE LS AND GREP ######################################################
+
 # Alias ls colors if supported
 $(ls --color=always &>/dev/null) && alias ls='ls --color=always'
 

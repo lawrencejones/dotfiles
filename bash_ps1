@@ -16,6 +16,10 @@ _trunc_path()
   fi
   echo -e $newPWD
 }
+_python_virt_env()
+{
+  [ -n "$VIRTUAL_ENV" ] && echo "🐍 ($(basename $VIRTUAL_ENV)) "
+}
 _pwd_ps1()
 {
   # Include -P to resolve symlinks
@@ -24,7 +28,7 @@ _pwd_ps1()
   local git_root=`git rev-parse --show-toplevel 2>/dev/null`
   if [ -n "$git_root" ];
   then # ON GIT
-    local basedir=`dirname $git_root`
+    local basedir=`dirname "$git_root"`
     wd='...'${wd#$basedir}
   fi
   echo -e `_trunc_path "$wd"`
@@ -42,7 +46,8 @@ HOST=`hostname`
 # Set to the debian colors
 PS1='\[${PINK}\]\u '                          # username
 PS1=$PS1'\[${D}\]at \[${ORANGE}\]$HOST '      # hostname
-PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # prwrkdir
-PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
+PS1=$PS1'\[${CLRCOL}\]$(_python_virt_env)'    # python
+PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # working dir
+PS1=$PS1'$(_git_ps1) \n'                      # git branch
 PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'  # $ > grey
 

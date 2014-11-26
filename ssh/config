@@ -18,9 +18,14 @@ Host *.doc
 # Sesquis ##################################################
 
 Host sesquis.beta
-  Hostname ec2-54-191-173-178.us-west-2.compute.amazonaws.com
+  Hostname ec2-54-171-81-144.eu-west-1.compute.amazonaws.com
   User ubuntu
-  IdentityFile ~/.ssh/keys/lawr_key.pem
+  IdentityFile ~/.ssh/keys/sesquis.pem
+
+Host sesquis.prod
+  Hostname ec2-54-194-97-46.eu-west-1.compute.amazonaws.com
+  User ubuntu
+  IdentityFile ~/.ssh/keys/sesquis.pem
 
 # AWS Instances ############################################
 
