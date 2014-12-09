@@ -34,6 +34,7 @@ Plugin 'epeli/slimux'
 Plugin 'vim-scripts/genutils'
 Plugin 'LawrenceJones/vim-multiselect'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'rjohnsondev/vim-pig-latin'
 
 call vundle#end()
 

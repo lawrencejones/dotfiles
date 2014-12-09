@@ -32,6 +32,7 @@ alias twoup='lpr -o number-up=2 -o page-border=single'
 alias mocha='mocha --compilers coffee:coffee-script/register'
 alias indent-pb="pbpaste | sed 's/^/    /g' | pbcopy"
 alias app-root='cd $(get-app-root)'
+alias npm-deps='coffee ~/scratch/npm-deps/npm-deps.litcoffee'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

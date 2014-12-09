@@ -4,6 +4,7 @@
 [ -e ~/.amazonrc ] && source ~/.amazonrc
 
 ### SOURCE IMPERIAL CONFIG #####################################################
+
 # Pintos i386-elf toolchain
 PATH=$PATH:/usr/local/i386-elf-gcc/bin
 
@@ -11,6 +12,9 @@ PATH=$PATH:/usr/local/i386-elf-gcc/bin
 PATH=$PATH:/usr/local/sicstus4.2.3/bin
 
 ### PATH CONFIGURATION #########################################################
+
+# Required for pig latin
+export JAVA_HOME="$(/usr/libexec/java_home)"
 
 PATH=/usr/local/sbin:$PATH
 
