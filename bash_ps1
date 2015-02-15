@@ -16,10 +16,12 @@ _trunc_path()
   fi
   echo -e $newPWD
 }
+
 _python_virt_env()
 {
   [ -n "$VIRTUAL_ENV" ] && echo "🐍 ($(basename $VIRTUAL_ENV)) "
 }
+
 _pwd_ps1()
 {
   # Include -P to resolve symlinks
@@ -33,6 +35,7 @@ _pwd_ps1()
   fi
   echo -e `_trunc_path "$wd"`
 }
+
 _git_ps1()
 {
   local branch=$(git branch 2>/dev/null | grep -oP '(?<=\*\s).*')

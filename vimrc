@@ -123,6 +123,7 @@ au BufRead,BufNewFile package.json set ft=javascript          " Force JSON hl
 au BufReadPost *.pegjs set syntax=javascript    " Force JS hl
 au BufRead,BufNewFile *.pro set syntax=prolog   " Detect prolog
 au BufRead,BufNewFile Gemfile set ft=ruby       " Set ruby syntax for Gemfiles
+au BufRead,BufNewFile *.locals set ft=javascript
 
 " --------------- Preferred Syntastic Checkers --------------------------------
 
@@ -299,16 +300,19 @@ if has("folding")
       setlocal fillchars+=fold:\
 
     elseif !exists('b:foldpat') || b:foldpat==0
+      " Swap out spaces for tabs
+      let l:tabspaces = "                     "[0:&tabstop-1]
+      let l:foldcontent = substitute(getline(v:foldstart), '\t', l:tabspaces, '')
       let l:foldtext = ' '.(v:foldend-v:foldstart).' lines folded'.v:folddashes.'|'
       let l:endofline = (&textwidth>0 ? &textwidth : 80)
-      let l:linetext = strpart(getline(v:foldstart),0,l:endofline-strlen(l:foldtext))
+      let l:linetext = strpart(l:foldcontent,0,l:endofline-strlen(l:foldtext))
       let l:align = l:endofline-strlen(l:linetext)
       setlocal fillchars+=fold:-
 
     elseif b:foldpat==1
       let l:align = winwidth(0)-&foldcolumn-(&nu ? Max(strlen(line('$'))+1, l:numwidth) : 0)
       let l:foldtext = ' '.v:folddashes
-      let l:linetext = substitute(getline(v:foldstart),'\s\+$','','')
+      let l:linetext = substitute(v:foldstart,'\s\+$','','')
       let l:linetext .= ' ---'.(v:foldend-v:foldstart-1).' lines--- '
       let l:linetext .= substitute(getline(v:foldend),'^\s\+','','')
       let l:linetext = strpart(l:linetext,0,l:align-strlen(l:foldtext))
@@ -381,26 +385,6 @@ endfunction
 
 autocmd BufNewFile,BufRead *.apib call HighlightApibExt()
 autocmd BufNewFile,BufRead *.apib set shiftwidth=4
-
-" --------------- Java Proferences --------------------------------------------
-
-function! SetupJava()
-
-  " Set folding to indent, and hopefully display only
-  " top level class names and method sigs.
-  set foldlevel=1
-  set foldmethod=indent
-
-  " Adjust tab spacing to 4 spaces
-  set shiftwidth=4
-  set tabstop=4
-
-  " Enable autocompletion with C-n
-  set complete=.,w,b,u,t,i
-
-endfunction
-
-autocmd BufNewFile,BufRead *.java call SetupJava()
 
 " --------------- Selecta Configuration ---------------------------------------
 

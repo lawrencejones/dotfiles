@@ -3,19 +3,22 @@
 #------- Editing of .profile file and refresh command -----------
 alias profile='vim ~/.profile && source ~/.profile'
 alias aliases='vim ~/.bash_aliases && source ~/.bash_aliases'
+alias :r='source ~/.bashrc'
 alias dotfiles='cd ~/dotfiles'
 #----------------------------------------------------------------
 
 #------- Vim Commands -------------------------------------------
 alias :q='exit'
+#----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
 alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias gs='git status'
 alias ga='git add -A'
 alias gc='git commit -a'
-alias gac='git add -A :/ && git commit -a'
+alias gco='git checkout'
 alias gcb='git checkout -b'
+alias gac='git add -A :/ && git commit -a'
 alias gd='git diff'
 alias gb='git branch'
 alias gp='git push'

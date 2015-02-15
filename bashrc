@@ -13,9 +13,8 @@ PATH=$PATH:/usr/local/sicstus4.2.3/bin
 
 ### PATH CONFIGURATION #########################################################
 
-# Required for pig latin
-export JAVA_HOME="$(/usr/libexec/java_home)"
-
+# X11 configuration on mac
+PATH=/usr/X11R6/bin:$PATH
 PATH=/usr/local/sbin:$PATH
 
 # Add avr toolchain
@@ -114,6 +113,9 @@ $(brew --prefix &>/dev/null) &&
     . $(brew --prefix)/etc/bash_completion
   fi
 
+# Load preview functions
+source ~/dotfiles/bin/preview.sh
+
 # Configure environment
 source ~/.shared_env
 [ -f ~/.env ] && source ~/.env
@@ -123,3 +125,6 @@ source ~/.bash_helpers.sh
 source ~/.bash_ps1
 source ~/.bash_aliases
 
+
+# added by travis gem
+[ -f /Users/lawrencejones/.travis/travis.sh ] && source /Users/lawrencejones/.travis/travis.sh
