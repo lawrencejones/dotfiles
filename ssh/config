@@ -12,8 +12,7 @@ Host doc-shell
 
 Host *.doc
   User lmj112
-  Hostname %h.ic.ac.uk
-  ProxyCommand ssh -q doc-shell nc %h 22
+  ProxyCommand ssh -T -q doc-shell nc $(echo %h | cut -d. -f1) 22 2>/dev/null
 
 # Sesquis ##################################################
 
