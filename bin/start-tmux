@@ -1,5 +1,5 @@
 #!/bin/sh
 
-which reattach-to-user-namespace && \
+$(which reattach-to-user-namespace &>/dev/null) && \
   reattach-to-user-namespace -l bash || \
   bash
