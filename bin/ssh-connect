@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# Finds saved host patterns in ssh config, allowing connection by tree
+# navigation.
+
+def get_ssh_conf()
+  return open(File.join(ENV['HOME'], '.ssh', 'config'), 'r').read
+end
+
+def build_host_tree(ssh_conf)
+
+  host_tree = {}
+
+  ssh_conf.scan(/(?<=Host )\w+\..*/).each do |host|
+    host_cat = host_tree
+    for subdomain in host.split('.')
+      host_cat = host_cat[subdomain] ||= {}
+    end
+  end
+
+  return host_tree
+
+end
+
+def prompt_for_host(root)
+
+  subdomains = []
+
+  while root.keys.size > 0 do
+
+    puts """
+    Select one:
+    """
+
+    root.keys.each_with_index do |option, i|
+      puts "\t[#{i+1}]\t#{(subdomains.join('.') + '.' + option).sub(%r{^\.}, '')}"
+    end
+
+    print """
+    Choose: """
+
+    subdomains << selected = root.keys[Integer(gets.chomp) - 1]
+    root = root[selected]
+
+  end
+
+  return subdomains.join('.')
+
+end
+
+
+host_tree = build_host_tree(get_ssh_conf())
+system("ssh #{prompt_for_host(host_tree)}")

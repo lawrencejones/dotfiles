@@ -22,7 +22,7 @@ Host sesquis.beta
   IdentityFile ~/.ssh/keys/sesquis.pem
 
 Host sesquis.prod
-  Hostname ec2-54-194-97-46.eu-west-1.compute.amazonaws.com
+  Hostname ec2-52-16-53-177.eu-west-1.compute.amazonaws.com
   User ubuntu
   IdentityFile ~/.ssh/keys/sesquis.pem
 
