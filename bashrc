@@ -3,14 +3,6 @@
 ### SOURCE AMAZON ENHANCEMENTS #################################################
 [ -e ~/.amazonrc ] && source ~/.amazonrc
 
-### SOURCE IMPERIAL CONFIG #####################################################
-
-# Pintos i386-elf toolchain
-PATH=$PATH:/usr/local/i386-elf-gcc/bin
-
-# Add prolog binary for sicstus
-PATH=$PATH:/usr/local/sicstus4.2.3/bin
-
 ### PATH CONFIGURATION #########################################################
 
 # X11 configuration on mac
@@ -19,6 +11,12 @@ PATH=/usr/local/sbin:$PATH
 
 # Add avr toolchain
 PATH=$PATH:/usr/local/CrossPack-AVR/bin
+
+# Add prolog binary for sicstus
+PATH=$PATH:/usr/local/sicstus4.2.3/bin
+
+# Pintos i386-elf toolchain
+PATH=$PATH:/usr/local/i386-elf-gcc/bin
 
 # Add selecta to path for vim
 PATH=$PATH:$HOME/.vim/bundle/selecta
@@ -125,6 +123,3 @@ source ~/.bash_helpers.sh
 source ~/.bash_ps1
 source ~/.bash_aliases
 
-
-# added by travis gem
-[ -f /Users/lawrencejones/.travis/travis.sh ] && source /Users/lawrencejones/.travis/travis.sh

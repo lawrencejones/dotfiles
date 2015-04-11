@@ -7,7 +7,16 @@ edit-all() {
 
 # Search and replace with sed
 sr() {
-  find -name "$1" -exec sed -i "$2" {} \;
+  if [[ "$#" -eq 0 ]]; then
+    echo """
+    Usage: sr <file-pattern> <sed-replacement>
+    Examples...
+
+        sr '*.coffee' 's/promiseSave/save/g'
+    """
+  else
+    find -name "$1" -exec sed -i "$2" {} \;
+  fi
 }
 
 # Initiates new scratch folder
