@@ -19,7 +19,9 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 brew update
 brew upgrade
+
 brew tap homebrew/dupes
+brew install coreutils
 
 brew install git
 brew install ruby-build

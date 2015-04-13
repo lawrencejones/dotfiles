@@ -1,0 +1,17 @@
+#!/bin/bash
+# GoCardless custom env
+
+gc-clone() {
+  if [[ "$#" -eq 0 ]]; then
+    echo """
+    Usage: gc-clone <repo-name>
+    Examples...
+
+        gc-clone payments-service
+
+    """
+  else
+    git clone git@github.com:gocardless/$1.git $2
+  fi
+}
+

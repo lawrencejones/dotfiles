@@ -39,7 +39,7 @@ alias npm-deps='coffee ~/scratch/npm-deps/npm-deps.litcoffee'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
-alias projects='cd /Users/lawrencejones/Desktop/Projects'
+alias projects='cd /Users/lawrencejones/Projects'
 alias sesquis='cd /Users/lawrencejones/Desktop/Projects/sesquis'
 alias journal='cd /Users/lawrencejones/Desktop/Projects/journal'
 #----------------------------------------------------------------
@@ -52,4 +52,3 @@ alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 #------- Imperial Aliases ---------------------------------------
 alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"
 #----------------------------------------------------------------
-

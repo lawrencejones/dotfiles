@@ -1,8 +1,5 @@
 #!/bin/sh
 
-### SOURCE AMAZON ENHANCEMENTS #################################################
-[ -e ~/.amazonrc ] && source ~/.amazonrc
-
 ### PATH CONFIGURATION #########################################################
 
 # X11 configuration on mac
@@ -128,6 +125,9 @@ source ~/dotfiles/bin/preview.sh
 # Configure environment
 source ~/.shared_env
 [ -f ~/.env ] && source ~/.env
+
+# GC env
+source ~/.gocardless
 
 # Bash specific
 source ~/.bash_helpers.sh

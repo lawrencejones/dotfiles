@@ -13,6 +13,7 @@ sr() {
     Examples...
 
         sr '*.coffee' 's/promiseSave/save/g'
+
     """
   else
     find -name "$1" -exec sed -i "$2" {} \;

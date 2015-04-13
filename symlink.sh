@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 dir=~/dotfiles
 olddir=~/dotfiles_old
@@ -37,6 +37,10 @@ for f in `ls | grep -iv -E "hooks|symlink.sh"`; do
 done
 
 echo -e "\n...done\n"
+
+# Load newly linked bashrc
+# NB - Detection of programs may fail if bashrc is not loaded
+source ~/.bashrc
 
 # If vundle if not already present, clone
 [[ -d $dir/vim/bundle/Vundle.vim ]] || (
