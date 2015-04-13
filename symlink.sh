@@ -50,4 +50,23 @@ echo -e "\n...done\n"
   git clone https://github.com/tmux-plugins/tpm $dir/tmux/plugins/tpm
 )
 
+# Check for nvm
+$(hash nvm &>/dev/null) || (
+
+  echo NVM is not present
+
+  echo -n "Would you like to install nvm? [y/n]: " && read yn
+  if [ "$yn" = "y" ]; then
+    # Possibly out of date. Check https://github.com/creationix/nvm if fails
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
+    source ~/.bashrc
+  fi
+
+  echo -n "Would you like to install node v0.10.X? [y/n]: " && read yn
+  if [ "$yn" = "y" ]; then
+    nvm install 0.10.x
+  fi
+
+)
+
 echo Complete!
