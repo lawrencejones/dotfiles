@@ -11,11 +11,17 @@ alias dotfiles='cd ~/dotfiles'
 alias :q='exit'
 #----------------------------------------------------------------
 
+#------- Ruby ---------------------------------------------------
+alias be='bundle exec'
+alias bi='bundle install'
+alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
+#----------------------------------------------------------------
+
 #------- Git Aliases --------------------------------------------
 alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias gs='git status'
 alias ga='git add -A'
-alias gc='git commit -a'
+alias gca='git commit --amend'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gac='git add -A :/ && git commit -a'
@@ -26,22 +32,17 @@ alias gp='git push'
 
 #------- Utilities ----------------------------------------------
 alias ll='ls -lh'
-alias clr='echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n " && clear'
 alias listpath='echo $PATH | tr ":" "\n"'
-alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl .'
 alias tmux='tmux -2' # colors!!!
-alias post-json='curl -X POST -H "Content-Type: application/json"'
 alias twoup='lpr -o number-up=2 -o page-border=single'
 alias mocha='mocha --compilers coffee:coffee-script/register'
-alias indent-pb="pbpaste | sed 's/^/    /g' | pbcopy"
-alias app-root='cd $(get-app-root)'
-alias npm-deps='coffee ~/scratch/npm-deps/npm-deps.litcoffee'
+alias ar='cd $(get-app-root)'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
 alias projects='cd /Users/lawrencejones/Projects'
-alias sesquis='cd /Users/lawrencejones/Desktop/Projects/sesquis'
-alias journal='cd /Users/lawrencejones/Desktop/Projects/journal'
+alias sesquis='cd /Users/lawrencejones/Projects/sesquis'
+alias journal='cd /Users/lawrencejones/Projects/journal'
 #----------------------------------------------------------------
 
 #------- PostgreSQL ---------------------------------------------

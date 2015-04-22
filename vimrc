@@ -35,6 +35,10 @@ Plugin 'vim-scripts/genutils'
 Plugin 'LawrenceJones/vim-multiselect'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'rizzatti/dash.vim'
+Plugin 'rking/ag.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
 
 call vundle#end()
 
@@ -48,6 +52,8 @@ let g:tagbar_left=1           " Vim tagbar shortcut
 colorscheme molokai
 let g:molokai_original = 1
 
+" colorscheme base16-default
+
 set t_ut=             " Disable deleted coloring
 set t_Co=256          " Force 256 colors
 syn sync fromstart    " Calculate syntax colors from start of file
@@ -58,6 +64,11 @@ set t_vb=
 
 " Forces a syntax hl refresh
 nnoremap <leader>S :syn sync fromstart<CR>
+
+" airline config
+let g:airline_theme='dark'
+let g:airline#extensions#tabline#enabled = 1
+highlight clear LineNr
 
 " --------------- Indentation and Formatting ----------------------------------
 
@@ -96,13 +107,13 @@ let g:syntastic_mode_map = {
 
 " --------------- ColorColumn Toggling ----------------------------------------
 
-" Alternately toggles a color column on or off. Mapped to leader
-" key c.
+" Alternately toggles a color column on or off. Mapped to leader key c.
 function! g:ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
   else
-    setlocal colorcolumn=80
+    " Column is positioned 1 col past textwidth
+    setlocal colorcolumn=+1
   endif
 endfunction
 
@@ -145,6 +156,9 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 
 " --------------- General Shortcuts -------------------------------------------
 
+" Configure Dash leader
+nmap <silent> <leader>d <Plug>DashSearch
+
 " Paste from system clipboard
 nmap <leader>P :read !pbpaste <CR>
 
@@ -156,30 +170,11 @@ vmap <C-c> :w !pbcopy<CR><CR>
 " Shortcut to destroy trailing whitespace
 nmap <leader>s :%s/\v\s+$//<CR>
 
-" Append yanking, store in register R[a]
-"
-" <leader>Ay - will yank the current line into append buffer
-" <leader>ay - will append the current line into buffer
-" <leader>ap - paste buffer
-
-function! ConfigureAppendYanking(reg, prefix)
-
-  let appReg = toupper(a:reg)
-  let setReg = tolower(a:reg)
-
-  for key in [ 'y', 'd' ]
-    execute "map <leader>" . toupper(a:prefix) . ' "' . setReg . key . key
-    execute "map <leader>" . tolower(a:prefix) . ' "' . appReg . key . key
-  endfor
-
-  execute "map <leader>" . tolower(a:prefix) . ' "' . a:reg . 'p'
-
-endfun
-
-call ConfigureAppendYanking('b', 'a')
-
 " Map tagbar toggle
 nmap <F8> :TagbarToggle<CR>
+
+" Search using silversurfer (ag) for word under cursor
+nnoremap <Leader>a :Ag <C-r><C-w><CR>
 
 " --------------- Tmux Integration --------------------------------------------
 
@@ -393,7 +388,7 @@ autocmd BufNewFile,BufRead *.apib set shiftwidth=4
 function! SelectaCommand(choice_command, selecta_args, vim_command)
 
   try
-    silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
   catch /Vim:Interrupt/
     " Swallow the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen

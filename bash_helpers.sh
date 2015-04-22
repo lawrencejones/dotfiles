@@ -1,14 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Given a wildcard, will load queue for vim editing
 edit-all() {
-  find -name "$1" -exec vim {} \;
+  if [[ "$#" -eq 0 ]]; then
+    echo """
+    Desc:  Given a wildcard, will load queue for vim editing
+    Usage: edit-all <file-pattern>
+    Examples...
+
+        edit-all '*.coffee'
+
+    """
+  else
+    find . -name "$1" -exec vim {} \;
+  fi
 }
 
-# Search and replace with sed
 sr() {
   if [[ "$#" -eq 0 ]]; then
     echo """
+    Desc:  Search and replace with sed
     Usage: sr <file-pattern> <sed-replacement>
     Examples...
 
@@ -16,34 +26,96 @@ sr() {
 
     """
   else
-    find -name "$1" -exec sed -i "$2" {} \;
+    gfind -name "$1" -exec gsed -i "$2" {} \;
   fi
 }
 
-# Initiates new scratch folder
-scratch() {
-  SCRATCH_DIR="$HOME/scratch"
-  mkdir -p "$SCRATCH_DIR/$1" && cd "$SCRATCH_DIR/$1"
-}
 
-# Extracts token from given line
-# token <index> <delimiter?>
 token() {
+  if [[ "$#" -eq 0 ]]; then
 
-  index=$1; : ${index:="1"}
-  delimiter=$2; : ${delimiter:=$'\t'}
+    echo """
+    Desc:  Extracts token from given line
+    Usage: token <index> <delimiter?>
+    Examples...
 
-  cut -d"$delimiter" -f"$index"
+        token 2  # whitespace default
+        token 1 "\t"  # tab delimited
 
+    """
+
+  else
+
+    index=$1; : ${index:="1"}
+    delimiter=$2; : ${delimiter:=$'\t'}
+
+    cut -d"$delimiter" -f"$index"
+
+  fi
 }
 
-# Extracts given line from stdin.
-# line <index> <count?>
 line() {
+  if [[ "$#" -eq 0 ]]; then
 
-  index=$1; : ${index:="1"}
-  count=$2; : ${count:="1"}
+    echo """
+    Desc:  Select lines from output
+    Usage: line <index-from> <how-many-lines>
+    Examples...
 
-  head -n `expr $index + $count - 1` | tail -$count
+        echo -e \"1\\n2\\n3\\n4\\n5\" | line 2 3  # > 2\\n3\\n4
 
+    """
+
+  else
+
+    index=$1; : ${index:="1"}
+    count=$2; : ${count:="1"}
+
+    head -n `expr $index + $count - 1` | tail -$count
+
+  fi
+}
+
+github() {
+  git_remote=$(git remote -v | head -1 | perl -wnl -e '/github.com.([^ ]*)/ and print $1')
+  echo Opening $git_remote...
+  open "https://github.com/$git_remote"
+}
+
+alias gc='gocardless-dir'
+gocardless-dir() {
+  if [[ "$#" -eq 0 ]]; then
+
+    echo """
+    Desc:  Pulls and changes to gc repo
+    Usage: gc <repo-name>
+    Examples...
+
+        gc payments-service
+
+    """
+
+  else
+    if [ ! -d "$HOME/Projects/$1" ]; then
+      git clone https://github.com/gocardless/$1 $HOME/Projects/$1
+    fi
+    cd $HOME/Projects/$1
+  fi
+}
+
+gc-ssh() {
+  if [[ "$#" -eq 0 ]]; then
+
+    echo """
+    Desc:  Connects to GC servers
+    Usage: gc-ssh <host>
+    Examples...
+
+        gc worker-service-live01.production
+
+    """
+
+  else
+    ssh -p $GC_PORT $1
+  fi
 }

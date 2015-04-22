@@ -42,10 +42,12 @@ echo -e "\n...done\n"
 # NB - Detection of programs may fail if bashrc is not loaded
 source ~/.bashrc
 
-# If vundle if not already present, clone
+# If vundle if not already present, clone and install bundles
 [[ -d $dir/vim/bundle/Vundle.vim ]] || (
   echo Installing vundle...
-  git clone https://github.com/gmarik/Vundle.vim $dir/vim/bundle/Vundle.vim
+  git clone https://github.com/gmarik/Vundle.vim $dir/vim/bundle/Vundle.vim && /
+  vim +BundleInstall
+
 )
 
 # If tpm is not installed

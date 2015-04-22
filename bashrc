@@ -59,7 +59,7 @@ rbenv() {
 ### SELECT GNU COMMANDS ########################################################
 
 # For those commands that require a g prefix, select if exist
-cmds="ls grep find dircolors"
+cmds="ls grep find dircolors sed"
 for cmd in $cmds
 do
   $(which g$cmd >/dev/null 2>/dev/null) && alias $cmd="g$cmd"
@@ -118,6 +118,15 @@ $(brew --prefix &>/dev/null) &&
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
+
+### LOCAL REPO DETECTION #######################################################
+
+cd() {
+  builtin cd "$@" && {
+    [ -e dev ] && source dev
+  }
+}
+
 
 # Load preview functions
 source ~/dotfiles/bin/preview.sh

@@ -1,3 +1,14 @@
+# GoCardless ###############################################
+
+Host *.staging *.production
+  IdentityFile ~/.ssh/id_rsa
+  Hostname %h.gocardless.com
+  User deploy
+
+Host *.gocardless.com
+  User deploy
+  IdentityFile ~/.ssh/id_rsa
+
 # Github and services ######################################
 
 Host github.com
@@ -26,18 +37,3 @@ Host sesquis.prod
   User ubuntu
   IdentityFile ~/.ssh/keys/sesquis.pem
 
-# AWS Instances ############################################
-
-# Amazon ###################################################
-
-Host amazon.vm
-  Hostname lawrjone-1.desktop.amazon.com
-  User lawrjone
-
-Host amazon.ubuntu
-  Hostname ud43d7e417eed53b2a10d
-  User lawrjone
-
-Host amazon.mbp
-  Hostname 14109fce33b9.ant.amazon.com
-  User lawrjone
