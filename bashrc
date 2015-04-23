@@ -2,27 +2,13 @@
 
 ### PATH CONFIGURATION #########################################################
 
-# X11 configuration on mac
-PATH=/usr/X11R6/bin:$PATH
-PATH=/usr/local/sbin:$PATH
+# Secondary paths (desc importance) ##############
 
-# Add avr toolchain
-PATH=$PATH:/usr/local/CrossPack-AVR/bin
-
-# Add prolog binary for sicstus
-PATH=$PATH:/usr/local/sicstus4.2.3/bin
-
-# Pintos i386-elf toolchain
-PATH=$PATH:/usr/local/i386-elf-gcc/bin
-
-# Add selecta to path for vim
-PATH=$PATH:$HOME/.vim/bundle/selecta
-
-# Add brew path
-PATH=/usr/local/bin:$PATH
-
-# Configure local scripts
-PATH=$HOME/.bin:$PATH
+PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin  # X11 configuration on mac
+PATH=$PATH:/usr/local/CrossPack-AVR/bin  # Add avr toolchain
+PATH=$PATH:/usr/local/sicstus4.2.3/bin  # Add prolog binary for sicstus
+PATH=$PATH:/usr/local/i386-elf-gcc/bin  # Pintos i386-elf toolchain
+PATH=$PATH:$HOME/.vim/bundle/selecta  # Add selecta to path for vim
 
 ### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
 
@@ -121,15 +107,15 @@ $(brew --prefix &>/dev/null) &&
 
 ### LOCAL REPO DETECTION #######################################################
 
+# Priority paths (ascd importance)
+PATH=./bin:$PATH  # current path
+PATH=/usr/local/bin:$PATH  # brew path
+
 cd() {
   builtin cd "$@" && {
     [ -e dev ] && source dev
   }
 }
-
-
-# Load preview functions
-source ~/dotfiles/bin/preview.sh
 
 # Configure environment
 source ~/.shared_env
@@ -143,3 +129,4 @@ source ~/.bash_helpers.sh
 source ~/.bash_ps1
 source ~/.bash_aliases
 
+export PATH=./bin:$PATH

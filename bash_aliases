@@ -1,5 +1,3 @@
-#FILE LOCATION ~/.profile
-
 #------- Editing of .profile file and refresh command -----------
 alias profile='vim ~/.profile && source ~/.profile'
 alias aliases='vim ~/.bash_aliases && source ~/.bash_aliases'
@@ -14,7 +12,8 @@ alias :q='exit'
 #------- Ruby ---------------------------------------------------
 alias be='bundle exec'
 alias bi='bundle install'
-alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)'
+alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
+alias diffocop="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------

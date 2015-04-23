@@ -1,17 +1,41 @@
 #!/bin/bash
 # GoCardless custom env
 
-gc-clone() {
+alias gc='gocardless-dir'
+gocardless-dir() {
   if [[ "$#" -eq 0 ]]; then
+
     echo """
-    Usage: gc-clone <repo-name>
+    Desc:  Pulls and changes to gc repo
+    Usage: gc <repo-name>
     Examples...
 
-        gc-clone payments-service
+        gc payments-service
 
     """
+
   else
-    git clone git@github.com:gocardless/$1.git $2
+    if [ ! -d "$HOME/Projects/$1" ]; then
+      git clone https://github.com/gocardless/$1 $HOME/Projects/$1
+    fi
+    cd $HOME/Projects/$1
+    [ -z "$TMUX" ] && tmux -2
   fi
 }
 
+gc-ssh() {
+  if [[ "$#" -eq 0 ]]; then
+
+    echo """
+    Desc:  Connects to GC servers
+    Usage: gc-ssh <host>
+    Examples...
+
+        gc worker-service-live01.production
+
+    """
+
+  else
+    ssh -p $GC_PORT $1
+  fi
+}
