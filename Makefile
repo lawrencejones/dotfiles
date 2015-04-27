@@ -7,6 +7,7 @@ symlinks:
 	ln -sfh $(DIR)/colors  ~/.colors
 	ln -sfh $(DIR)/git/gitconfig  ~/.gitconfig
 	ln -sfh $(DIR)/git/gitignore_global  ~/.gitignore_global
+	ln -sfh $(DIR)/nix/profile  ~/.profile
 	ln -sfh $(DIR)/nix/inputrc  ~/.inputrc
 	ln -sfh $(DIR)/ssh  ~/.ssh
 	ln -sfh $(DIR)/tmux  ~/.tmux
@@ -15,6 +16,7 @@ symlinks:
 	ln -sfh $(DIR)/vimrc  ~/.vimrc
 	ln -sfh $(DIR)/zsh  ~/.zsh
 	ln -sfh $(DIR)/zsh/zshrc  ~/.zshrc
+	ln -sfh $(DIR)/zsh/zprofile  ~/.zprofile
 
 ensure_brew:
 	[ -n "$(which brew)" ] && \

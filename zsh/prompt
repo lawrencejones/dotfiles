@@ -46,12 +46,10 @@ _git_ps1()
 HOST=`hostname`
 [ -e ~/.hostname ] && source ~/.hostname
 
-source ~/.colors/colors.molokai
-
 # Set to the debian colors
-PS1="%{$PINK%}%n%{$CLRCOL%} "                 # username
-PS1=$PS1"%{$WHITE%}at %{$ORANGE%}$HOST "      # hostname
-PS1=$PS1"%{$WHITE%}in %{$GREEN%}$(_pwd_ps1)"  # working dir
-PS1=$PS1"$(_git_ps1) "$'\n'                   # git branch
-PS1=$PS1"%{$WHITE%}$ %{$CLRCOL%}%{$GREY%}"    # $ > grey
+PROMPT="%{$PINK%}%n%{$CLRCOL%} "                      # username
+PROMPT=$PROMPT"%{$WHITE%}at %{$ORANGE%}$HOST "        # hostname
+PROMPT=$PROMPT"%{$WHITE%}in %{$GREEN%}"'$(_pwd_ps1)'  # working dir
+PROMPT=$PROMPT'$(_git_ps1) '$'\n'                     # git branch
+PROMPT=$PROMPT"%{$WHITE%}$ %{$CLRCOL%}%{$GREY%}"      # $ > grey
 

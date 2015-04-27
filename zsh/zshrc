@@ -8,21 +8,6 @@ PATH=$PATH:/usr/local/sicstus4.2.3/bin  # Add prolog binary for sicstus
 PATH=$PATH:/usr/local/i386-elf-gcc/bin  # Pintos i386-elf toolchain
 PATH=$PATH:$HOME/.vim/bundle/selecta  # Add selecta to path for vim
 
-### GENERAL ZSH-NESS ###########################################################
-
-# Enable reverse-i search
-bindkey '^R' history-incremental-search-backward
-
-# Autocompletion
-autoload -U compinit
-compinit
-bindkey '^I' complete-word # complete on tab, leave expansion to _expand
-
-# Zsh extras
-source ~/.zsh/helpers
-source ~/.zsh/ps1
-source ~/.zsh/aliases
-
 ### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
 
 # Load NVM
@@ -105,6 +90,31 @@ $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
 
 # Force color output in tree
 alias tree='tree -C'
+
+### GENERAL ZSH-NESS ###########################################################
+
+# Enable reverse-i search
+bindkey '^R' history-incremental-search-backward
+
+# Autocompletion
+autoload -U compinit
+compinit
+
+# Glob-like autocomplete
+setopt glob_complete
+
+# History
+setopt append_history
+setopt share_history
+setopt hist_ignore_dups
+
+# Prompt setup
+setopt promptsubst
+
+# Zsh extras
+source ~/.zsh/helpers
+source ~/.zsh/prompt
+source ~/.zsh/aliases
 
 ### LOAD OTHER CONFIG ##########################################################
 
