@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 edit-all() {
   if [[ "$#" -eq 0 ]]; then
@@ -40,7 +40,7 @@ token() {
     Examples...
 
         token 2  # whitespace default
-        token 1 "\t"  # tab delimited
+        token 1 \"\\\t\"  # tab delimited
 
     """
 
@@ -62,7 +62,7 @@ line() {
     Usage: line <index-from> <how-many-lines>
     Examples...
 
-        echo -e \"1\\n2\\n3\\n4\\n5\" | line 2 3  # > 2\\n3\\n4
+        echo -e \"1\\\n2\\\n3\\\n4\\\n5\" | line 2 3  # > 2\\\n3\\\n4
 
     """
 

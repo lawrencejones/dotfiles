@@ -1,5 +1,3 @@
-#!/bin/sh
-
 ### PATH CONFIGURATION #########################################################
 
 # Secondary paths (desc importance) ##############
@@ -9,6 +7,21 @@ PATH=$PATH:/usr/local/CrossPack-AVR/bin  # Add avr toolchain
 PATH=$PATH:/usr/local/sicstus4.2.3/bin  # Add prolog binary for sicstus
 PATH=$PATH:/usr/local/i386-elf-gcc/bin  # Pintos i386-elf toolchain
 PATH=$PATH:$HOME/.vim/bundle/selecta  # Add selecta to path for vim
+
+### GENERAL ZSH-NESS ###########################################################
+
+# Enable reverse-i search
+bindkey '^R' history-incremental-search-backward
+
+# Autocompletion
+autoload -U compinit
+compinit
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+
+# Zsh extras
+source ~/.zsh/helpers.sh
+source ~/.zsh/ps1
+source ~/.zsh/aliases
 
 ### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
 
@@ -25,7 +38,7 @@ fi
 
 # Configure rbenv
 export PATH="/Users/lawrencejones/.rbenv/shims:${PATH}"
-source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.bash"
+source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.zsh"
 rbenv rehash 2>/dev/null
 rbenv() {
   typeset command
@@ -45,14 +58,11 @@ rbenv() {
 ### SELECT GNU COMMANDS ########################################################
 
 # For those commands that require a g prefix, select if exist
-cmds="ls grep find dircolors sed"
+cmds=('ls' 'grep' 'find' 'dircolors' 'sed')
 for cmd in $cmds
 do
-  $(which g$cmd >/dev/null 2>/dev/null) && alias $cmd="g$cmd"
+  $(hash g$cmd &>/dev/null) && alias $cmd="g$cmd"
 done
-
-# Enable spell checking for commands
-shopt -s cdspell
 
 ### CONFIGURE TERMINAL COLORS ##################################################
 
@@ -81,15 +91,14 @@ fi
 $(ls --color=always &>/dev/null) && alias ls='ls --color=always'
 
 # If supported, then run dircolors
-if [[ $(dircolors 2>/dev/null) ]];
-then
+dircolors &>/dev/null && {
   $(gls --color=always &>/dev/null) && alias ls='gls --color=always'
   test -r ~/.dircolors/dircolors.$theme &&
     eval "$(dircolors -b ~/.dircolors/dircolors.$theme &>/dev/null)" || eval "$(dircolors -b)"
-else
+} || {
   # Default ls and colors
   export LSCOLORS=GxFxCxDxBxegedabagaced
-fi
+}
 
 # If we have gnu-grep
 $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
@@ -97,36 +106,21 @@ $(which ggrep &>/dev/null) && alias grep='ggrep --color=auto'
 # Force color output in tree
 alias tree='tree -C'
 
-### SOURCE ANY EXTERNAL SCRIPTS ################################################
-
-# If brew is installed, and bash completion found, then load it!
-$(brew --prefix &>/dev/null) &&
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-  fi
-
-### LOCAL REPO DETECTION #######################################################
-
-# Priority paths (ascd importance)
-PATH=./bin:$PATH  # current path
-PATH=/usr/local/bin:$PATH  # brew path
-
-cd() {
-  builtin cd "$@" && {
-    [ -e dev ] && source dev
-  }
-}
+### LOAD OTHER CONFIG ##########################################################
 
 # Configure environment
 source ~/.shared_env
 [ -f ~/.env ] && source ~/.env
 
 # GC env
-source ~/.gocardless
+source ~/.zsh/gocardless
 
-# Bash specific
-source ~/.bash_helpers.sh
-source ~/.bash_ps1
-source ~/.bash_aliases
+### FINAL PATH ADDITIONS #######################################################
 
-export PATH=./bin:$PATH
+# Primary paths (ascd importance) ################
+
+# Priority paths (ascd importance)
+PATH=/usr/local/bin:$PATH  # brew path
+PATH=./bin:$PATH  # current path
+
+export PATH
