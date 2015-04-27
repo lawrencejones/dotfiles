@@ -1,5 +1,5 @@
 # Extracts a few colors from the molokai scheme
-export       D=$'\e[01;37m'
+export   WHITE=$'\e[01;37m'
 export    GREY=$'\e[33;00m'
 export    PINK=$'\e[01;38;5;197m'
 export   GREEN=$'\e[01;38;5;82m'

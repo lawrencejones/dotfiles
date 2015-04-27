@@ -39,18 +39,19 @@ _pwd_ps1()
 _git_ps1()
 {
   local branch=$(git branch 2>/dev/null | perl -wnl -e '/(?<=\*\s).*/ and print $&;')
-  [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
+  [[ -n $branch ]] && echo " %{$WHITE%}on %{$PINK%}($branch)"
 }
 
 # Configure host, allow for alias is provided
 HOST=`hostname`
 [ -e ~/.hostname ] && source ~/.hostname
 
+source ~/.colors/colors.molokai
+
 # Set to the debian colors
-PS1='\[${PINK}\]\u '                          # username
-PS1=$PS1'\[${D}\]at \[${ORANGE}\]$HOST '      # hostname
-PS1=$PS1'\[${CLRCOL}\]$(_python_virt_env)'    # python
-PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # working dir
-PS1=$PS1'$(_git_ps1) \n'                      # git branch
-PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'  # $ > grey
+PS1="%{$PINK%}%n%{$CLRCOL%} "                 # username
+PS1=$PS1"%{$WHITE%}at %{$ORANGE%}$HOST "      # hostname
+PS1=$PS1"%{$WHITE%}in %{$GREEN%}$(_pwd_ps1)"  # working dir
+PS1=$PS1"$(_git_ps1) "$'\n'                   # git branch
+PS1=$PS1"%{$WHITE%}$ %{$CLRCOL%}%{$GREY%}"    # $ > grey
 

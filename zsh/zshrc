@@ -19,7 +19,7 @@ compinit
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 
 # Zsh extras
-source ~/.zsh/helpers.sh
+source ~/.zsh/helpers
 source ~/.zsh/ps1
 source ~/.zsh/aliases
 
@@ -109,7 +109,7 @@ alias tree='tree -C'
 ### LOAD OTHER CONFIG ##########################################################
 
 # Configure environment
-source ~/.shared_env
+[ -f ~/.shared_env ] && source ~/.shared_env
 [ -f ~/.env ] && source ~/.env
 
 # GC env

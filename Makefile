@@ -3,17 +3,18 @@ DIR=$(HOME)/dotfiles
 all: symlinks ensure_brew brew ruby_env gems node vim
 
 symlinks:
-	ln -sfh colors  ~/.colors
-	ln -sfh git/gitconfig  ~/.gitconfig
-	ln -sfh git/gitignore_global  ~/.gitignore_global
-	ln -sfh nix/inputrc  ~/.inputrc
-	ln -sfh ssh  ~/.ssh
-	ln -sfh tmux  ~/.tmux
-	ln -sfh tmux/tmux.conf  ~/.tmux.conf
-	ln -sfh vim  ~/.vim
-	ln -sfh vimrc  ~/.vimrc
-	ln -sfh zsh  ~/.zsh
-	ln -sfh zsh/zshrc  ~/.zshrc
+	ln -sfh $(DIR)/bin  ~/.bin
+	ln -sfh $(DIR)/colors  ~/.colors
+	ln -sfh $(DIR)/git/gitconfig  ~/.gitconfig
+	ln -sfh $(DIR)/git/gitignore_global  ~/.gitignore_global
+	ln -sfh $(DIR)/nix/inputrc  ~/.inputrc
+	ln -sfh $(DIR)/ssh  ~/.ssh
+	ln -sfh $(DIR)/tmux  ~/.tmux
+	ln -sfh $(DIR)/tmux/tmux.conf  ~/.tmux.conf
+	ln -sfh $(DIR)/vim  ~/.vim
+	ln -sfh $(DIR)/vimrc  ~/.vimrc
+	ln -sfh $(DIR)/zsh  ~/.zsh
+	ln -sfh $(DIR)/zsh/zshrc  ~/.zshrc
 
 ensure_brew:
 	[ -n "$(which brew)" ] && \
