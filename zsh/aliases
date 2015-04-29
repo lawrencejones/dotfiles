@@ -14,6 +14,7 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
 alias diffocop="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
+alias diffospec="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep 'spec\.rb$' | xargs rspec"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------

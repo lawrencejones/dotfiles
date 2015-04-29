@@ -97,6 +97,7 @@ alias tree='tree -C'
 bindkey '^R' history-incremental-search-backward
 
 # Autocompletion
+fpath=($HOME/.zsh/completion $fpath)
 autoload -U compinit
 compinit
 

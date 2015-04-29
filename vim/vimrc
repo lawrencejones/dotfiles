@@ -14,31 +14,30 @@ if filereadable(ninja_file) | exec "source " . ninja_file | endif
 " Allow vundle to manage itself
 Plugin 'gmarik/Vundle.vim'
 
-" Bundle manifest
+" Syntax plugins
 Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
-Plugin 'tpope/vim-obsession'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-surround'
-Plugin 'garybernhardt/selecta' " Ruby script
+Plugin 'mintplant/vim-literate-coffeescript'
 Plugin 'ap/vim-css-color'
+Plugin 'tikhomirov/vim-glsl'
+
+" Utility plugins
+Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'garybernhardt/selecta'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'mintplant/vim-literate-coffeescript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lukaszkorecki/CoffeeTags'
-Plugin 'epeli/slimux'
-Plugin 'vim-scripts/genutils'
-Plugin 'LawrenceJones/vim-multiselect'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'tikhomirov/vim-glsl'
 Plugin 'rizzatti/dash.vim'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-rails'
 
 call vundle#end()
 

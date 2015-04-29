@@ -38,8 +38,8 @@ _pwd_ps1()
 
 _git_ps1()
 {
-  local branch=$(git branch 2>/dev/null | perl -wnl -e '/(?<=\*\s).*/ and print $&;')
-  [[ -n $branch ]] && echo " %{$WHITE%}on %{$PINK%}($branch)"
+  branch=$(git branch 2>/dev/null | perl -wnl -e '/(?<=\*\s).*/ and print $&;')
+  [ -n "$branch" ] && echo " %{$WHITE%}on %{$PINK%}($branch)"
 }
 
 # Configure host, allow for alias is provided
