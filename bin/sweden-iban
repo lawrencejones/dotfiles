@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+TMP_FILE=`mktemp -t /tmp`
+
+echo -e """
+======= SWEDISH IBAN RESOLVER =======
+
+Clearing:\t$1
+Account:\t$2
+"""
+
+curl -sS 'http://www.ibancalculator.com/bic_und_iban.html' \
+  --data "country=SE&step=1&_ob_blz_cb_=$1&_ob_kontonr_cb_=$2&_ob_a_cb_=Calculate+IBAN" \
+  > $TMP_FILE
+
+if [ -n "$(cat $TMP_FILE | grep ERROR)" ];
+then
+  echo "FAILED TO VALIDATE IBAN!!"
+  exit -1
+fi
+
+echo -e """
+Resolved IBAN:\t$(
+cat $TMP_FILE | \
+  perl -wnl -e '/IBAN:[^A-Z\d]*([\dA-Z]+)/ and print $1' | \
+  perl -pe 's/(.{4})/$1 /g'
+)
+"""
+
