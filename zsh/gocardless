@@ -16,7 +16,8 @@ gocardless-dir() {
 
   else
     if [ ! -d "$HOME/Projects/$1" ]; then
-      git clone https://github.com/gocardless/$1 $HOME/Projects/$1
+      git clone https://github.com/gocardless/$1 $HOME/Projects/$1 || \
+        return
     fi
     cd $HOME/Projects/$1
     [ -z "$TMUX" ] && tmux -2

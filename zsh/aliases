@@ -1,8 +1,5 @@
 #------- Editing of .profile file and refresh command -----------
-alias profile='vim ~/.profile && source ~/.profile'
-alias aliases='vim ~/.bash_aliases && source ~/.bash_aliases'
-alias :r='source ~/.bashrc'
-alias dotfiles='cd ~/dotfiles'
+alias :ra='source ~/.zsh/aliases'
 #----------------------------------------------------------------
 
 #------- Vim Commands -------------------------------------------
@@ -13,7 +10,12 @@ alias :q='exit'
 alias be='bundle exec'
 alias bi='bundle install'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
-alias diffocop="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
+#----------------------------------------------------------------
+
+#------- Diffo-actions ------------------------------------------
+alias git-current-branch='git rev-parse --abbrev-ref HEAD'
+alias git-parent-branch="git show-branch -a 2&>/dev/null | ack '\*' | ack -v \"\$(git-current-branch)\" | head -n1 | perl -wnl -e '/\[([^\^\]]*)/ and print \$1;'"
+alias diffocop="git diff origin/\$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
 alias diffospec="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep 'spec\.rb$' | xargs rspec"
 #----------------------------------------------------------------
 
