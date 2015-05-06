@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/lawrencejones/Projects/payments-service/app/middleware/authentication'
+let g:netrw_dirhist_2='/Users/lawrencejones/Projects/payments-service/app/middleware'
+let g:netrw_dirhist_3='/Users/lawrencejones/Projects/payments-service/app/middleware/authentication'

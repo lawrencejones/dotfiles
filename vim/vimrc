@@ -175,6 +175,9 @@ nmap <F8> :TagbarToggle<CR>
 " Search using silversurfer (ag) for word under cursor
 nnoremap <Leader>a :Ag <C-r><C-w><CR>
 
+" Make current file executable
+nnoremap <Leader>x :w <bar> !chmod a+x % <CR><CR>
+
 " --------------- Tmux Integration --------------------------------------------
 
 if $TMUX != ''
@@ -408,6 +411,6 @@ nnoremap <leader>t :call SelectaCommand("find . \\(
       \ -path ./tmp -or
       \ -path ./public -or
       \ -name tags
-      \ \\) -prune -or -type f -print", "", ":e")<cr>
+      \ \\) -prune -or -type f -print", "", ":e!")<cr>
 
 

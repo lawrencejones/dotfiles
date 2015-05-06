@@ -1,22 +1,22 @@
 #------- Editing of .profile file and refresh command -----------
 alias :ra='source ~/.zsh/aliases'
+alias :rh='source ~/.zsh/helpers'
 #----------------------------------------------------------------
 
 #------- Vim Commands -------------------------------------------
 alias :q='exit'
+alias :Q='exit'
 #----------------------------------------------------------------
 
 #------- Ruby ---------------------------------------------------
 alias be='bundle exec'
 alias bi='bundle install'
+alias bc='bundle console'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias git-current-branch='git rev-parse --abbrev-ref HEAD'
-alias git-parent-branch="git show-branch -a 2&>/dev/null | ack '\*' | ack -v \"\$(git-current-branch)\" | head -n1 | perl -wnl -e '/\[([^\^\]]*)/ and print \$1;'"
 alias diffocop="git diff origin/\$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
-alias diffospec="git diff origin/dev --name-only --diff-filter=ACMRTUXB | grep 'spec\.rb$' | xargs rspec"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------

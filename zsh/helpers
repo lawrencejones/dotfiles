@@ -30,6 +30,58 @@ sr() {
   fi
 }
 
+trim() {
+  sed 's/^\s*//' | sed 's/\s*$//'
+}
+
+diffospec() {
+  if [[ "$1" -eq "--help" ]]; then
+
+    echo """
+    Desc:  Runs rspec against files that have changed from a different commit
+    Usage: diffospec <sha?>
+    Examples...
+
+        diffospec  # compares against parent branch by default
+        diffospec 3efc2  # compares against #3efc2
+
+    """
+
+  else
+
+    ref=$1; : ${ref:="$(git-parent-branch)"}
+    echo "Spec'ing against $ref"
+
+    specsWhereFileHasChangedPattern=$(
+    git diff origin/$ref --name-only --diff-filter=ACMRTUXB \
+    | ack -v spec \
+    | perl -wnl -e '/^[^\/]+\/(.+)\.rb$/ and print "-wholename \"**/$1_spec.rb\" -o"' \
+    | tr '\n' ' ' \
+    | sed 's/ -o\s*$//'
+    )
+
+    specsWhereFileHasChanged=$(find spec $(echo $specsWhereFileHasChangedPattern | xargs))
+    specsThatHaveChanged=$(git diff origin/$ref --name-only --diff-filter=ACMRTUXB | ack spec)
+
+    specsToRun=$(echo $specsThatHaveChanged'\n'$specsWhereFileHasChanged | sort -u)
+
+    echo $specsToRun | sed 's/^/- /'
+    rspec $(echo $specsToRun | xargs)
+
+  fi
+}
+
+git-current-branch() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+git-parent-branch() {
+  git show-branch -a 2&>/dev/null \
+  | ack '\*' \
+  | ack -v "$(git-current-branch)" \
+  | head -n1 \
+  | perl -wnl -e '/\[([^\^\]]*)/ and print $1;'
+}
 
 token() {
   if [[ "$#" -eq 0 ]]; then
