@@ -35,7 +35,7 @@ trim() {
 }
 
 diffospec() {
-  if [[ "$1" -eq "--help" ]]; then
+  if [ "$1" == "--help" ]; then
 
     echo """
     Desc:  Runs rspec against files that have changed from a different commit
@@ -52,11 +52,11 @@ diffospec() {
     originalPath=$(pwd)
     cd $(git rev-parse --show-toplevel)
 
-    ref=$1; : ${ref:="$(git-parent-branch)"}
+    ref=$1; if [ -z "$ref" ]; then ref=$(git-parent-branch); fi
     echo "Spec'ing against $ref"
 
     specsWhereFileHasChangedPattern=$(
-    git diff origin/$ref --name-only --diff-filter=ACMRTUXB \
+    git diff "$ref" --name-only --diff-filter=ACMRTUXB \
     | ack -v spec \
     | perl -wnl -e '/^[^\/]+\/(.+)\.rb$/ and print "-wholename \"**/$1_spec.rb\" -o"' \
     | tr '\n' ' ' \
@@ -64,12 +64,17 @@ diffospec() {
     )
 
     specsWhereFileHasChanged=$(find spec $(echo $specsWhereFileHasChangedPattern | xargs))
-    specsThatHaveChanged=$(git diff origin/$ref --name-only --diff-filter=ACMRTUXB | ack spec)
+    specsThatHaveChanged=$(git diff "$ref" --name-only --diff-filter=ACMRTUXB | ack spec.rb)
 
     specsToRun=$(echo $specsThatHaveChanged'\n'$specsWhereFileHasChanged | sort -u)
 
-    echo $specsToRun | sed 's/^/- /'
-    rspec $(echo $specsToRun | xargs)
+    if [ "$specsToRun" =~ '^ *$' ];
+    then
+      echo "No specs to run!"
+    else
+      echo $specsToRun | sed 's/^/- /'
+      rspec $(echo $specsToRun | xargs)
+    fi
 
     cd $originalPath
 
