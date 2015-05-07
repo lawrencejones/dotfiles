@@ -49,6 +49,9 @@ diffospec() {
 
   else
 
+    originalPath=$(pwd)
+    cd $(git rev-parse --show-toplevel)
+
     ref=$1; : ${ref:="$(git-parent-branch)"}
     echo "Spec'ing against $ref"
 
@@ -67,6 +70,8 @@ diffospec() {
 
     echo $specsToRun | sed 's/^/- /'
     rspec $(echo $specsToRun | xargs)
+
+    cd $originalPath
 
   fi
 }

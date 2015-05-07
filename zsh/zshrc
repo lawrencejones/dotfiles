@@ -2,6 +2,7 @@
 
 # Secondary paths (desc importance) ##############
 
+PATH=$PATH:/usr/local/heroku/bin  # Heroku toolbelt
 PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin  # X11 configuration on mac
 PATH=$PATH:/usr/local/CrossPack-AVR/bin  # Add avr toolchain
 PATH=$PATH:/usr/local/sicstus4.2.3/bin  # Add prolog binary for sicstus

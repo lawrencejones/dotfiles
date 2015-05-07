@@ -38,7 +38,7 @@ alias listpath='echo $PATH | tr ":" "\n"'
 alias tmux='tmux -2' # colors!!!
 alias twoup='lpr -o number-up=2 -o page-border=single'
 alias mocha='mocha --compilers coffee:coffee-script/register'
-alias ar='cd $(get-app-root)'
+alias ar='cd $(git rev-parse --show-toplevel)'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
