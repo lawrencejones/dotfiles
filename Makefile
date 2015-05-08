@@ -2,8 +2,6 @@ DIR=$(HOME)/dotfiles
 
 all: symlinks brew vim
 
-#brew ruby_env gems node vim
-
 symlinks:
 	@ln -sfh $(DIR)/bin  ~/.bin
 	@ln -sfh $(DIR)/colors  ~/.colors

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-brew = %w{
+brews = %w{
   coreutils
   findutils
   gnu-tar
