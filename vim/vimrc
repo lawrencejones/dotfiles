@@ -38,6 +38,8 @@ Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-endwise'
+Plugin 'danro/rename.vim'
 
 call vundle#end()
 
