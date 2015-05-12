@@ -1,6 +1,9 @@
 #!/bin/bash
 # GoCardless custom env
 
+# Load pry session with gocardless pro client
+alias pro-client="source ~/env/gc.sandbox-staging && pry --exec \"require_relative '$HOME/.bin/pry-gc.rb'\""
+
 alias gc='gocardless-dir'
 gocardless-dir() {
   if [[ "$#" -eq 0 ]]; then
