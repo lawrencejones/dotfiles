@@ -17,9 +17,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add npm locations to path if node exists
 if [ -n "$(node --version 2>/dev/null)" ]; then
-  export NODE_PATH="/usr/local/lib/node_modules:/usr/local/lib/node:$NODE_PATH"
-  export PATH="/usr/local/share/npm/bin:$PATH"
-  export PATH="/usr/local/bin/npm:$PATH"
+  nodeVersion=$(node --version)
+  export NODE_PATH="$HOME/.nvm/$nodeVersion/lib/node_modules:$NODE_PATH"
+  export PATH="$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
 
 # Configure rbenv

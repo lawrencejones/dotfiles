@@ -180,6 +180,9 @@ nnoremap <Leader>a :Ag <C-r><C-w><CR>
 " Make current file executable
 nnoremap <Leader>x :w <bar> !chmod a+x % <CR><CR>
 
+" Delete the current file and buffer
+nnoremap <Leader>D :call delete(expand('%')) <bar> bdelete!
+
 " --------------- Tmux Integration --------------------------------------------
 
 if $TMUX != ''
