@@ -17,6 +17,7 @@
 	excludesfile = ~/.gitignore_global
 [url "git@github.com:"]
 	insteadOf = https://github.com
+  insteadOf = github:
 [branch]
 	autosetuprebase = always
 [init]

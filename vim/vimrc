@@ -40,6 +40,9 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'
 Plugin 'danro/rename.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 call vundle#end()
 

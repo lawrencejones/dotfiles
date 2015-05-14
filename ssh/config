@@ -2,8 +2,8 @@
 
 Host *.staging *.production
   IdentityFile ~/.ssh/id_rsa
-  Hostname %h.gocardless.com
   User deploy
+  Hostname %h.gocardless.com
 
 Host *.gocardless.com
   User deploy

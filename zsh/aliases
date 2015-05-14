@@ -13,10 +13,11 @@ alias be='bundle exec'
 alias bi='bundle install'
 alias bc='bundle console'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
+alias ispec='RAILS_ENV=integration be rspec'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias diffocop="git diff origin/\$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
+alias diffocop="git diff \$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------

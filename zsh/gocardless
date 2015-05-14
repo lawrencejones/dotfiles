@@ -1,8 +1,12 @@
 #!/bin/bash
 # GoCardless custom env
 
+# Load dev config
+export GC_GIT=$HOME/Projects
+[ -f $GC_GIT/scripts/dev_env/env_setup.sh ] && . $GC_GIT/scripts/dev_env/env_setup.sh
+
 # Load pry session with gocardless pro client
-alias pro-client="source ~/env/gc.sandbox-staging && pry --exec \"require_relative '$HOME/.bin/pry-gc.rb'\""
+alias pro-client="source ~/env/gc.keys && pry --exec \"require_relative '$HOME/.bin/pro-client.rb'\""
 
 alias gc='gocardless-dir'
 gocardless-dir() {

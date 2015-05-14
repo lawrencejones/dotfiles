@@ -1,0 +1,8 @@
+# Debug middleware for NotRails
+snippet dbmid
+	uses Class.new(NotRails::Middleware) do
+		requires ${1:args}
+		def call
+			binding.pry
+		end
+	end
