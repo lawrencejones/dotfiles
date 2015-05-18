@@ -127,6 +127,10 @@ source ~/.zsh/aliases
 # GC env
 source ~/.zsh/gocardless
 
+# Load autoenv
+[ -f /usr/local/opt/autoenv/activate.sh ] && source /usr/local/opt/autoenv/activate.sh
+[ -f .env ] && source .env
+
 ### FINAL PATH ADDITIONS #######################################################
 
 # Primary paths (ascd importance) ################
@@ -134,5 +138,6 @@ source ~/.zsh/gocardless
 # Priority paths (ascd importance)
 PATH=/usr/local/bin:$PATH  # brew path
 PATH=./bin:$PATH  # current path
+PATH=$HOME/.bin:$PATH  # custom scripts
 
 export PATH

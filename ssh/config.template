@@ -4,6 +4,7 @@ Host *.staging *.production
   IdentityFile ~/.ssh/id_rsa
   User deploy
   Hostname %h.gocardless.com
+  Port $GC_PORT
 
 Host *.gocardless.com
   User deploy
@@ -23,7 +24,7 @@ Host doc-shell
 
 Host *.doc
   User lmj112
-  ProxyCommand ssh -T -q doc-shell nc $(echo %h | cut -d. -f1) 22 2>/dev/null
+  ProxyCommand ssh -T -q doc-shell nc $$(echo %h | cut -d. -f1) 22 2>/dev/null
 
 # Sesquis ##################################################
 
