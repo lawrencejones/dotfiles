@@ -98,9 +98,14 @@ alias tree='tree -C'
 bindkey '^R' history-incremental-search-backward
 
 # Autocompletion
-fpath=($HOME/.zsh/completion $fpath)
+fpath=($fpath $HOME/.zsh/completion)
 autoload -U compinit
 compinit
+
+# Make custom completions take priority
+for completion in $(ls ~/.zsh/completion); do
+  compdef $completion ${completion:1}
+done
 
 # Glob-like autocomplete
 setopt glob_complete
