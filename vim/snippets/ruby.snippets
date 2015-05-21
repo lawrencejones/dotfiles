@@ -6,3 +6,44 @@ snippet dbmid
 			binding.pry
 		end
 	end
+
+# Creation middleware for NotRails
+snippet #nr-create
+	class Create < NotRails::Middleware
+	  uses Middleware::SetupRequest,
+				 resource_name: :${1:resource_name},
+				 action_name: :create,
+				 permission_requirements: { $1: Permission::FULL_ACCESS },
+				 scope: Constants::Auth::Scopes::FULL_ACCESS
+
+		uses Middleware::JsonContentType
+		uses Middleware::Authenticate
+		uses Middleware::JsonSchema
+		uses Middleware::TransformEnvelope,
+		     flatten_links: true,
+				 rename_keys: { },
+				 parse_values: { }
+
+		requires :transformed_envelope, :organisation
+
+		def call
+		  ${2:singular_resource} = ${4:NamedResource}.create($2_params)
+			if $2.persisted?
+			  Renderer.render_new_resource($2, serializer: Enterprise::${3:ResourceSerializer})
+			else
+			  Renderer.render_validation_error($2, request: request)
+			end
+		end
+
+		private
+
+		def $2_params
+		  @$2_params ||= transformed_envelope.merge(organisation_id: organisation.id)
+		end
+	end
+
+# Create route handler for NotRails
+snippet #nr-mount-create
+	match "/enterprise/${1:resource_name}",
+	      to: NotRails::Handler.new(Routes::${2:ResourceName}::Create),
+				via: :post

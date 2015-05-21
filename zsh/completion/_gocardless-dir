@@ -1,0 +1,3 @@
+#compdef gocardless-dir
+
+compadd $(ag -u --files-with-matches --depth 3 -G ".git/config" "git@github.com:gocardless" ~/Projects  | perl -wnl -e "/Projects\/([^\/]+)/ and print \$1")
