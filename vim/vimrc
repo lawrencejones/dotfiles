@@ -43,6 +43,7 @@ Plugin 'danro/rename.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+Plugin 'diepm/vim-rest-console'
 
 call vundle#end()
 
@@ -282,52 +283,17 @@ endfunction
 " Configure fold status text
 if has("folding")
 
-  set foldtext=MyFoldText()
-
-  function! MyFoldText()
-
-    " for now, just don't try if version isn't 7 or higher
-    if v:version < 701
-      return foldtext()
-    endif
-
-    " clear fold from fillchars to set it up the way we want later
-    let &l:fillchars = substitute(&l:fillchars,',\?fold:.','','gi')
-    let l:numwidth = (v:version < 701 ? 8 : &numberwidth)
-
-    if &fdm=='diff'
-      let l:linetext=''
-      let l:foldtext='---------- '.(v:foldend-v:foldstart+1).' lines the same ----------'
-      let l:align = winwidth(0)-&foldcolumn-(&nu ? Max(strlen(line('$'))+1, l:numwidth) : 0)
-      let l:align = (l:align / 2) + (strlen(l:foldtext)/2)
-
-      " note trailing space on next line
-      setlocal fillchars+=fold:\
-
-    elseif !exists('b:foldpat') || b:foldpat==0
-      " Swap out spaces for tabs
-      let l:tabspaces = "                     "[0:&tabstop-1]
-      let l:foldcontent = substitute(getline(v:foldstart), '\t', l:tabspaces, '')
-      let l:foldtext = ' '.(v:foldend-v:foldstart).' lines folded'.v:folddashes.'|'
-      let l:endofline = (&textwidth>0 ? &textwidth : 80)
-      let l:linetext = strpart(l:foldcontent,0,l:endofline-strlen(l:foldtext))
-      let l:align = l:endofline-strlen(l:linetext)
-      setlocal fillchars+=fold:-
-
-    elseif b:foldpat==1
-      let l:align = winwidth(0)-&foldcolumn-(&nu ? Max(strlen(line('$'))+1, l:numwidth) : 0)
-      let l:foldtext = ' '.v:folddashes
-      let l:linetext = substitute(v:foldstart,'\s\+$','','')
-      let l:linetext .= ' ---'.(v:foldend-v:foldstart-1).' lines--- '
-      let l:linetext .= substitute(getline(v:foldend),'^\s\+','','')
-      let l:linetext = strpart(l:linetext,0,l:align-strlen(l:foldtext))
-      let l:align -= strlen(l:linetext)
-      setlocal fillchars+=fold:-
-    endif
-
-    return printf('%s%*s', l:linetext, l:align, l:foldtext)
-
+  function! NeatFoldText()
+    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let lines_count = v:foldend - v:foldstart + 1
+    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+    let foldchar = matchstr(&fillchars, 'fold:\zs.')
+    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+    let foldtextend = lines_count_text . repeat(foldchar, 8)
+    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+    return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
   endfunction
+  set foldtext=NeatFoldText()
 
 endif
 
@@ -357,39 +323,6 @@ endif
 
 " Alias the NesC filetype to C
 autocmd BufRead,BufNewFile *.nc set ft=c
-
-" --------------- Apiary Preferences ------------------------------------------
-
-" Configures extra highlighting for my apib extensions of MODEL and INCLUDE
-function! HighlightApibExt()
-
-  syn clear " Initially clear syntax
-
-  " Keywords (MODEL | INCLUDE)
-  syn keyword apibKeywords MODEL INCLUDE
-  hi def link apibKeywords Type
-
-  " Path following keywords
-  syn match modelName /\(MODEL\|INCLUDE\|FORMAT\|HOST\)\@<= [^\]]\+/ display
-  hi def link modelName Exception
-
-  " Set preprocessor directives to white
-  syn match preprocessorDirectives /\[[^\]]\+\]([^)]\+)/ contains=apibKeywords,modelName display
-  hi def link preprocessorDirectives Normal
-
-  " Change standard text to comment level
-  syn match bodyText /^[^#].\+/ contains=apibKeywords,modelName,preprocessorDirectives display
-  hi def link bodyText Comment
-
-  " Top level keys
-  syn keyword topLevel FORMAT HOST
-  hi def link topLevel Constant
-
-
-endfunction
-
-autocmd BufNewFile,BufRead *.apib call HighlightApibExt()
-autocmd BufNewFile,BufRead *.apib set shiftwidth=4
 
 " --------------- Selecta Configuration ---------------------------------------
 

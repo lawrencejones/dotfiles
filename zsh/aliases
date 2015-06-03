@@ -19,7 +19,7 @@ alias sprung='pgrep spring | xargs kill -9'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias diffocop="git diff \$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs rubocop"
+alias diffocop="git diff \$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
@@ -31,8 +31,12 @@ alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gac='git add -A :/ && git commit -a'
 alias gd='git diff'
+alias gdh='git diff HEAD'
 alias gb='git branch'
 alias gp='git push'
+alias gpcb='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpfh='git push -f origin $(git rev-parse --abbrev-ref HEAD)'
+alias gredo='git add -A && git commit --amend --no-edit -n && git push -f origin $(git rev-parse --abbrev-ref HEAD)'
 alias gr='git rebase'
 alias gri='git rebase -i'
 alias grc='git rebase --continue'

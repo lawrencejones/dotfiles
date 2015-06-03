@@ -27,18 +27,16 @@ snippet #nr-create
 		requires :transformed_envelope, :organisation
 
 		def call
-		  ${2:singular_resource} = ${4:NamedResource}.create($2_params)
-			if $2.persisted?
-			  Renderer.render_new_resource($2, serializer: Enterprise::${3:ResourceSerializer})
-			else
-			  Renderer.render_validation_error($2, request: request)
-			end
+			Renderer.render_resource_or_validation_error(
+			  ${2:NamedResource}.create(${3:singular_resource}_params),
+				serializer: Enterprise::${4:ResourceSerializer},
+				request: request)
 		end
 
 		private
 
-		def $2_params
-		  @$2_params ||= transformed_envelope.merge(organisation_id: organisation.id)
+		def $3_params
+		  @$3_params ||= transformed_envelope.merge(organisation_id: organisation.id)
 		end
 	end
 
@@ -47,3 +45,45 @@ snippet #nr-mount-create
 	match "/enterprise/${1:resource_name}",
 	      to: NotRails::Handler.new(Routes::${2:ResourceName}::Create),
 				via: :post
+
+# Test template for middleware
+snippet #nr-middleware-spec
+	describe ${1:Middleware}::${2:ClassName}::${3:Route} do
+	  subject(:instance) { described_class.new(context, next_middleware) }
+
+		let(:context) do
+			{
+				request: instance_double(ActionDispatch::Request,
+																 uuid: 'UUID',
+																 path: '/enterprise/${4:resource_path}'),
+				transformed_envelope: ${5:resource_payload},
+				organisation: organisation
+			}
+		end
+		let(:next_middleware) { double(call: nil) }
+
+		let(:$5) do
+			{
+			}.stringify_keys
+		end
+
+		let(:organisation) { FactoryGirl.create(:the_guardian_organisation) }
+
+		# let(:json_body) { JSON.parse(instance.call.third.first).with_indifferent_access }
+
+		context "happy path" do
+			it { is_expected.to respond_with_status(HAPPY) }
+		end
+	end
+
+snippet #rws
+	it { is_expected.to respond_with_status(${1:status}) }
+
+snippet #rwh
+	it { is_expected.to respond_with_header('${1:header}', ${2:match}) }
+
+snippet #rwb
+	it { is_expected.to respond_with_body_that_matches(${1:match}) }
+
+snippet #err-iau
+	Constants::Errors::InvalidAPIUsage::${1:Error}
