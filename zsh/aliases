@@ -52,6 +52,7 @@ alias twoup='lpr -o number-up=2 -o page-border=single'
 alias mocha='mocha --compilers coffee:coffee-script/register'
 alias ar='cd $(git rev-parse --show-toplevel)'
 alias ssh='compile-ssh-config && ssh'
+alias curl-json='function() { curl $1 | pp.js }'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
