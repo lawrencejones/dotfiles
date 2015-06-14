@@ -33,13 +33,13 @@ brews = %w{
   phantomjs
  }
 
-INSTALLED_BREWS = `brew list`.split("\n")
+INSTALLED_BREWS = system('brew list').split("\n")
 
 brews.each do |brew|
   if INSTALLED_BREWS.include?(brew)
     puts "#{brew} already installed"
   else
     puts "Installing #{brew}..."
-    puts `brew install #{brew}`
+    puts system('brew install #{brew}')
   end
 end

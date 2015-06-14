@@ -3,8 +3,10 @@
 SSH_CONFIG_PATH="#{Dir.home}/.ssh/config"
 
 template = File.read("#{SSH_CONFIG_PATH}.template")
-compiled = template.gsub(/\$\S+/) do |env_key|
-  ENV[env_key[1..-1]] || "$#{env_key}"
+compiled = template.gsub(/\$[^\(\$]\S+/) do |env_accessor|
+  env_key = env_accessor[1..-1]  # $VAR -> VAR
+  raise "Require #{env_accessor}" unless env_value = ENV[env_key]
+  env_value
 end
 
 File.write(SSH_CONFIG_PATH, compiled)
