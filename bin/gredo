@@ -1,0 +1,21 @@
+#!/bin/zsh
+
+currentBranch=$(git rev-parse --abbrev-ref HEAD)
+remoteBranch=origin/$currentBranch
+
+# Verify nothing has been pushed before overwriting
+git fetch
+if [ -s "$(git diff $currentBranch $remoteBranch)" ];
+then
+  echo """
+  New content has been pushed to your remote branch.
+  Refusing to commit-ammend!"""
+  exit -1
+fi
+
+# Overwrite last commit with new content
+echo "Overwriting last commit on remote..."
+git add -A && \
+  git commit --amend --no-edit -n && \
+  git push -f origin $currentBranch
+echo "Done!"
