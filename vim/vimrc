@@ -142,13 +142,6 @@ au BufRead,BufNewFile *.pro set syntax=prolog   " Detect prolog
 au BufRead,BufNewFile Gemfile set ft=ruby       " Set ruby syntax for Gemfiles
 au BufRead,BufNewFile *.locals set ft=javascript
 
-" Activate pencil when in markdown or text
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-augroup END
-
 " --------------- Preferred Syntastic Checkers --------------------------------
 
 let g:syntastic_python_checkers = ['pep8']

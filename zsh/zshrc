@@ -2,12 +2,13 @@
 
 # Secondary paths (desc importance) ##############
 
-PATH=$PATH:/usr/local/heroku/bin  # Heroku toolbelt
-PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin  # X11 configuration on mac
-PATH=$PATH:/usr/local/CrossPack-AVR/bin  # Add avr toolchain
-PATH=$PATH:/usr/local/sicstus4.2.3/bin  # Add prolog binary for sicstus
-PATH=$PATH:/usr/local/i386-elf-gcc/bin  # Pintos i386-elf toolchain
-PATH=$PATH:$HOME/.vim/bundle/selecta  # Add selecta to path for vim
+PATH=$PATH:/usr/local/bin                   # brew path
+PATH=$PATH:/usr/local/heroku/bin            # Heroku toolbelt
+PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin   # X11 configuration on mac
+PATH=$PATH:/usr/local/CrossPack-AVR/bin     # Add avr toolchain
+PATH=$PATH:/usr/local/sicstus4.2.3/bin      # Add prolog binary for sicstus
+PATH=$PATH:/usr/local/i386-elf-gcc/bin      # Pintos i386-elf toolchain
+PATH=$PATH:$HOME/.vim/bundle/selecta        # Add selecta to path for vim
 
 ### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
 
@@ -23,7 +24,7 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
 fi
 
 # Configure rbenv
-if [ -s "$(rbenv --version 2>/dev/null)" ];
+if [ -n "$(rbenv --version 2>/dev/null)" ];
 then
   export PATH="/Users/lawrencejones/.rbenv/shims:${PATH}"
   source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.zsh"
@@ -144,7 +145,6 @@ source ~/.zsh/gocardless
 # Primary paths (ascd importance) ################
 
 # Priority paths (ascd importance)
-PATH=/usr/local/bin:$PATH  # brew path
 PATH=./bin:$PATH  # current path
 PATH=$HOME/.bin:$PATH  # custom scripts
 
