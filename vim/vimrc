@@ -44,7 +44,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'diepm/vim-rest-console'
-Plugin 'reedes/vim-pencil'
+Plugin 'tpope/vim-vinegar'
 
 call vundle#end()
 
@@ -343,13 +343,5 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <leader>t :call SelectaCommand("find . \\(
-      \ -path ./.git -or
-      \ -path ./node_modules -or
-      \ -path ./logs -or
-      \ -path ./tmp -or
-      \ -path ./public -or
-      \ -name tags
-      \ \\) -prune -or -type f -print", "", ":e!")<cr>
-
-
+" ag: WOO!
+nnoremap <leader>t :call SelectaCommand("ag -l", "", ":e!")<cr>
