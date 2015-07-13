@@ -15,11 +15,11 @@ alias bc='bundle console'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
 alias ispec='RAILS_ENV=integration be rspec'
 alias pry-lib='bundle exec pry --exec "\$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), \"lib\")); true"'
-alias sprung='pgrep spring | xargs kill -9'
+alias sprung='pgrep spring ruby | xargs kill -9'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias diffocop="git diff \$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
+alias diffocop="git diff dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
@@ -53,6 +53,7 @@ alias ar='cd $(git rev-parse --show-toplevel)'
 alias ssh='compile-ssh-config && ssh'
 alias curl-json='function() { curl $1 | pp.js }'
 alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
+alias rest-console='cd $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

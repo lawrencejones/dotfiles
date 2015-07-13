@@ -1,4 +1,4 @@
-gem 'gocardless-pro', '~>0.2.0'
+gem 'gocardless-pro', '~>0.3.0'
 require 'gocardless-pro'
 
 class GCEnv

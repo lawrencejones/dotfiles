@@ -37,7 +37,7 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'
 Plugin 'danro/rename.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -45,6 +45,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'diepm/vim-rest-console'
 Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-ragtag'
 
 call vundle#end()
 
@@ -70,6 +71,9 @@ set t_vb=
 
 " Forces a syntax hl refresh
 nnoremap <leader>S :syn sync fromstart<CR>
+
+" Remap no highlight to return
+nnoremap <CR> :noh<CR>
 
 " airline config
 let g:airline_theme='dark'
@@ -110,6 +114,7 @@ autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 let g:syntastic_mode_map = {
   \ "mode": "active",
   \ "passive_filetypes": ["haml", "scss", "sass"] }
+let g:syntastic_javascript_checkers = ['eslint']
 
 " --------------- ColorColumn Toggling ----------------------------------------
 
@@ -267,6 +272,10 @@ endif
 
 " Map space to toggle current fold
 noremap <Space> za
+
+" Set foldmethod to indent by default
+set foldmethod=indent
+set foldlevel=99
 
 " Turn foldcolumn viewing on for a fold visualization
 nnoremap <leader>f :call FoldColumnToggle()<cr>
