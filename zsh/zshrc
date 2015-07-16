@@ -101,6 +101,9 @@ alias tree='tree -C'
 # Enable reverse-i search
 bindkey '^R' history-incremental-search-backward
 
+# Intelligent mv
+autoload -U zmv
+
 # Autocompletion
 fpath=($fpath $HOME/.zsh/completion)
 autoload -U compinit
