@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Determines if the keys should be sorted in the output
+var sortOutputKeys = process.argv.indexOf('-u') == -1;
+
 var input = "";
 
 function lexisort(obj) {
@@ -24,7 +27,7 @@ process.stdin.on('data', function(data) {
 process.stdin.on('end', function() {
   try {
     var json = JSON.parse(input.toString());
-    console.log(JSON.stringify(lexisort(json), null, 2));
+    console.log(JSON.stringify(sortOutputKeys ? lexisort(json) : json, null, 2));
   } catch(err) {
     console.log(input.toString());
   }

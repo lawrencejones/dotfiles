@@ -98,6 +98,15 @@ alias tree='tree -C'
 
 ### GENERAL ZSH-NESS ###########################################################
 
+# Command history
+HISTFILE=$HOME/.zhistory          # save on shell exit
+HISTSIZE=1200                     # lines of history
+SAVEHIST=1000                     # lines of history on disc
+setopt APPEND_HISTORY             # append rather than overwrite
+setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first
+setopt EXTENDED_HISTORY           # save timestamp and runtime info
+
+
 # Enable reverse-i search
 bindkey '^R' history-incremental-search-backward
 
