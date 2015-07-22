@@ -14,7 +14,7 @@ _trunc_path()
   else
     newPWD=$wd
   fi
-  echo -e $newPWD
+  echo -e $newPWD | sed 's/\\//g'
 }
 
 _python_virt_env()
@@ -25,7 +25,7 @@ _python_virt_env()
 _pwd_ps1()
 {
   # Include -P to resolve symlinks
-  local wd=`pwd` # -P`
+  local wd="$(pwd | sed 's/ /\\ /g')" # -P`
 
   local git_root=`git rev-parse --show-toplevel 2>/dev/null`
   if [ -n "$git_root" ];

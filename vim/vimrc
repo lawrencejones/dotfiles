@@ -78,6 +78,7 @@ nnoremap <CR> :noh<CR>
 " airline config
 let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 0  " turn off git branch
 highlight clear LineNr
 
 " --------------- Indentation and Formatting ----------------------------------

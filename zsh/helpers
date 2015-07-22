@@ -42,7 +42,7 @@ diffospec() {
     Usage: diffospec <sha?>
     Examples...
 
-        diffospec  # compares against parent branch by default
+        diffospec  # compares against head by default
         diffospec 3efc2  # compares against #3efc2
 
     """
@@ -52,7 +52,7 @@ diffospec() {
     originalPath=$(pwd)
     cd $(git rev-parse --show-toplevel)
 
-    ref=$1; if [ -z "$ref" ]; then ref=$(git-parent-branch); fi
+    ref=$1; if [ -z "$ref" ]; then ref='HEAD'; fi
     echo "Spec'ing against $ref"
 
     specsWhereFileHasChangedPattern=$(

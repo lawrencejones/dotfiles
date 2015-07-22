@@ -19,6 +19,7 @@ export NVM_DIR="$HOME/.nvm"
 # Add npm locations to path if node exists
 if [ -n "$(node --version 2>/dev/null)" ]; then
   nodeVersion=$(node --version)
+
   export NODE_PATH="$HOME/.nvm/$nodeVersion/lib/node_modules:$NODE_PATH"
   export PATH="$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
@@ -102,6 +103,7 @@ alias tree='tree -C'
 HISTFILE=$HOME/.zhistory          # save on shell exit
 HISTSIZE=1200                     # lines of history
 SAVEHIST=1000                     # lines of history on disc
+setopt no_share_history           # don't share history
 setopt APPEND_HISTORY             # append rather than overwrite
 setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first
 setopt EXTENDED_HISTORY           # save timestamp and runtime info
