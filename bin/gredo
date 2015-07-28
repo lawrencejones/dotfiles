@@ -1,7 +1,17 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
+
+set -e  # give up if fail
 
 currentBranch=$(git rev-parse --abbrev-ref HEAD)
 remoteBranch=origin/$currentBranch
+
+if ([[ "$currentBranch" == "dev" ]] || [[ "$currentBranch" == "master" ]]);
+then
+  echo """
+  Refusing to git-redo $currentBranch.
+  """
+  exit -1
+fi
 
 # Verify nothing has been pushed before overwriting
 git fetch

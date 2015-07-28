@@ -46,6 +46,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'diepm/vim-rest-console'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-ragtag'
+Plugin 'rorymckinley/vim-rubyhash'
 
 call vundle#end()
 
@@ -168,8 +169,8 @@ map <Leader>pg :GitGutterPrevHunk<CR>
 
 " --------------- General Shortcuts -------------------------------------------
 
-" Configure Dash leader
-nmap <silent> <leader>d <Plug>DashSearch
+" Delete the current file and buffer
+nnoremap <Leader>d :call delete(expand('%')) <bar> bdelete!
 
 " Paste from system clipboard
 nmap <leader>P :read !pbpaste <CR>
@@ -187,9 +188,6 @@ nnoremap <Leader>a :Ag <C-r><C-w><CR>
 
 " Make current file executable
 nnoremap <Leader>x :w <bar> !chmod a+x % <CR><CR>
-
-" Delete the current file and buffer
-nnoremap <Leader>D :call delete(expand('%')) <bar> bdelete!
 
 " --------------- Tmux Integration --------------------------------------------
 

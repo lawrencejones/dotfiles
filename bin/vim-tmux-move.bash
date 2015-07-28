@@ -1,5 +1,7 @@
+#!/bin/sh
+
 program="`tmux display -p '#{pane_current_command}'`"
- 
+
 if [[ $program == "vim" ]]; then
 	# let vim handle it
 	tmux send-keys 'Escape' 'C-w' $1
