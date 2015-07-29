@@ -47,6 +47,7 @@ Plugin 'diepm/vim-rest-console'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-ragtag'
 Plugin 'rorymckinley/vim-rubyhash'
+Plugin 'wellle/targets.vim'
 
 call vundle#end()
 
