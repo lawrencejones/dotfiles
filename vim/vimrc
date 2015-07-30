@@ -192,33 +192,46 @@ nnoremap <Leader>x :w <bar> !chmod a+x % <CR><CR>
 
 " --------------- Tmux Integration --------------------------------------------
 
-" Integrate movement between tmux/vim panes/windows
-function! TmuxMove(direction)
+if $TMUX != ''
 
-  " Check if we are currently focusing on a edge window.
-  " To achieve that, move to/from the requested window and see if the window
-  " number changed
+  " Integrate movement between tmux/vim panes/windows
+  function! TmuxMove(direction)
 
-  let old_window = winnr()
-  silent! exe 'wincmd ' . a:direction
-  let new_window = winnr()
-  silent! exe old_window . 'wincmd w'  " change back to original window
+    " Check if we are currently focusing on a edge window.
+    " To achieve that, move to/from the requested window and see if the window
+    " number changed
 
-  if old_window == new_window
-    " The focused window is at an edge, so ask tmux to switch panes
-    if a:direction == 'j'
-      call system("tmux select-pane -D")
-    elseif a:direction == 'k'
-      call system("tmux select-pane -U")
-    elseif a:direction == 'h'
-      call system("tmux select-pane -L")
-    elseif a:direction == 'l'
-      call system("tmux select-pane -R")
-    endif
-  else
+    let old_window = winnr()
     exe 'wincmd ' . a:direction
-  end
-endfun
+    let new_window = winnr()
+
+    " Change back to original window
+    exe old_window . 'wincmd w'
+
+    if old_window == new_window
+      " The focused window is at an edge, so ask tmux to switch panes
+      if a:direction == 'j'
+        call system("tmux select-pane -D")
+      elseif a:direction == 'k'
+        call system("tmux select-pane -U")
+      elseif a:direction == 'h'
+        call system("tmux select-pane -L")
+      elseif a:direction == 'l'
+        call system("tmux select-pane -R")
+      endif
+    else
+      exe 'wincmd ' . a:direction
+    end
+  endfun
+
+else
+
+  nmap <C-h> :exe 'wincmd h'<CR>
+  nmap <C-j> :exe 'wincmd j'<CR>
+  nmap <C-k> :exe 'wincmd k'<CR>
+  nmap <C-l> :exe 'wincmd l'<CR>
+
+end
 
 " --------------- Folding! ----------------------------------------------------
 
