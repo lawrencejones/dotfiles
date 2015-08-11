@@ -63,10 +63,15 @@ diffospec() {
     | sed 's/ -o\s*$//'
     )
 
-    specsWhereFileHasChanged=$(find spec $(echo $specsWhereFileHasChangedPattern | xargs))
-    specsThatHaveChanged=$(git diff "$ref" --name-only --diff-filter=ACMRTUXB | ack spec.rb)
+    if [ -n "${specswherefilehaschangedpattern// }" ];
+    then
+      specsWhereFileHasChanged=$(find spec $(echo $specsWhereFileHasChangedPattern | xargs))
+    else
+      specsWhereFileHasChanged=""
+    fi
 
-    specsToRun=$(echo $specsThatHaveChanged'\n'$specsWhereFileHasChanged | sort -u)
+    specsThatHaveChanged=$(git diff "$ref" --name-only --diff-filter=ACMRTUXB | ack spec.rb)
+    specsToRun=$(echo $specsThatHaveChanged'\n'$specsWhereFileHasChanged | sort -u | ack "\S")
 
     if [ "$specsToRun" =~ '^ *$' ];
     then

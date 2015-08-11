@@ -1,12 +1,19 @@
 #------- Editing of .profile file and refresh command -----------
 alias :ra='source ~/.zsh/aliases'
+alias :ea='vim ~/.zsh/aliases'
+
 alias :rh='source ~/.zsh/helpers'
+alias :eh='vim ~/.zsh/helpers'
+
+alias :rz='source ~/.zsh/zshrc'
+alias :ez='source ~/.zsh/zshrc'
+
+alias :ev='vim ~/.vim/vimrc'
 #----------------------------------------------------------------
 
 #------- Vim Commands -------------------------------------------
 alias :q='exit'
 alias :Q='exit'
-alias vimrc='vim ~/.vim/vimrc'
 #----------------------------------------------------------------
 
 #------- Ruby ---------------------------------------------------
@@ -55,6 +62,8 @@ alias ssh='compile-ssh-config && ssh'
 alias curl-json='function() { curl $1 | pp.js }'
 alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
 alias rest-console='cd $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
+alias plain-paste='pbpaste | pbcopy'
+alias tmuxcp='tmux show-buffer | pbcopy'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
