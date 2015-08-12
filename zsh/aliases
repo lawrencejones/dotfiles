@@ -64,6 +64,7 @@ alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
 alias rest-console='cd $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
 alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
+alias curl-time='curl -w "@~/dotfiles/nix/curl/curl-timing-output.txt"'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

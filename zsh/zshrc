@@ -20,7 +20,7 @@ export NVM_DIR="$HOME/.nvm"
 if [ -n "$(node --version 2>/dev/null)" ]; then
   nodeVersion=$(node --version)
 
-  export NODE_PATH="$HOME/.nvm/$nodeVersion/lib/node_modules:$NODE_PATH"
+  export NODE_PATH="$HOME/.nvm/versions/node/$nodeVersion/lib/node_modules:$NODE_PATH"
   export PATH="$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
 
