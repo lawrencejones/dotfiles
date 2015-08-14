@@ -46,6 +46,10 @@ then
   }
 fi
 
+# Python config
+export PIP_REQUIRE_VIRTUALENV=true  # prevent pip from running unless in virtualenv
+export VIRTUAL_ENV_DISABLE_PROMPT=true  # turn off patching of prompt
+
 ### SELECT GNU COMMANDS ########################################################
 
 # For those commands that require a g prefix, select if exist
@@ -108,7 +112,6 @@ setopt APPEND_HISTORY             # append rather than overwrite
 setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first
 setopt EXTENDED_HISTORY           # save timestamp and runtime info
 
-
 # Enable reverse-i search
 bindkey '^R' history-incremental-search-backward
 
@@ -143,14 +146,11 @@ source ~/.zsh/aliases
 
 ### LOAD OTHER CONFIG ##########################################################
 
-# Configure environment
-[ -f ~/.shared_env ] && source ~/.shared_env
-[ -f ~/.env ] && source ~/.env
-
-# GC env
+# Load environment
+source ~/.private-env
 source ~/.zsh/gocardless
 
-# Load autoenv
+# Load autoenv to boot shared .env
 [ -f /usr/local/opt/autoenv/activate.sh ] && source /usr/local/opt/autoenv/activate.sh
 cd .  # force autoenv to start
 

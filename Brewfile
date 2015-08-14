@@ -10,7 +10,6 @@ brews = %w{
   gnu-indent
   gnu-getopt
   gnu-sed
-
   git
   ruby-build
   rbenv
@@ -33,13 +32,17 @@ brews = %w{
   phantomjs
  }
 
-INSTALLED_BREWS = system('brew list').split("\n")
+INSTALLED_BREWS = `brew list`.split("\n")
+
+puts("Installing brews...\n\n")
 
 brews.each do |brew|
   if INSTALLED_BREWS.include?(brew)
-    puts "#{brew} already installed"
+    puts("- #{brew} already installed")
   else
-    puts "Installing #{brew}..."
-    puts system('brew install #{brew}')
+    puts("- Installing #{brew}...")
+    system('brew install #{brew}')
   end
 end
+
+puts("\nBrews complete!")

@@ -7,4 +7,5 @@
          time_starttransfer:  %{time_starttransfer}\n
                             ----------\n
                  time_total:  %{time_total}\n
+                   response:    %{response_code}\n
 \n

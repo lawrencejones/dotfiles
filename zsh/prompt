@@ -1,5 +1,5 @@
 ### CONFIGURE PROMPT ###########################################################
-_trunc_path()
+_prompt_trunc_path()
 {
   #   How many characters of the $PWD should be kept
   local pwdmaxlen=30
@@ -17,12 +17,12 @@ _trunc_path()
   echo -e $newPWD | sed 's/\\//g'
 }
 
-_python_virt_env()
+_prompt_python_virt_env()
 {
   [ -n "$VIRTUAL_ENV" ] && echo "🐍 ($(basename $VIRTUAL_ENV)) "
 }
 
-_pwd_ps1()
+_prompt_pwd_ps1()
 {
   # Include -P to resolve symlinks
   local wd="$(pwd | sed 's/ /\\ /g')" # -P`
@@ -33,13 +33,23 @@ _pwd_ps1()
     local basedir=`dirname "$git_root"`
     wd='...'${wd#$basedir}
   fi
-  echo -e `_trunc_path "$wd"`
+  echo -e `_prompt_trunc_path "$wd"`
 }
 
-_git_ps1()
+_prompt_git_ps1()
 {
   branch=$(git branch 2>/dev/null | perl -wnl -e '/(?<=\*\s).*/ and print $&;')
   [ -n "$branch" ] && echo " %{$WHITE%}on %{$PINK%}($branch)"
+}
+
+_prompt_lambda()
+{
+  if [ -n "$VIRTUAL_ENV" ];
+  then
+    echo "(🐍 ) ~> "
+  else
+    echo "λ ~> "
+  fi
 }
 
 # Configure host, allow for alias is provided
@@ -49,7 +59,7 @@ HOST=`hostname`
 # Set to the debian colors
 PROMPT="%{$PINK%}%n%{$CLRCOL%} "                      # username
 PROMPT=$PROMPT"%{$WHITE%}at %{$ORANGE%}$HOST "        # hostname
-PROMPT=$PROMPT"%{$WHITE%}in %{$GREEN%}"'$(_pwd_ps1)'  # working dir
-PROMPT=$PROMPT'$(_git_ps1) '$'\n'                     # git branch
-PROMPT=$PROMPT"%{$WHITE%}$ %{$CLRCOL%}%{$GREY%}"      # $ > grey
+PROMPT=$PROMPT"%{$WHITE%}in %{$GREEN%}"'$(_prompt_pwd_ps1)'  # working dir
+PROMPT=$PROMPT'$(_prompt_git_ps1) '$'\n'                     # git branch
+PROMPT=$PROMPT"%{$WHITE%}"'$(_prompt_lambda)'"%{$CLRCOL%}%{$GREY%}"      # $ > grey
 

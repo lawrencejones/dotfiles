@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+# Deactivate unused python virtual envs
+if [ -n "$VIRTUAL_ENV" ];
+then
+  [ -n "$(git rev-parse HEAD 2>/dev/null)" ] && deactivate
+fi
