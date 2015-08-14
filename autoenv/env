@@ -3,5 +3,5 @@
 # Deactivate unused python virtual envs
 if [ -n "$VIRTUAL_ENV" ];
 then
-  [ -n "$(git rev-parse HEAD 2>/dev/null)" ] && deactivate
+  [ -z "$(git rev-parse HEAD 2>/dev/null)" ] && deactivate
 fi
