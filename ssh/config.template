@@ -1,6 +1,6 @@
 # GoCardless ###############################################
 
-Host *.staging *.production
+Host *.gc.staging *.gc.production
   IdentityFile ~/.ssh/id_rsa
   User deploy
   Hostname %h.gocardless.com
@@ -28,15 +28,8 @@ Host *.doc
 
 # Sesquis ##################################################
 
-Host sesquis.beta
-  Hostname ec2-54-171-81-144.eu-west-1.compute.amazonaws.com
+Host sesquis.staging
+  Hostname ec2-52-18-253-18.eu-west-1.compute.amazonaws.com
   User ubuntu
-  IdentityFile ~/.ssh/keys/sesquis.pem
+  IdentityFile ~/.ssh/keys/sesquis-deploy.pem
   Port $SESQUIS_PORT
-
-Host sesquis.prod
-  Hostname ec2-52-16-53-177.eu-west-1.compute.amazonaws.com
-  User ubuntu
-  IdentityFile ~/.ssh/keys/sesquis.pem
-  Port $SESQUIS_PORT
-
