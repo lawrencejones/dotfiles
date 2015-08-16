@@ -147,8 +147,8 @@ source ~/.zsh/aliases
 ### LOAD OTHER CONFIG ##########################################################
 
 # Load environment
-source ~/.private-env
-source ~/.zsh/gocardless
+[ -f ~/.private-env ] && source ~/.private-env
+[ -f ~/.zsh/gocardless ] && source ~/.zsh/gocardless
 
 # Load autoenv to boot shared .env
 [ -f /usr/local/opt/autoenv/activate.sh ] && source /usr/local/opt/autoenv/activate.sh
