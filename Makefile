@@ -9,7 +9,7 @@ symlinks:
 	@ln -sf $(DIR)/git/gitignore_global  ~/.gitignore_global
 	@ln -sf $(DIR)/nix/profile  ~/.profile
 	@ln -sf $(DIR)/nix/inputrc  ~/.inputrc
-	@ln -sf $(DIR)/ssh  ~/.ssh
+	@ln -sf $(DIR)/ssh/config.template  ~/.ssh/config.template
 	@ln -sf $(DIR)/tmux  ~/.tmux
 	@ln -sf $(DIR)/tmux/tmux.conf  ~/.tmux.conf
 	@ln -sf $(DIR)/vim  ~/.vim
