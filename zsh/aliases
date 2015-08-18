@@ -65,6 +65,7 @@ alias rest-console='cd $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh
 alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
+alias py='bpython'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

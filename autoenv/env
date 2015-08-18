@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-# Deactivate unused python virtual envs
-if [ -n "$VIRTUAL_ENV" ];
+# Deactivate python virtual envs when changing out of that repo
+if [ -n "$VIRTUAL_ENV" ] && ! [[ "$(git rev-parse --show-toplevel 2>/dev/null)" =~ "$(basename "$VIRTUAL_ENV")" ]];
 then
-  [ -z "$(git rev-parse HEAD 2>/dev/null)" ] && deactivate
+  unset VIRTUAL_ENV
 fi
