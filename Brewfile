@@ -41,7 +41,7 @@ brews.each do |brew|
     puts("- #{brew} already installed")
   else
     puts("- Installing #{brew}...")
-    system('brew install #{brew}')
+    system("brew install #{brew}")
   end
 end
 
