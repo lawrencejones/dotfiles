@@ -1,6 +1,14 @@
+# Sesquis ##################################################
+
+Host sesquis.staging
+  Hostname ec2-52-18-253-18.eu-west-1.compute.amazonaws.com
+  User ubuntu
+  IdentityFile ~/.ssh/keys/sesquis-deploy.pem
+  Port $SESQUIS_PORT
+
 # GoCardless ###############################################
 
-Host *.gc.staging *.gc.production
+Host *.staging *.production
   IdentityFile ~/.ssh/id_rsa
   User deploy
   Hostname %h.gocardless.com
@@ -26,10 +34,3 @@ Host *.doc
   User lmj112
   ProxyCommand ssh -T -q doc-shell nc $(echo %h | cut -d. -f1) 22 2>/dev/null
 
-# Sesquis ##################################################
-
-Host sesquis.staging
-  Hostname ec2-52-18-253-18.eu-west-1.compute.amazonaws.com
-  User ubuntu
-  IdentityFile ~/.ssh/keys/sesquis-deploy.pem
-  Port $SESQUIS_PORT
