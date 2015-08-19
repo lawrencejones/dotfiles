@@ -9,3 +9,13 @@ snippet #rwb
 
 snippet #err-iau
 	Constants::Errors::InvalidAPIUsage::${1:Error}
+
+snippet #mai
+	uses Middleware::Actions::Index,
+	     validator: ${1:validator},
+			 model: ${2:model},
+			 unscoped_global_access: ${3:unscoped_global_access},
+			 filter: ${4:filter},
+			 each_serializer: ${4:each_serializer},
+			 linked_serializer: ${5:linked_serializer},
+			 association_map: ${6:map}
