@@ -9,6 +9,7 @@ alias :rz='source ~/.zsh/zshrc'
 alias :ez='vim ~/.zsh/zshrc'
 
 alias :ev='vim ~/.vim/vimrc'
+alias df='cd ~/dotfiles'
 #----------------------------------------------------------------
 
 #------- Vim Commands -------------------------------------------
