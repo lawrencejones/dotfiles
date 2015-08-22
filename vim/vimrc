@@ -48,6 +48,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-ragtag'
 Plugin 'rorymckinley/vim-rubyhash'
 Plugin 'wellle/targets.vim'
+Plugin 'nvie/vim-flake8'
 
 call vundle#end()
 
