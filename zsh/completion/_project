@@ -1,0 +1,3 @@
+#compdef project
+
+compadd $(ls ~/Projects | xargs)

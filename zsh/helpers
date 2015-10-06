@@ -1,5 +1,33 @@
 #!/usr/bin/env zsh
 
+alias p='project'
+project() {
+  if [[ "$#" -eq 0 ]]; then
+
+    echo """
+    Desc:  Pulls and changes to gh repos
+    Usage: p <repo-name>
+    Examples...
+
+        p dotfiles  # automatically selects LawrenceJones/dotfiles
+        p icdocsoc/website  # standard gh url
+
+    """
+
+  else
+    ghUrl=$([[ "$1" =~ '/' ]] && echo $1 || echo "LawrenceJones/$1")
+    projectDir=$(basename $ghUrl)
+
+    if [ ! -d "$HOME/Projects/$projectDir" ]; then
+      git clone git@github.com:$ghUrl $HOME/Projects/$projectDir || \
+        return
+    fi
+
+    cd $HOME/Projects/$projectDir
+    [ -z "$TMUX" ] && tmux -2
+  fi
+}
+
 edit-all() {
   if [[ "$#" -eq 0 ]]; then
     echo """
@@ -19,14 +47,14 @@ sr() {
   if [[ "$#" -eq 0 ]]; then
     echo """
     Desc:  Search and replace with sed
-    Usage: sr <file-pattern> <sed-replacement>
+    Usage: sr <source-regex> <replacement>
     Examples...
 
-        sr '*.coffee' 's/promiseSave/save/g'
+        sr 'var (\w+);' 'let \$1;'
 
     """
   else
-    gfind -name "$1" -exec gsed -i "$2" {} \;
+    ag "$1" -l | xargs perl -wnl -e "s/$1/$2/g and print \$1"
   fi
 }
 

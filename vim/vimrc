@@ -26,7 +26,6 @@ Plugin 'tikhomirov/vim-glsl'
 
 " Utility plugins
 Plugin 'tpope/vim-surround'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'garybernhardt/selecta'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
@@ -54,6 +53,7 @@ call vundle#end()
 
 syntax on                     " Turn syntax on
 filetype plugin indent on     " Set to detect filetype
+set re=1                      " Enable newer regexs
 
 let g:tagbar_left=1           " Vim tagbar shortcut
 
@@ -155,20 +155,6 @@ au BufRead,BufNewFile Gemfile set ft=ruby                     " Set ruby syntax 
 
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_args = ['--config tox.ini']
-
-" --------------- GitGutter Plugin Settings -----------------------------------
-
-let g:gitgutter_enabled = 0             " Start by default
-autocmd BufRead * GitGutterEnable       " Turn gitgutter on
-
-" Enabled/Disabled GitGutter with '\g'
-map <Leader>g :GitGutterToggle<CR>
-
-" Go to next hunk with '\\g'
-map <Leader>ng :GitGutterNextHunk<CR>
-
-" Go to previous hunk with '\pg'
-map <Leader>pg :GitGutterPrevHunk<CR>
 
 " --------------- General Shortcuts -------------------------------------------
 
