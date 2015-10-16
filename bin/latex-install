@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+
+if [[ "$#" -eq 0 ]]; then
+  echo """
+    Desc:  Compiles .ins -> .sty of the target latex package
+    Usage: latex-install <url-of-zip>
+    Examples...
+
+        install-latex http://mirrors.ctan.org/macros/latex/contrib/lineno.zip
+
+  """
+
+else
+
+  CURRENT_DIR=$(pwd)
+  TMP=$(mktemp -d -t latex-package)
+
+  cd $TMP
+
+  wget "$1" -O package.zip
+  unzip package.zip
+
+  for INS in $(find `pwd` -name "*.ins");
+  do
+    echo "Compiling $INS..."
+    $(cd $(dirname $INS) && latex $INS)
+  done
+
+  for STY in $(find . -name "*.sty");
+  do
+    echo "Copying $STY..."
+    cp $STY "$CURRENT_DIR/$(basename $STY)"
+  done
+
+fi

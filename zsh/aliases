@@ -67,6 +67,7 @@ alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
 alias by='bpython'
+alias latex-init='curl --silent -L https://github.com/lawrencejones/latex-template/archive/master.zip | bsdtar --exclude README.md -xvf-'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
