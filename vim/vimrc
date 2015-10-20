@@ -23,6 +23,8 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'mintplant/vim-literate-coffeescript'
 Plugin 'ap/vim-css-color'
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'dag/vim2hs'
+Plugin 'eagletmt/ghcmod-vim'
 
 " Utility plugins
 Plugin 'tpope/vim-surround'
@@ -48,6 +50,7 @@ Plugin 'tpope/vim-ragtag'
 Plugin 'rorymckinley/vim-rubyhash'
 Plugin 'wellle/targets.vim'
 Plugin 'nvie/vim-flake8'
+Plugin 'Shougo/vimproc.vim'
 
 call vundle#end()
 
@@ -107,6 +110,7 @@ set laststatus=2                  " Set status to visible
 set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
+set textwidth=100                 " Default to 100 chars line length
 
 " HARDMODE
 noremap <Up> <NOP>
