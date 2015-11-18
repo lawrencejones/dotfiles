@@ -1,5 +1,7 @@
 ### PATH CONFIGURATION #########################################################
 
+[ -f ~/.profile ] && source ~/.profile
+
 # Secondary paths (desc importance) ##############
 
 PATH=$PATH:/usr/local/bin                   # brew path
@@ -159,6 +161,7 @@ cd .  # force autoenv to start
 # Primary paths (ascd importance) ################
 
 # Priority paths (ascd importance)
+PATH=/usr/local/bin:$PATH  # brewness
 PATH=./bin:$PATH  # current path
 PATH=$HOME/.bin:$PATH  # custom scripts
 
