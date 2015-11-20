@@ -4,7 +4,6 @@
 
 # Secondary paths (desc importance) ##############
 
-PATH=$PATH:/usr/local/bin                   # brew path
 PATH=$PATH:/usr/local/heroku/bin            # Heroku toolbelt
 PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries, cabal dependent
 PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin   # X11 configuration on mac
@@ -13,11 +12,16 @@ PATH=$PATH:/usr/local/sicstus4.2.3/bin      # Add prolog binary for sicstus
 PATH=$PATH:/usr/local/i386-elf-gcc/bin      # Pintos i386-elf toolchain
 PATH=$PATH:$HOME/.vim/bundle/selecta        # Add selecta to path for vim
 
-### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
+# Primary paths (ascd importance) ################
 
-# Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Priority paths (ascd importance)
+PATH=/usr/local/bin:$PATH                   # brewness
+PATH=$HOME/.bin:$PATH                       # custom scripts
+PATH=./bin:$PATH                            # current path
+
+export PATH
+
+### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
 
 # Add npm locations to path if node exists
 if [ -n "$(node --version 2>/dev/null)" ]; then
@@ -26,6 +30,10 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
   export NODE_PATH="$HOME/.nvm/versions/node/$nodeVersion/lib/node_modules:$NODE_PATH"
   export PATH="$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];
@@ -155,14 +163,3 @@ setopt promptsubst
 # Load autoenv to boot shared .env
 [ -f /usr/local/opt/autoenv/activate.sh ] && source /usr/local/opt/autoenv/activate.sh
 cd .  # force autoenv to start
-
-### FINAL PATH ADDITIONS #######################################################
-
-# Primary paths (ascd importance) ################
-
-# Priority paths (ascd importance)
-PATH=/usr/local/bin:$PATH  # brewness
-PATH=./bin:$PATH  # current path
-PATH=$HOME/.bin:$PATH  # custom scripts
-
-export PATH
