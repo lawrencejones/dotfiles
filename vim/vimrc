@@ -25,6 +25,7 @@ Plugin 'ap/vim-css-color'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'dag/vim2hs'
 Plugin 'eagletmt/ghcmod-vim'
+Plugin 'rust-lang/rust.vim'
 
 " Utility plugins
 Plugin 'tpope/vim-surround'

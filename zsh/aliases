@@ -32,6 +32,7 @@ alias diffocop="git diff dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' |
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
+alias g='git'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias gs='git status'
 alias ga='git add -A'

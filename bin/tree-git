@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+# Shotgun approach to get tree to filter gitignored files. Highly unreliable.
+
+tree -I $(find . -name .gitignore -exec cat {} \; \
+        | perl -pe 's/\n/|/ unless eof' \
+        | sed 's/\/|/|/g') "$@"

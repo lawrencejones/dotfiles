@@ -11,6 +11,7 @@ PATH=$PATH:/usr/local/CrossPack-AVR/bin     # Add avr toolchain
 PATH=$PATH:/usr/local/sicstus4.2.3/bin      # Add prolog binary for sicstus
 PATH=$PATH:/usr/local/i386-elf-gcc/bin      # Pintos i386-elf toolchain
 PATH=$PATH:$HOME/.vim/bundle/selecta        # Add selecta to path for vim
+PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
 
 # Primary paths (ascd importance) ################
 
