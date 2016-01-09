@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-echo "Generating tags..." && ctags -R
