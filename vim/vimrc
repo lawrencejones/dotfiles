@@ -123,7 +123,7 @@ autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 let g:syntastic_mode_map = {
   \ "mode": "active",
   \ "passive_filetypes": ["haml", "scss", "sass"] }
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Linewise completion
 imap <C-@> <C-Space>
