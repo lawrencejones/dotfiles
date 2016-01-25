@@ -60,7 +60,7 @@ alias tmux='tmux -2' # colors!!!
 alias twoup='lpr -o number-up=2 -o page-border=single'
 alias mocha='mocha --compilers coffee:coffee-script/register'
 alias ar='cd $(git rev-parse --show-toplevel)'
-alias ssh='compile-ssh-config && ssh'
+alias ssh='compile-ssh-conf && ssh'
 alias curl-json='function() { curl $1 | pp.js }'
 alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
 alias rest-console='cd $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
