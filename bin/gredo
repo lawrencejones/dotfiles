@@ -5,7 +5,7 @@ set -e  # give up if fail
 currentBranch=$(git rev-parse --abbrev-ref HEAD)
 remoteBranch=origin/$currentBranch
 
-if ([[ "$currentBranch" == "dev" ]] || [[ "$currentBranch" == "master" ]]);
+if ([[ "$1" != "-f" ]] && ([[ "$currentBranch" == "dev" ]] || [[ "$currentBranch" == "master" ]]));
 then
   echo """
   Refusing to git-redo $currentBranch.

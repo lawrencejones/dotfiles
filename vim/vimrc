@@ -160,6 +160,7 @@ au BufReadPost *.pegjs set syntax=javascript                  " Force JS hl
 au BufRead,BufNewFile *.pro set syntax=prolog                 " Detect prolog
 au BufRead,BufNewFile Gemfile set ft=ruby                     " Set ruby syntax for Gemfiles
 au BufRead,BufNewFile *.md set ft=markdown                    " Set markdown ft
+au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filetype
 
 " --------------- Preferred Syntastic Checkers --------------------------------
 
