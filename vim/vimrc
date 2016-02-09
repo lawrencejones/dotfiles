@@ -52,6 +52,8 @@ Plugin 'rorymckinley/vim-rubyhash'
 Plugin 'wellle/targets.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 
 call vundle#end()
 
