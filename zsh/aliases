@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 #------- Editing of .profile file and refresh command -----------
 alias :ra='source ~/.zsh/aliases'
 alias :ea='vim ~/.zsh/aliases'
@@ -53,6 +55,23 @@ alias gm='git merge'
 alias gpl='git pull'
 #----------------------------------------------------------------
 
+#------- Templating ---------------------------------------------
+template-init() {
+  if [[ "$#" -eq 1 ]]; then
+    echo "Requires destination directory!"
+    exit 255
+  fi
+
+  git clone https://github.com/$1 $2 && \
+    cd $2 && \
+    cat README.md && \
+    rm -rf .git README.md && \
+    git init && git add -A && git commit -am "Init from template $1"
+}
+alias latex-init='template-init lawrencejones/latex-template'
+alias d3-init='template-init lawrencejones/d3-template'
+#----------------------------------------------------------------
+
 #------- Utilities ----------------------------------------------
 alias ll='ls -lh'
 alias listpath='echo $PATH | tr ":" "\n"'
@@ -68,7 +87,6 @@ alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
 alias by='bpython'
-alias latex-init='curl --silent -L https://github.com/lawrencejones/latex-template/archive/master.zip | bsdtar --exclude README.md -xvf-'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
