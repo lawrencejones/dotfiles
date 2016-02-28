@@ -72,6 +72,10 @@ alias latex-init='template-init lawrencejones/latex-template'
 alias d3-init='template-init lawrencejones/d3-template'
 #----------------------------------------------------------------
 
+#------- OS X Apps ----------------------------------------------
+alias skim='open -a /Applications/Skim.app'
+#----------------------------------------------------------------
+
 #------- Utilities ----------------------------------------------
 alias ll='ls -lh'
 alias listpath='echo $PATH | tr ":" "\n"'

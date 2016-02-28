@@ -29,7 +29,7 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
   nodeVersion=$(node --version)
 
   export NODE_PATH="$HOME/.nvm/versions/node/$nodeVersion/lib/node_modules:$NODE_PATH"
-  export PATH="$HOME/.nvm/$nodeVersion/bin:$PATH"
+  export PATH="./node_modules/.bin:$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
 
 # Load NVM

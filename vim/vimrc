@@ -168,6 +168,8 @@ au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filety
 
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_args = ['--config tox.ini']
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " --------------- General Shortcuts -------------------------------------------
 
