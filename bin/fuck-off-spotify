@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# In true Spotify fashion, spotifyhelper spins up to 100% CPU indefinitely on my machine
+# despite not having Spotify focused, or even playing music.
+#
+# This script will kill the helper process is if detects abnormal CPU usage. Even more
+# concerningly, this doesn't even affect Spotify the app. Ikr.
+
+def spotify_helper_pids
+  `pgrep "Spotify Helper"`.split.map(&:to_i)
+end
+
+def cpu_usage(pid)
+  `ps -p #{pid} -o %cpu`.lines.last.chomp.to_f
+end
+
+killed = spotify_helper_pids.
+  select { |pid| cpu_usage(pid) > 90 }.
+  each   { |pid| Process.kill('SIGTERM', pid) }
+
+if killed.any?
+  `/usr/local/bin/growlnotify \
+    --title "Spotify Helper" \
+    --message "Killed #{killed.count} runaway spotifyhelpers"`
+end

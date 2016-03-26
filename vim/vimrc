@@ -54,6 +54,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'AndrewRadev/sideways.vim'
 
 call vundle#end()
 
@@ -192,6 +193,10 @@ nnoremap <Leader>a :Ag <C-r><C-w><CR>
 
 " Make current file executable
 nnoremap <Leader>x :w <bar> !chmod a+x % <CR><CR>
+
+" Shortcut shifting parameters sideways
+nmap ,h :SidewaysLeft <CR>
+nmap ,l :SidewaysRight <CR>
 
 " --------------- Tmux Integration --------------------------------------------
 
