@@ -18,6 +18,7 @@ killed = spotify_helper_pids.
   each   { |pid| Process.kill('SIGTERM', pid) }
 
 if killed.any?
+  puts("[#{Time.now.to_s}] Killed #{killed.count} helpers")
   `/usr/local/bin/growlnotify \
     --title "Spotify Helper" \
     --message "Killed #{killed.count} runaway spotifyhelpers"`
