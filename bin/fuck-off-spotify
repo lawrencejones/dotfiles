@@ -2,7 +2,7 @@
 # In true Spotify fashion, spotifyhelper spins up to 100% CPU indefinitely on my machine
 # despite not having Spotify focused, or even playing music.
 #
-# This script will kill the helper process is if detects abnormal CPU usage. Even more
+# This script will kill the helper process if it detects abnormal CPU usage. Even more
 # concerningly, this doesn't even affect Spotify the app. Ikr.
 
 def spotify_helper_pids
