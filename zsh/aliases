@@ -70,6 +70,7 @@ template-init() {
 }
 alias latex-init='template-init lawrencejones/latex-template'
 alias d3-init='template-init lawrencejones/d3-template'
+alias js-init='template-init lawrencejones/js-template'
 #----------------------------------------------------------------
 
 #------- OS X Apps ----------------------------------------------

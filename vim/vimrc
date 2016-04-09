@@ -114,7 +114,7 @@ set laststatus=2                  " Set status to visible
 set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
-set textwidth=100                 " Default to 100 chars line length
+set textwidth=80                  " Default line length in chars
 
 " HARDMODE
 noremap <Up> <NOP>
