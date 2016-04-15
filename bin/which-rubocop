@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# Guesses which cop relates to a particular error message
+# Usage: which-rubocop "Do not use parallel assignment"
+
+require 'rubygems'
+
+rubocop_bin = Gem.bin_path('rubocop', 'rubocop')
+rubocop_path = File.expand_path('../..', rubocop_bin)
+
+found_in_files = %x{ag -l "#{ARGV.first}" "#{rubocop_path}"}.split
+probable_match = found_in_files.find { |path| path.split('/')[-2] == 'style' }
+
+if probable_match.nil?
+  puts('Error: could not find match!')
+  exit(255)
+end
+
+category, cop = probable_match.split('/').last(2)
+cop.gsub!(/\.rb$/, '')
+
+puts("#{category}/#{cop}".gsub(/_/, ' ').gsub(/\w+/, &:capitalize).gsub(' ', ''))

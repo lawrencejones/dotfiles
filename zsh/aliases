@@ -30,7 +30,7 @@ alias sprung='pgrep spring ruby | xargs kill -9'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias diffocop="git diff dev --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
+alias diffocop="git diff \$(git-parent-branch) --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
