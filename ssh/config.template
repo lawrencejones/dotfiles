@@ -6,17 +6,11 @@ Host sesquis.staging
   IdentityFile ~/.ssh/keys/sesquis-deploy.pem
   Port $SESQUIS_PORT
 
-# GoCardless ###############################################
+# Diggit ###################################################
 
-Host *.staging *.production
-  IdentityFile ~/.ssh/id_rsa
+Host diggit.production
+  Hostname 178.62.124.191
   User deploy
-  Hostname %h.gocardless.com
-  Port $GC_PORT
-
-Host *.gocardless.com
-  User deploy
-  IdentityFile ~/.ssh/id_rsa
 
 # Github and services ######################################
 
