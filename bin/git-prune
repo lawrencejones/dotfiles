@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# Deletes branches on localhost that don't exist on origin
+
+require 'json'
+
+def local_branches
+  `git branch`.split - %w(*)
+end
+
+def origin_branches
+  `git branch -a`.split.
+    select { |branch| branch[%r{remotes/origin/}] }.
+    map { |branch| branch.split('/').last }
+end
+
+`git fetch --prune`
+
+to_be_deleted = local_branches - origin_branches
+puts('About to delete the following local branches...')
+puts(JSON.pretty_generate(to_be_deleted))
+
+print('Do you accept responsibility if bad things happen? [y/n] ')
+exit(0) unless gets.chomp == 'y'
+
+`git branch -D #{to_be_deleted.join(' ')}`
+puts('Done!')
