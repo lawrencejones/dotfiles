@@ -8,7 +8,7 @@ rubocop_bin = Gem.bin_path('rubocop', 'rubocop')
 rubocop_path = File.expand_path('../..', rubocop_bin)
 
 found_in_files = %x{ag -l "#{ARGV.first}" "#{rubocop_path}"}.split
-probable_match = found_in_files.find { |path| path.split('/')[-2] == 'style' }
+probable_match = found_in_files.find { |path| path.split('/')[-3] == 'cop' }
 
 if probable_match.nil?
   puts('Error: could not find match!')

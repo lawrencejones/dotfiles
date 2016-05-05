@@ -6,6 +6,7 @@
 [alias]
   branches = branch -a
   tags = tag
+  remotes = remote -v
   stashes = stash list
   unstage = reset -q HEAD --
   discard = checkout --
