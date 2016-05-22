@@ -26,7 +26,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [url "git@github.com:"]
-	insteadOf = https://github.com
   insteadOf = github:
 [url "git@gist.github.com:"]
 	insteadOf = https://gist.github.com
