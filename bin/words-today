@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+# Computes the words I have written today on my MEng report
+
+def midnight
+  86_400 * (Time.now.to_i / 86_400)
+end
+
+def last_commit_before(time)
+  `git rev-list --max-count=1 --min-age=#{time} HEAD`.chomp
+end
+
+def pages_at(commit)
+  `git ls-tree --name-only -r #{commit} -- pages/*.tex`.split
+end
+
+def page_word_count(page:, commit:)
+  `git show #{commit}:#{page} | detex -e listing,figure | wc -w`.strip.to_i
+end
+
+def word_count(commit)
+  pages_at(commit).
+    map { |page| page_word_count(page: page, commit: commit) }.
+    inject(:+)
+end
+
+words_today = word_count('HEAD')
+words_before = word_count(last_commit_before(midnight))
+
+puts <<-MSG
+Before today, you had #{words_before}.
+Today, we are up to #{words_today}!
+
+Written: #{words_today - words_before}!!
+MSG

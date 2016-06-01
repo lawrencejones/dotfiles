@@ -180,3 +180,7 @@ github() {
 ckdir() {
   mkdir -p $1 && cd $_
 }
+
+last-screenshot() {
+  echo "$HOME/Dropbox/Screenshots/$(ls --color=no -t $HOME/Dropbox/Screenshots | head -n 1)"
+}

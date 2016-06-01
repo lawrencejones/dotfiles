@@ -1,62 +1,57 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Source ninja
-let ninja_file=expand('/apollo/env/envImprovement/var/vimruntimehook')
-if filereadable(ninja_file) | exec "source " . ninja_file | endif
-
 " --------------- Plugins installed -------------------------------------------
 
-" Allow vundle to manage itself
-Plugin 'gmarik/Vundle.vim'
+" Get plugging!
+call plug#begin('~/.vim/plugged')
 
 " Syntax plugins
-Plugin 'scrooloose/syntastic'
-Plugin 'slim-template/vim-slim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mintplant/vim-literate-coffeescript'
-Plugin 'ap/vim-css-color'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'dag/vim2hs'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'rust-lang/rust.vim'
+Plug 'scrooloose/syntastic'
+Plug 'slim-template/vim-slim'
+Plug 'digitaltoad/vim-jade'
+Plug 'wavded/vim-stylus'
+Plug 'kchmck/vim-coffee-script'
+Plug 'ap/vim-css-color'
+Plug 'tikhomirov/vim-glsl'
+Plug 'dag/vim2hs'
+Plug 'eagletmt/ghcmod-vim'
+Plug 'rust-lang/rust.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Utility plugins
-Plugin 'tpope/vim-surround'
-Plugin 'garybernhardt/selecta'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'lukaszkorecki/CoffeeTags'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'rizzatti/dash.vim'
-Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
-Plugin 'burnettk/vim-angular'
-Plugin 'tpope/vim-endwise'
-Plugin 'danro/rename.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'diepm/vim-rest-console'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-ragtag'
-Plugin 'rorymckinley/vim-rubyhash'
-Plugin 'wellle/targets.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
-Plugin 'AndrewRadev/sideways.vim'
+Plug 'tpope/vim-surround'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/taglist.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'lukaszkorecki/CoffeeTags'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rizzatti/dash.vim'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'bling/vim-airline'
+Plug 'burnettk/vim-angular'
+Plug 'tpope/vim-endwise'
+Plug 'danro/rename.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'diepm/vim-rest-console'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-ragtag'
+Plug 'rorymckinley/vim-rubyhash'
+Plug 'wellle/targets.vim'
+Plug 'nvie/vim-flake8'
+Plug 'Shougo/vimproc.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'AndrewRadev/sideways.vim'
 
-call vundle#end()
+" Requires external fzf binary
+set rtp+=/usr/local/opt/fzf
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 syntax on                     " Turn syntax on
 filetype plugin indent on     " Set to detect filetype
@@ -121,6 +116,9 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Call out to fzf
+nnoremap <leader>t :call fzf#vim#gitfiles('.')<cr>
 
 autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
 let g:syntastic_mode_map = {
@@ -303,27 +301,3 @@ endif
 
 " Alias the NesC filetype to C
 autocmd BufRead,BufNewFile *.nc set ft=c
-
-" --------------- Selecta Configuration ---------------------------------------
-
-" Run a given vim command on the results of fuzzy selecting from a given shell
-" command. See usage below.
-function! SelectaCommand(choice_command, selecta_args, vim_command)
-
-  try
-    let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-  catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
-    " leftovers from selecta on the screen
-    redraw!
-    return
-  endtry
-  redraw!
-  exec a:vim_command . " " . selection
-
-endfunction
-
-" Find all files in all non-dot directories starting in the working directory.
-" Fuzzy select one of those. Open the selected file with :e.
-" ag: WOO!
-nnoremap <leader>t :call SelectaCommand("ag -l", "", ":e!")<cr>

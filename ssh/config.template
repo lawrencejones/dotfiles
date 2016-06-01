@@ -1,8 +1,13 @@
+# vim: set ft=sshconfig:
 # Diggit ###################################################
 
 Host diggit.production
   Hostname 178.62.124.191
   User deploy
+
+Host diggit.worker
+  Hostname 146.169.47.204
+  User worker
 
 # Github and services ######################################
 
@@ -19,4 +24,3 @@ Host doc-shell
 Host *.doc
   User lmj112
   ProxyCommand ssh -T -q doc-shell nc $(echo %h | cut -d. -f1) 22 2>/dev/null
-

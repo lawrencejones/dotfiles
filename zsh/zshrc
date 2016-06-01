@@ -39,7 +39,7 @@ export NVM_DIR="$HOME/.nvm"
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];
 then
-  export PATH="/Users/lawrencejones/.rbenv/shims:${PATH}"
+  export PATH="$HOME/.rbenv/shims:${PATH}"
   source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.zsh"
   rbenv rehash 2>/dev/null
   rbenv() {
