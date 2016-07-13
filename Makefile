@@ -26,10 +26,8 @@ ensure_brew:
 	@hash brew &>/dev/null || \
 		ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-vim: $(DIR)/vim/bundle/Vundle.vim
-	@vim +BundleInstall +:q +:q
+vim: $(DIR)/vim/autoload/plug.vim
+	@vim +PlugInstall +:q +:q
 
-%/Vundle.vim:
-	@git clone https://github.com/gmarik/Vundle.vim $@
-
-
+%/plug.vim:
+	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
