@@ -1,13 +1,28 @@
 # vim: set ft=sshconfig:
 # Diggit ###################################################
 
-Host diggit.production
+Host diggit.prod
   Hostname 178.62.124.191
   User deploy
 
 Host diggit.worker
   Hostname 146.169.47.204
   User worker
+
+# GoCardless ###############################################
+
+Host *.staging *.production
+  Hostname %h.gocardless.com
+  User $GC_USER
+  Port $GC_PORT
+
+Host *.gocardless.com
+  User $GC_USER
+  Port $GC_PORT
+
+Host *.gc.cx
+  User $GC_USER
+  Port $GC_PORT
 
 # Github and services ######################################
 
