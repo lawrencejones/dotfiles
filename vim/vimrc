@@ -18,6 +18,7 @@ Plug 'dag/vim2hs'
 Plug 'eagletmt/ghcmod-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'rodjek/vim-puppet'
 
 " Utility plugins
 Plug 'tpope/vim-surround'

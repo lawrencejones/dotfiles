@@ -1,6 +1,7 @@
 ### PATH CONFIGURATION #########################################################
 
 [ -f ~/.profile ] && source ~/.profile
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 # Secondary paths (desc importance) ##############
 
@@ -40,7 +41,8 @@ export NVM_DIR="$HOME/.nvm"
 if [ -n "$(rbenv --version 2>/dev/null)" ];
 then
   export PATH="$HOME/.rbenv/shims:${PATH}"
-  source "/usr/local/Cellar/rbenv/0.4.0/libexec/../completions/rbenv.zsh"
+  [ -d /usr/local/Cellar/rbenv/0.4.0 ] && \
+    source "/usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh"
   rbenv rehash 2>/dev/null
   rbenv() {
     typeset command
