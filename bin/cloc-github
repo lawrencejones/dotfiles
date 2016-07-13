@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+# Determines lines of code in github project
+set -e
+
+if [[ "$#" -eq 0 ]]; then
+  echo """
+  Desc:  Determines lines of code in GitHub project
+  Usage: cloc-github <gh-path>
+  Examples...
+
+      cloc-github icdocsoc/website
+      cloc-github ansible/ansible trunk # custom branch
+
+  """
+  exit 255
+fi
+
+DIR=$(mktemp -d)
+cd $DIR
+BRANCH=$2; : ${BRANCH:=master}
+echo "Downloading $1.zip on $BRANCH"
+wget -O master.zip "https://github.com/$1/archive/$BRANCH.zip"
+unzip master.zip
+rm -f master.zip
+cloc .
+rm -rf $DIR

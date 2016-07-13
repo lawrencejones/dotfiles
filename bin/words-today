@@ -14,7 +14,7 @@ def pages_at(commit)
 end
 
 def page_word_count(page:, commit:)
-  `git show #{commit}:#{page} | detex -e listing,figure | wc -w`.strip.to_i
+  `git show #{commit}:#{page} | detex -e table,listing,figure | wc -w`.strip.to_i
 end
 
 def word_count(commit)
