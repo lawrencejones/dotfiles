@@ -1,6 +1,6 @@
 DIR=$(HOME)/dotfiles
 
-all: symlinks brew vim
+all: symlinks vim
 
 symlinks:
 	@ln -sf $(DIR)/bin  ~/.bin

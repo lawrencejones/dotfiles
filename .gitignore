@@ -3,3 +3,4 @@
 /env
 .npmrc
 vim/plugged/
+vim/.netrwhist

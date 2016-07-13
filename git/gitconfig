@@ -24,7 +24,7 @@
 [color]
 	ui = true
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /opt/boxen/config/git/gitignore
 [url "git@github.com:"]
   insteadOf = github:
 [url "git@gist.github.com:"]
@@ -37,3 +37,9 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+
+[hub]
+protocol = https
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
