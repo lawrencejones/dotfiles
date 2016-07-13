@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# If available, load in private-env
+[ -f ~/.private-env ] && source ~/.private-env
+
 # Deactivate python virtual envs when changing out of that repo
 if [ -n "$VIRTUAL_ENV" ] && ! [[ "$(git rev-parse --show-toplevel 2>/dev/null)" =~ "$(basename "$VIRTUAL_ENV")" ]];
 then

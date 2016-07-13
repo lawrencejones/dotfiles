@@ -160,7 +160,7 @@ setopt promptsubst
 
 ### LOAD OTHER CONFIG ##########################################################
 
-# Load environment
+# Load private environment in case autoenv isn't available
 [ -f ~/.private-env ] && source ~/.private-env
 
 # Load autoenv to boot shared .env
