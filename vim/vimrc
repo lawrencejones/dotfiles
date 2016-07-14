@@ -104,6 +104,7 @@ set shiftwidth=2    " Values used by smarttab setting
 set nu                            " Turn on numbers
 set ruler                         " Show line and col
 set mouse=a                       " Enable mouse scrolling, pane selection
+set ttymouse=xterm2               " Support tmux 2.2 mouse escape sequences
 set nobackup                      " Prevents potential slow write
 set statusline+=%F                " Put filepath in status
 set laststatus=2                  " Set status to visible
