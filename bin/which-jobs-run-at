@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+# Displays a text table showing running time of each job using messages inside datadog
+
+require 'rubygems'
+require 'dogapi'
+require 'terminal-table'
+require 'active_support/core_ext/time'
+require 'slop'
+
+class JobPrinter
+  INTERVAL = 10 * 60 # 10m
+
+  def initialize(jobs, start_time, end_time)
+    @jobs = jobs
+    @start_time = start_time
+    @end_time = end_time
+    @intervals = compute_intervals.freeze
+  end
+
+  def print
+    puts(Terminal::Table.new(rows: [header, :separator, *job_rows]))
+  end
+
+  attr_reader :jobs, :start_time, :end_time, :intervals
+
+  def header
+    ['Job', *intervals.map { |i| i.min == 0 ? i.hour : '' }]
+  end
+
+  def job_rows
+    jobs.map do |job|
+      [job[:name], *intervals.map do |i|
+        next_interval = i.advance(seconds: INTERVAL)
+        i.between?(job[:started], job[:finished]) ||
+          job[:started] >= i && job[:finished] < next_interval ? 'X' : ''
+      end]
+    end
+  end
+
+  def compute_intervals
+    start_interval = start_time.advance(seconds: - start_time.to_i % INTERVAL)
+    intervals = []
+
+    while start_interval <= end_time
+      intervals << start_interval
+      start_interval = start_interval.advance(seconds: INTERVAL)
+    end
+
+    intervals
+  end
+end
+
+class JobFinder
+  API_KEY = ENV.fetch('GC_DATADOG_API_KEY')
+  APP_KEY = ENV.fetch('GC_DATADOG_APP_KEY')
+  HEADER_ROW = %w(Job Start Finish Duration).freeze
+
+  def initialize(start_time, end_time, stage:, env:)
+    @start_time = start_time
+    @end_time = end_time
+    @dog = Dogapi::Client.new(API_KEY, APP_KEY)
+    @stage = stage
+    @env = env
+  end
+
+  attr_reader :dog, :start_time, :end_time, :stage, :env
+
+  def jobs
+    jobs_that_day.
+      map { |_, job| job if job[:started] && job[:finished] }.compact.
+      select do |job|
+        in_period?(job[:started]) || in_period?(job[:finished])
+      end
+  end
+
+  def in_period?(time)
+    time.between?(start_time, end_time)
+  end
+
+  def jobs_that_day
+    events_that_day.
+      sort_by { |e| e['date_happened'] }.
+      each_with_object({}) do |event, jobs|
+        event_details = /Run (?<id>\S+) of (?<job>\S+) (?<action>\S+)/.match(event['text'])
+        job = jobs[event_details[:id]] ||= { name: event_details[:job] }
+        job[event_details[:action].to_sym] = Time.at(event['date_happened'])
+      end
+  end
+
+  def events_that_day
+    day = start_time.to_date.to_time
+    end_of_day = day.advance(days: 1)
+    dog.stream(day, end_of_day, tags: [
+      "env:#{stage}", 'job', "tag:#{env}"
+    ])[1]['events']
+  end
+end
+
+opts = Slop.parse do |o|
+  o.string '-d', '--date', '13-07-2016'
+  o.string '-t0', '--start-time', '13:10'
+  o.string '-t1', '--end-time', '13:25'
+  o.string '-s', '--stage', 'production/staging', default: 'production'
+  o.string '-e', '--env', 'live/sandbox', default: 'live'
+end.to_hash
+
+start_time = Time.parse("#{opts[:start_time]} #{opts[:date]}")
+end_time = Time.parse("#{opts[:end_time]} #{opts[:date]}")
+
+jobs = JobFinder.new(start_time, end_time, stage: opts[:stage], env: opts[:env]).jobs
+JobPrinter.new(jobs, start_time, end_time).print
