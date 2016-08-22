@@ -11,7 +11,7 @@ Host diggit.worker
 
 # GoCardless ###############################################
 
-Host *.staging *.production
+Host *.staging
   Hostname %h.gocardless.com
   User $GC_USER
   Port $GC_PORT

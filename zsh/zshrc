@@ -5,6 +5,7 @@
 
 # Secondary paths (desc importance) ##############
 
+PATH=$PATH:/usr/local/bin                   # Brewness
 PATH=$PATH:/usr/local/heroku/bin            # Heroku toolbelt
 PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries, cabal dependent
 PATH=$PATH:/usr/X11R6/bin:/usr/local/sbin   # X11 configuration on mac
@@ -17,7 +18,6 @@ PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
 # Primary paths (ascd importance) ################
 
 # Priority paths (ascd importance)
-PATH=/usr/local/bin:$PATH                   # brewness
 PATH=$HOME/.bin:$PATH                       # custom scripts
 PATH=./bin:$PATH                            # current path
 
@@ -40,7 +40,6 @@ export NVM_DIR="$HOME/.nvm"
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];
 then
-  export PATH="$HOME/.rbenv/shims:${PATH}"
   [ -d /usr/local/Cellar/rbenv/0.4.0 ] && \
     source "/usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh"
   rbenv rehash 2>/dev/null

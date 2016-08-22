@@ -54,7 +54,7 @@ sr() {
 
     """
   else
-    ag "$1" -l | xargs perl -wnl -e "s/$1/$2/g and print \$1"
+    ag "$1" -l | xargs perl -p -i -e "s/$1/$2/g"
   fi
 }
 

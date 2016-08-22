@@ -2,3 +2,4 @@ tags
 dev
 .env
 app/middleware/debug.rb
+.pryrc_local.rb

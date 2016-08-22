@@ -24,7 +24,7 @@
 [color]
 	ui = true
 [core]
-	excludesfile = /opt/boxen/config/git/gitignore
+	excludesfile = /Users/lawrencejones/.gitignore_global
 [url "git@github.com:"]
   insteadOf = github:
 [url "git@gist.github.com:"]

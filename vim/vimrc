@@ -46,6 +46,7 @@ Plug 'nvie/vim-flake8'
 Plug 'Shougo/vimproc.vim'
 Plug 'xolox/vim-misc'
 Plug 'AndrewRadev/sideways.vim'
+Plug 'ruanyl/vim-gh-line'
 
 " Requires external fzf binary
 set rtp+=/usr/local/opt/fzf

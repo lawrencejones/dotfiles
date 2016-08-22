@@ -11,6 +11,7 @@ alias :rz='source ~/.zsh/zshrc'
 alias :ez='vim ~/.zsh/zshrc'
 
 alias :ev='vim ~/.vim/vimrc'
+alias :eh='vim /opt/boxen/repo/hiera/users/lawrencejones.yaml'
 alias df='cd ~/dotfiles'
 #----------------------------------------------------------------
 
@@ -26,7 +27,7 @@ alias bc='bundle console'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
 alias ispec='RAILS_ENV=integration be rspec'
 alias pry-lib='bundle exec pry --exec "\$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), \"lib\")); true"'
-alias sprung='pgrep spring ruby | xargs kill -9'
+alias sprung='pgrep spring ruby rails rake | xargs kill -9'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
