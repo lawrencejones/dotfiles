@@ -4,6 +4,7 @@ require 'rubygems'
 require 'dogapi'
 require 'active_support/core_ext/time'
 require 'slop'
+require 'ascii_charts'
 
 class JobRuntimes
   API_KEY = ENV.fetch('GC_DATADOG_API_KEY')
@@ -63,5 +64,11 @@ runtimes = JobRuntimes.
       stage: opts[:stage],
       env: opts[:env]).in_period
 
-puts %x{spark #{runtimes.map(&:last).join(' ')}}
+# Spark!
+puts %x{spark #{runtimes.map(&:last).join(' ')}} if false
+
+# Bar chart
+puts AsciiCharts::Cartesian.new(runtimes.map do |(t,runtime)|
+  [Time.at(t).strftime('%d/%m'), runtime]
+end, title: "!! Jobs::#{opts[:job]} historic runtimes !!").draw
 

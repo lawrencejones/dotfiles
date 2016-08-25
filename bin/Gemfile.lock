@@ -1,0 +1,49 @@
+GIT
+  remote: https://github.com/pry/pry
+  revision: f4cb0e8ab2bbabfc5ba5e5c52d3c926bdbb54cfc
+  specs:
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (5.0.0.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    ascii_charts (0.9.1)
+    byebug (9.0.5)
+    coderay (1.1.1)
+    concurrent-ruby (1.0.2)
+    dogapi (1.22.0)
+      multi_json
+    i18n (0.7.0)
+    method_source (0.8.2)
+    minitest (5.9.0)
+    multi_json (1.12.1)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    slop (4.4.1)
+    terminal-table (1.6.0)
+    thread_safe (0.3.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  ascii_charts
+  dogapi
+  pry!
+  pry-byebug
+  slop (~> 4.4.1)
+  terminal-table
+
+BUNDLED WITH
+   1.12.5
