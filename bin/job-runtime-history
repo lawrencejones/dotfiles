@@ -55,6 +55,7 @@ opts = Slop.parse do |o|
   o.string '-t1', '--finish-date', '2016-08-16'
   o.string '-s', '--stage', 'production/staging', default: 'production'
   o.string '-e', '--env', 'live/sandbox', default: 'live'
+  o.string '-f', '--format', 'spark|chart|values', default: 'chart'
 end.to_hash
 
 runtimes = JobRuntimes.
@@ -64,11 +65,13 @@ runtimes = JobRuntimes.
       stage: opts[:stage],
       env: opts[:env]).in_period
 
-# Spark!
-puts %x{spark #{runtimes.map(&:last).join(' ')}} if false
-
-# Bar chart
-puts AsciiCharts::Cartesian.new(runtimes.map do |(t,runtime)|
-  [Time.at(t).strftime('%d/%m'), runtime]
-end, title: "!! Jobs::#{opts[:job]} historic runtimes !!").draw
+case opts[:format]
+when 'spark'  then puts %x{spark #{runtimes.map(&:last).join(' ')}}
+when 'values' then puts runtimes.map(&:last).join(' ')
+when 'chart'
+  # Bar chart
+  puts AsciiCharts::Cartesian.new(runtimes.map do |(t,runtime)|
+    [Time.at(t).strftime('%d/%m'), runtime]
+  end, title: "!! Jobs::#{opts[:job]} historic runtimes !!").draw
+end
 
