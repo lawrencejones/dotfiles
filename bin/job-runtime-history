@@ -52,10 +52,14 @@ end
 opts = Slop.parse do |o|
   o.string '-j', '--job', 'CreateFees'
   o.string '-t0', '--start-date', '2016-07-13'
-  o.string '-t1', '--finish-date', '2016-08-16'
+  o.string '-t1', '--finish-date', '2016-08-16', default: Date.today.to_s
   o.string '-s', '--stage', 'production/staging', default: 'production'
   o.string '-e', '--env', 'live/sandbox', default: 'live'
   o.string '-f', '--format', 'spark|chart|values', default: 'chart'
+  o.on '-h', '--help' do
+    puts(o)
+    exit
+  end
 end.to_hash
 
 runtimes = JobRuntimes.
