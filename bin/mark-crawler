@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+# Unzip the most recently downloaded file (crawler submission) to
+# Projects/crawlers
+#
+# Usage:
+#
+#     # Extract to Projects/crawlers/lawrence_jones
+#     mark-crawler Lawrence Jones
+#
+
+unzip $(ls -d -t $HOME/Downloads/* | head -n 1) -d $(gsed 's/[A-Z]/\L\0/g' <(echo $1'_'$2))
