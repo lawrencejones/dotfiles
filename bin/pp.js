@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 // Determines if the keys should be sorted in the output
-var sortOutputKeys = process.argv.indexOf('-u') == -1;
+let sortOutputKeys = process.argv.indexOf('-u') == -1;
 
-var input = "";
+let input = "";
 
-function lexisort(obj) {
+const lexisort = (obj) => {
   if (obj instanceof Array) return obj.map(lexisort);
   if (obj === null) return null;
   if ('object' !== typeof obj) return obj;
@@ -18,19 +18,23 @@ function lexisort(obj) {
   return sortedObj;
 };
 
-process.stdin.resume();
+process.stdin.setEncoding('utf8');
 
-process.stdin.on('data', function(data) {
-  input = input + data;
-});
-
-process.stdin.on('end', function() {
-  try {
-    var json = JSON.parse(input.toString());
-    console.log(JSON.stringify(sortOutputKeys ? lexisort(json) : json, null, 2));
-  } catch(err) {
-    console.log(input.toString());
+process.stdin.on('readable', (data) => {
+  let chunk = process.stdin.read();
+  if (chunk !== null) {
+    input = input + chunk.toString();
   }
 });
 
-process.stdin.on('end', function() { process.exit(0) });
+process.stdin.on('end', () => {
+  try {
+    var json = JSON.parse(input.toString());
+    /* This blocks! */
+    process.stdout.write(JSON.stringify(sortOutputKeys ? lexisort(json) : json, null, 2));
+    process.stdin.on('end', () => { process.exit(0) });
+  } catch(err) {
+    console.log(err);
+    process.exit(255);
+  }
+});

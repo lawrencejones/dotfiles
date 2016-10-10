@@ -63,6 +63,9 @@ fi
 export PIP_REQUIRE_VIRTUALENV=true  # prevent pip from running unless in virtualenv
 export VIRTUAL_ENV_DISABLE_PROMPT=true  # turn off patching of prompt
 
+# Golang
+export GOPATH="$HOME/Projects"
+
 ### SELECT GNU COMMANDS ########################################################
 
 # For those commands that require a g prefix, select if exist
