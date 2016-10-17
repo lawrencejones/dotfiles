@@ -1,10 +1,27 @@
 #!/usr/bin/env ruby
+# See usage below...
 
 require 'rubygems'
 require 'dogapi'
 require 'active_support/core_ext/time'
 require 'slop'
 require 'ascii_charts'
+
+# job-runtime-history can be used to fetch data on how long jobs from
+# gocardless/payments-service have historically taken to run. These values can be
+# outputted in a variety of formats, and selected from a date time range.
+opts = Slop.parse do |o|
+  o.string  '-j',   '--job',         'CreateFees'
+  o.string  '-t0',  '--start-date',  '2016-07-13'
+  o.string  '-t1',  '--finish-date', '2016-08-16',          default:  Date.today.to_s
+  o.string  '-s',   '--stage',       'production|staging',  default:  'production'
+  o.string  '-e',   '--env',         'live|sandbox',        default:  'live'
+  o.string  '-f',   '--format',      'spark|chart|values',  default:  'chart'
+  o.on      '-h',   '--help' do
+    puts(o)
+    exit
+  end
+end.to_hash
 
 class JobRuntimes
   API_KEY = ENV.fetch('GC_DATADOG_API_KEY')
@@ -48,19 +65,6 @@ class JobRuntimes
     events
   end
 end
-
-opts = Slop.parse do |o|
-  o.string '-j', '--job', 'CreateFees'
-  o.string '-t0', '--start-date', '2016-07-13'
-  o.string '-t1', '--finish-date', '2016-08-16', default: Date.today.to_s
-  o.string '-s', '--stage', 'production/staging', default: 'production'
-  o.string '-e', '--env', 'live/sandbox', default: 'live'
-  o.string '-f', '--format', 'spark|chart|values', default: 'chart'
-  o.on '-h', '--help' do
-    puts(o)
-    exit
-  end
-end.to_hash
 
 runtimes = JobRuntimes.
   new(opts[:job],

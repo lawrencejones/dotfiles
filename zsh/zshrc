@@ -64,7 +64,8 @@ export PIP_REQUIRE_VIRTUALENV=true  # prevent pip from running unless in virtua
 export VIRTUAL_ENV_DISABLE_PROMPT=true  # turn off patching of prompt
 
 # Golang
-export GOPATH="$HOME/Projects"
+export GOPATH="$HOME/Projects/golang"
+export PATH="$PATH:$GOPATH/bin"
 
 ### SELECT GNU COMMANDS ########################################################
 
