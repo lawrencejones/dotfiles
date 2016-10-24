@@ -12,6 +12,7 @@ PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
 # Primary paths (ascd importance) ################
 
 # Priority paths (ascd importance)
+PATH=$HOME/.rbenv/bin:$PATH                 # rbenv path
 PATH=$HOME/.bin:$PATH                       # custom scripts
 PATH=./bin:$PATH                            # current path
 
@@ -34,23 +35,7 @@ export NVM_DIR="$HOME/.nvm"
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];
 then
-  [ -d /usr/local/Cellar/rbenv/0.4.0 ] && \
-    source "/usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh"
-  rbenv rehash 2>/dev/null
-  rbenv() {
-    typeset command
-    command="$1"
-    if [ "$#" -gt 0 ]; then
-      shift
-    fi
-
-    case "$command" in
-    rehash|shell)
-      eval `rbenv "sh-$command" "$@"`;;
-    *)
-      command rbenv "$command" "$@";;
-    esac
-  }
+  eval "$(rbenv init -)"
 fi
 
 # Python config
