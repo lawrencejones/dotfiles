@@ -104,7 +104,6 @@ set shiftwidth=2    " Values used by smarttab setting
 set nu                            " Turn on numbers
 set ruler                         " Show line and col
 set mouse=a                       " Enable mouse scrolling, pane selection
-set ttymouse=xterm2               " Support tmux 2.2 mouse escape sequences
 set nobackup                      " Prevents potential slow write
 set statusline+=%F                " Put filepath in status
 set laststatus=2                  " Set status to visible
@@ -112,6 +111,12 @@ set directory=~/.vim/swapfiles//  " Change swapfile location for out of wd
 set fdm=marker                    " Set default fold method to marker
 set backspace=indent,eol,start    " Allow backspace over everything in insert mode
 set textwidth=80                  " Default line length in chars
+
+" For non-neovim editors
+if !has('nvim')
+  set ttymouse=xterm2             " Support tmux 2.2 mouse escape sequences
+endif
+
 
 " HARDMODE
 noremap <Up> <NOP>

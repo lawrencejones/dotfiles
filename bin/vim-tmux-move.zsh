@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/zsh
 
 program="`tmux display -p '#{pane_current_command}'`"
 
-if [[ $program == "vim" ]]; then
+if [[ $program =~ "n?vim" ]]; then
   # let vim handle it
   tmux send-keys 'Escape' ":call TmuxMove('" $1 "')" Enter
 else

@@ -4,6 +4,7 @@
 [push]
 	default = upstream
 [alias]
+  commit = commit -v
   branches = branch -a
   tags = tag
   remotes = remote -v
