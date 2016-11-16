@@ -17,6 +17,7 @@ alias :eh='vim /opt/boxen/repo/hiera/users/lawrencejones.yaml'
 #------- Vim Commands -------------------------------------------
 alias :q='exit'
 alias :Q='exit'
+alias vim='nvim'
 #----------------------------------------------------------------
 
 #------- Ruby ---------------------------------------------------
