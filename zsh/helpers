@@ -28,6 +28,12 @@ project() {
   fi
 }
 
+alias c='cookbook'
+cookbook() {
+  book=$1; : ${book:=""}
+  cd "$HOME/Projects/chef-repo/cookbooks/$book"
+}
+
 edit-all() {
   if [[ "$#" -eq 0 ]]; then
     echo """

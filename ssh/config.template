@@ -13,15 +13,12 @@ Host diggit.worker
 
 Host *.staging
   Hostname %h.gocardless.com
-  User $GC_USER
   Port $GC_PORT
 
 Host *.gocardless.com
-  User $GC_USER
   Port $GC_PORT
 
 Host *.gc.cx
-  User $GC_USER
   Port $GC_PORT
 
 # Github and services ######################################
