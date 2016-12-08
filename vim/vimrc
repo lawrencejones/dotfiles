@@ -7,7 +7,7 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Syntax plugins
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'slim-template/vim-slim'
 Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'
@@ -128,10 +128,14 @@ noremap <Right> <NOP>
 nnoremap <leader>t :call fzf#vim#gitfiles('.')<cr>
 
 autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
-let g:syntastic_mode_map = {
-  \ "mode": "active",
-  \ "passive_filetypes": ["haml", "scss", "sass"] }
-let g:syntastic_javascript_checkers = ['jshint']
+
+" Neomake
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
+let g:neomake_rust_enabled_makers = ['rustc']
+let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+autocmd BufWritePost *.rb Neomake
+autocmd BufWritePost *.hs Neomake
+autocmd BufWritePost *.go Neomake
 
 " Linewise completion
 imap <C-@> <C-Space>
