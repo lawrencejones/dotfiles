@@ -3,6 +3,13 @@
 # If available, load in private-env
 [ -f ~/.private-env ] && source ~/.private-env
 
+# Load the docker machine if we're not already configured
+if [ -z "$LOADED_DOCKER" ];
+then
+  export LOADED_DOCKER=yes
+  eval $(docker-machine env default)
+fi
+
 # Deactivate python virtual envs when changing out of that repo
 if [ -n "$VIRTUAL_ENV" ] && ! [[ "$(git rev-parse --show-toplevel 2>/dev/null)" =~ "$(basename "$VIRTUAL_ENV")" ]];
 then
