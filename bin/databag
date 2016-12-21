@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+unless ARGV.count == 2
+  puts(<<-HELP)
+
+  Desc:  Edits encrypted databags
+  Usage: databag <databag-file> <secret-key-file>
+  Examples...
+
+      databag \\
+        test/fixtures/data_bags/users_enc/bankops.json \\
+        test/fixtures/encrypted_data_bag_secret
+
+  HELP
+  exit(255)
+end
+
+require 'chef/encrypted_data_bag_item'
+require 'tempfile'
+
+def decrypt(databag, secret)
+  edb = Chef::EncryptedDataBagItem.new(databag, secret)
+  edb.instance_variable_get(:@enc_hash).keys.map { |k| [k, edb[k]] }.to_h
+end
+
+def edit(content = "{}")
+  Tempfile.open(["databag", ".json"]) do |f|
+    f << content
+    f.close
+    Kernel.system("#{ENV.fetch("EDITOR", "vim")} #{f.path}")
+    edited_content = File.read(f.path)
+    exit(0) if edited_content == content
+    edited_content
+  end
+end
+
+databag_file, secret_file = ARGV.first(2)
+secret = File.read(secret_file)
+databag = JSON.parse(File.read(databag_file)) rescue {}
+
+edited_databag = JSON.parse(edit(JSON.pretty_generate(decrypt(databag, secret))))
+encrypted_databag = Chef::EncryptedDataBagItem.encrypt_data_bag_item(edited_databag, secret)
+
+puts("Writing encrypted databag to #{databag_file}...")
+File.write(databag_file, JSON.pretty_generate(encrypted_databag))
+puts("done!")

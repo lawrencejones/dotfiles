@@ -5,3 +5,4 @@ app/middleware/debug.rb
 .pryrc_local.rb
 .virtualenv
 virtualenv
+tmp/
