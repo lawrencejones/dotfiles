@@ -35,7 +35,7 @@ def edit(content = "{}")
 end
 
 databag_file, secret_file = ARGV.first(2)
-secret = File.read(secret_file)
+secret = File.read(secret_file).strip
 databag = JSON.parse(File.read(databag_file)) rescue {}
 
 edited_databag = JSON.parse(edit(JSON.pretty_generate(decrypt(databag, secret))))
