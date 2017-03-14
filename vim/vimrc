@@ -117,7 +117,6 @@ if !has('nvim')
   set ttymouse=xterm2             " Support tmux 2.2 mouse escape sequences
 endif
 
-
 " HARDMODE
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -126,16 +125,7 @@ noremap <Right> <NOP>
 
 " Call out to fzf
 nnoremap <leader>t :call fzf#vim#gitfiles('.')<cr>
-
 autocmd BufRead * set tags=./tags,tags;$HOME        " Look for tags
-
-" Neomake
-let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
-let g:neomake_rust_enabled_makers = ['rustc']
-let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
-autocmd BufWritePost *.rb Neomake
-autocmd BufWritePost *.hs Neomake
-autocmd BufWritePost *.go Neomake
 
 " Linewise completion
 imap <C-@> <C-Space>
@@ -165,7 +155,7 @@ set ignorecase      " Ignore case of normal letters
 " --------------- Filetype Preferences ----------------------------------------
 
 au FileType python setlocal formatprg=autopep8\ -             " Use autopep8 for python gq
-au FileType make set noexpandtab                              " Force tabs in makefiles
+au FileType make,go set noexpandtab                           " Force tabs in makefiles
 au BufRead,BufNewFile Make.*,Makefile,makefile set ft=make    " Set filetype
 au BufRead,BufNewFile package.json set ft=javascript          " Force JSON hl
 au BufReadPost *.pegjs set syntax=javascript                  " Force JS hl
@@ -174,12 +164,14 @@ au BufRead,BufNewFile Gemfile set ft=ruby                     " Set ruby syntax 
 au BufRead,BufNewFile *.md set ft=markdown                    " Set markdown ft
 au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filetype
 
-" --------------- Preferred Syntastic Checkers --------------------------------
+" --------------- Neomake (nvim Syntastic) Config -----------------------------
 
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_args = ['--config tox.ini']
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+autocmd! BufWritePost * Neomake
+
+let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
+let g:neomake_rust_enabled_makers = ['rustc']
+let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 
 " --------------- General Shortcuts -------------------------------------------
 
