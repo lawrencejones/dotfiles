@@ -14,5 +14,5 @@ fi
 
 curl --silent \
   -H "Authorization: Bearer $GITHUB_DEPLOYMENT_TOKEN" \
-  https://api.github.com/repos/gocardless/payments-service/deployments \
+  "https://api.github.com/repos/$1/deployments" \
   | jq 'map({environment: .environment, sha: .sha, deployed: .created_at, author: .creator.login}) | group_by(.environment) | map(max_by(.deployed))'
