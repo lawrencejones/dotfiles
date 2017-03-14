@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [[ "$#" -eq 0 ]]; then
+  echo """
+    Desc:  Find currently deployed sha for each env
+    Usage: which-deploy <github-project-link>
+    Examples...
+
+        which-deploy gocardless/payments-service
+
+  """
+  exit 255
+fi
+
+curl --silent \
+  -H "Authorization: Bearer $GITHUB_DEPLOYMENT_TOKEN" \
+  https://api.github.com/repos/gocardless/payments-service/deployments \
+  | jq 'map({environment: .environment, sha: .sha, deployed: .created_at, author: .creator.login}) | group_by(.environment) | map(max_by(.deployed))'
