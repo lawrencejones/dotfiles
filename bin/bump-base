@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ! "$#" -eq 2 ]]; then
+  echo """
+    Desc:  Update the base image across our services
+    Usage: bump-base <new-image-tag> <repo-path>
+    Examples...
+
+        bump-base 2017032001 gocardless/gocardless
+
+  """
+  exit 255
+fi
+
+# gh-request <url> <extra-args>*
+function gh-request() {
+  curl --silent \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Content-Type: application/json" \
+    "https://api.github.com/$1" \
+    "${@:2}"
+}
+
+# get-dockerfile <org/repo>
+function get-dockerfile() {
+  gh-request "repos/$1/contents/Dockerfile" -H "Accept: application/vnd.github.v3.raw"
+}
+
+# create-blob <org/repo>
+function create-blob() {
+  base64 | \
+    tr -d '\n' | \
+    jq --join-output --slurp -Rn '{ content: input, encoding: "base64" }' | \
+    gh-request "repos/$1/git/blobs" \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d @- | \
+    jq --raw-output '.sha'
+}
+
+# create-dockerfile-tree <org/repo> <base-tree-sha> <dockerfile-blob-sha>
+function create-dockerfile-tree() {
+  cat <<-JSON | gh-request "repos/$1/git/trees" -X POST -d @- | jq --raw-output '.sha'
+  {
+    "base_tree": "$2",
+    "tree": [{
+      "path": "Dockerfile",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "$3"
+    }]
+  }
+JSON
+}
+
+# create-commit <org/repo> <base-sha> <tree-sha> <message>
+function create-commit() {
+  cat <<-JSON | gh-request "repos/$1/git/commits" -X POST -d @- | jq --raw-output '.sha'
+  {
+    "parents": ["$2"],
+    "tree": "$3",
+    "message": "$4"
+  }
+JSON
+}
+
+# create-reference <org/repo> <reference> <sha>
+function create-reference() {
+  cat <<-JSON | gh-request "repos/$1/git/refs" -X POST -d @- | jq --raw-output '.ref'
+  {
+    "ref": "$2", "sha": "$3"
+  }
+JSON
+}
+
+# create-pr <org/repo> <head> <base> <version>
+function create-pr() {
+  cat <<-JSON | gh-request "repos/$1/pulls" -X POST -d @- | jq --raw-output '.url'
+  {
+    "title": "Bump docker base image to $4",
+    "head": "$2",
+    "base": "$3",
+    "body": "Updates the docker base image to tag $4"
+  }
+JSON
+}
+
+# update-to-version <version>
+function update-to-version() {
+  perl -pe  "s/(?<=FROM registry.gocardless.io\/gocardless\/base:)\S+/$1/g"
+}
+
+# fetch-sha <org/repo> <reference>
+function fetch-sha() {
+  gh-request "repos/$1/git/refs/$2" | jq --raw-output '.object.sha'
+}
+
+# fetch-tree-for-sha <org/repo> <sha>
+function fetch-tree-for-sha() {
+  gh-request "repos/$1/git/trees/$2" # | jq --raw-output '.sha'
+}
+
+VERSION=$1
+REPO=$2
+
+MASTER_SHA=$(fetch-sha "$REPO" heads/master)
+BRANCH_NAME="bump-docker-base-image-$VERSION"
+
+BLOB=$(get-dockerfile "$REPO" | update-to-version "$VERSION" | create-blob "$REPO")
+UPDATE_TREE_SHA=$(create-dockerfile-tree "$REPO" "$MASTER_SHA" "$BLOB")
+UPDATE_COMMIT_SHA=$(create-commit "$REPO" "$MASTER_SHA" "$UPDATE_TREE_SHA" "Bump docker base image")
+
+create-reference "$REPO" "refs/heads/$BRANCH_NAME" "$UPDATE_COMMIT_SHA" >/dev/null
+
+echo -e "[$REPO]\tCreated PR - $(create-pr "$REPO" "$BRANCH_NAME" "master" "$VERSION")"
