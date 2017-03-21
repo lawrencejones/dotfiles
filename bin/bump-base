@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Used to bump the base image version for gocardless repositories.
+# Used to bump the base image version across multiple services
 
 set -euo pipefail
 
-if [[ ! "$#" -eq 2 ]]; then
+if [[ ! "$#" -eq 3 ]]; then
   echo """
-    Desc:  Update the base image across our services
-    Usage: bump-base <new-image-tag> <repo-path>
+    Desc:  Update the base image across repositories
+    Usage: bump-base <image> <new-image-version> <repo-path>
     Examples...
 
-        bump-base 2017032001 gocardless/gocardless
+        bump-base registry.io/image/base 2017032001 gocardless/gocardless
 
   """
   exit 255
@@ -88,9 +88,12 @@ function create-pr() {
 JSON
 }
 
-# update-to-version <version>
+# update-to-version <image> <version>
 function update-to-version() {
-  perl -pe  "s/(?<=FROM registry.gocardless.io\/gocardless\/base:)\S+/$1/g"
+  local IMAGE="${1//\//\\/}"
+  local VERSION=$2
+
+  perl -pe  "s/FROM $IMAGE(:\S+)?/FROM $IMAGE:$VERSION/g"
 }
 
 # fetch-sha <org/repo> <reference>
@@ -98,16 +101,22 @@ function fetch-sha() {
   gh-request "repos/$1/git/refs/$2" | jq --raw-output '.object.sha'
 }
 
-VERSION=$1
-REPO=$2
+IMAGE=$1
+VERSION=$2
+REPO=$3
 
 MASTER_SHA=$(fetch-sha "$REPO" heads/master)
 BRANCH_NAME="bump-docker-base-image-$VERSION"
 
-BLOB=$(get-dockerfile "$REPO" | update-to-version "$VERSION" | create-blob "$REPO")
+if ! grep "$IMAGE" <(get-dockerfile "$REPO") >/dev/null; then
+  echo -e "[$REPO] Does not use $IMAGE!"
+  exit 255
+fi
+
+BLOB=$(get-dockerfile "$REPO" | update-to-version "$IMAGE" "$VERSION" | create-blob "$REPO")
 UPDATE_TREE_SHA=$(create-dockerfile-tree "$REPO" "$MASTER_SHA" "$BLOB")
 UPDATE_COMMIT_SHA=$(create-commit "$REPO" "$MASTER_SHA" "$UPDATE_TREE_SHA" "Bump docker base image")
 
 create-reference "$REPO" "refs/heads/$BRANCH_NAME" "$UPDATE_COMMIT_SHA" >/dev/null
 
-echo -e "[$REPO]\tCreated PR - $(create-pr "$REPO" "$BRANCH_NAME" "master" "$VERSION")"
+echo -e "[$REPO] Created PR - $(create-pr "$REPO" "$BRANCH_NAME" "master" "$VERSION")"
