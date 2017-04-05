@@ -101,8 +101,8 @@ alias tree='tree -C'
 
 # Command history
 export HISTFILE=$HOME/.zhistory   # save on shell exit
-export HISTSIZE=3000              # lines of history
-export SAVEHIST=2800              # lines of history on disc
+export HISTSIZE=10000             # lines of history
+export SAVEHIST=10000             # lines of history on disc
 setopt no_share_history           # don't share history
 setopt APPEND_HISTORY             # append rather than overwrite
 setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first
