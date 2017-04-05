@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# Deploy changes in a chef-repo branch to chef environment
+
+set -euo pipefail
+
+if [[ ! "$#" -eq 1 ]]; then
+  echo """
+    Desc:  Deploy all changed cookbooks and run chef
+    Usage: deploy-cookbooks <chef-environment>
+    Examples...
+
+        deploy-cookbooks staging
+
+  """
+  exit 255
+fi
+
+function modified-metadata() {
+  git diff --name-only "$BRANCH" origin/master -- cookbooks/*/metadata.rb
+}
+
+# local-cookbook-version <cookbook>
+function local-cookbook-version() {
+  perl -wnl -e '/version.+?([0-9.]+)/ and print $1' < "cookbooks/$1/metadata.rb"
+}
+
+# chef-cookbook-version <cookbook>
+function chef-cookbook-version() {
+  perl -wnl -e "/$1\s+([0-9.]+)/ and print \$1" < <(bundle exec knife cookbook show "$1")
+}
+
+function print-deploy-plan() {
+  echo -e "Deploying $BRANCH to $KNIFE_ENV will deploy: ["
+  for CB in "${COOKBOOKS[@]}"; do
+    echo "  $CB [$(chef-cookbook-version "$CB") ~> $(local-cookbook-version "$CB")]"
+  done
+  echo -e "]\n"
+}
+
+function confirm-deploy() {
+  echo -n "Deploy? [y/n] " && read -r YN
+  if [ ! "$YN" == 'y' ]; then
+    echo "Did not receive yes, exiting!"
+    return 255
+  fi
+}
+
+# Uploads all cookbooks included in this change.
+function upload-cookbooks() {
+  for CB in "${COOKBOOKS[@]}"; do
+    bundle exec knife cookbook upload "$(basename "$CB")"
+  done
+  echo # for whitespace
+}
+
+# Runs chef-client on all the nodes that have recipes in their runlist that belong to the
+# cookbooks that have been changed. This will most likely be the nodes that need updating
+# with this change, unless something really weird is going on (in which case manually
+# deploying cookbooks is your best bet, not this script).
+function run-chef() {
+  local NODE_PATTERN
+  NODE_PATTERN="$(printf 'recipes:%s\:\:* OR ' "${COOKBOOKS[@]}" | sed 's/ OR $//')"
+
+  echo -e "Run chef on nodes matching '$NODE_PATTERN'\n"
+  bundle exec knife ssh -C 20 -x "$USER" -a softlayer.private_ip --ssh-port "$GC_PORT" \
+    "$NODE_PATTERN" -- sudo chef-client
+}
+
+KNIFE_ENV="$1"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+COOKBOOKS=(`modified-metadata | xargs -n1 dirname | xargs -n1 basename`) # [gc_base, ...]
+
+print-deploy-plan
+confirm-deploy || exit 255
+
+upload-cookbooks && run-chef
