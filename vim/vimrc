@@ -19,6 +19,7 @@ Plug 'eagletmt/ghcmod-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'rodjek/vim-puppet'
+Plug 'zah/nim.vim'
 
 " Utility plugins
 Plug 'AndrewRadev/sideways.vim'
