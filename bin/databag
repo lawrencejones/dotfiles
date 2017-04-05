@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 
-unless ARGV.count == 2
+unless ARGV.count >= 2
   puts(<<-HELP)
 
   Desc:  Edits encrypted databags
-  Usage: databag <databag-file> <secret-key-file>
+  Usage: databag <edit|decrypt> <databag-file> <secret-key-file>
   Examples...
 
       databag \\
+        edit
         test/fixtures/data_bags/users_enc/bankops.json \\
         test/fixtures/encrypted_data_bag_secret
 
@@ -34,13 +35,26 @@ def edit(content = "{}")
   end
 end
 
-databag_file, secret_file = ARGV.first(2)
+action, databag_file, secret_file = ARGV.first(3)
 secret = File.read(secret_file).strip
+
+puts("Decrypting #{databag_file} ...")
 databag = JSON.parse(File.read(databag_file)) rescue {}
 
-edited_databag = JSON.parse(edit(JSON.pretty_generate(decrypt(databag, secret))))
-encrypted_databag = Chef::EncryptedDataBagItem.encrypt_data_bag_item(edited_databag, secret)
+unless databag.values.any? { |v| v.class == Hash && v.key?('encrypted_data') }
+  puts('Not encrypted data bag, exiting.')
+  Process.exit(0)
+end
 
-puts("Writing encrypted databag to #{databag_file}...")
-File.write(databag_file, JSON.pretty_generate(encrypted_databag))
-puts("done!")
+case action
+when 'edit'
+  edited_databag = JSON.parse(edit(JSON.pretty_generate(decrypt(databag, secret))))
+  encrypted_databag = Chef::EncryptedDataBagItem.encrypt_data_bag_item(edited_databag, secret)
+
+  puts("Writing encrypted databag to #{databag_file}...")
+  File.write(databag_file, JSON.pretty_generate(encrypted_databag))
+  puts("done!")
+when 'decrypt'
+  decrypted_databag = decrypt(databag, secret)
+  File.write(databag_file, JSON.pretty_generate(decrypted_databag))
+end
