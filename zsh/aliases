@@ -38,6 +38,7 @@ alias diffocop="git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$
 alias g='git'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
 alias gs='git status'
+alias gsp='git status -- .'
 alias ga='git add -A'
 alias gca='git commit -v --amend'
 alias gco='git checkout'
