@@ -5,7 +5,7 @@ set -euo pipefail
 
 if [[ ! "$#" -eq 1 ]]; then
   echo """
-    Desc:  Deploy all changed cookbooks and run chef
+    Desc:  Deploy cookbooks with higher versions than on chef-server
     Usage: deploy-cookbooks <chef-environment>
     Examples...
 
@@ -15,9 +15,22 @@ if [[ ! "$#" -eq 1 ]]; then
   exit 255
 fi
 
-function modified-metadata() {
-  git diff --name-only "$BRANCH" origin/master -- cookbooks/*/metadata.rb
+function list-cookbooks() {
+  git ls-files cookbooks/*/metadata.rb | xargs -n1 dirname | xargs -n1 basename
 }
+
+function cookbooks-that-require-deploy() {
+  for CB in $(list-cookbooks); do
+    require-deploy "$CB" && echo "$CB"
+  done
+}
+
+# require-deploy <cookbook>
+function require-deploy() {
+  local CMP; CMP="$(local-cookbook-version "$CB")\n$(chef-cookbook-version "$CB")"
+  [ "$(echo -e "$CMP")" != "$(echo -e "$CMP" | sort -t '.' -k 1,1 -k 2,2 -k 3,3 -g)" ]
+}
+
 
 # local-cookbook-version <cookbook>
 function local-cookbook-version() {
@@ -25,15 +38,17 @@ function local-cookbook-version() {
 }
 
 # chef-cookbook-version <cookbook>
+# Caches the current cookbook versions in CHEF_COOKBOOK_VERSIONS so we don't
+# need to do n lookups
 function chef-cookbook-version() {
-  perl -wnl -e "/$1\s+([0-9.]+)/ and print \$1" < <(bundle exec knife cookbook show "$1")
+  perl -wnl -e "/^$1\s+([0-9.]+)/ and print \$1" <<< "$CHEF_COOKBOOK_VERSIONS"
 }
 
 function print-deploy-plan() {
   echo -e "Deploying $BRANCH to $KNIFE_ENV will deploy: ["
   for CB in "${COOKBOOKS[@]}"; do
-    echo "  $CB [$(chef-cookbook-version "$CB") ~> $(local-cookbook-version "$CB")]"
-  done
+    echo "$CB [$(chef-cookbook-version "$CB") ~> $(local-cookbook-version "$CB")]"
+  done | column -t | sed 's/^/    /g'
   echo -e "]\n"
 }
 
@@ -48,8 +63,8 @@ function confirm-deploy() {
 # Uploads all cookbooks included in this change.
 function upload-cookbooks() {
   for CB in "${COOKBOOKS[@]}"; do
-    bundle exec knife cookbook upload "$(basename "$CB")"
-  done
+    basename "$CB"
+  done | xargs bundle exec knife cookbook upload
   echo # for whitespace
 }
 
@@ -68,7 +83,10 @@ function run-chef() {
 
 KNIFE_ENV="$1"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-COOKBOOKS=(`modified-metadata | xargs -n1 dirname | xargs -n1 basename`) # [gc_base, ...]
+CHEF_COOKBOOK_VERSIONS="$(bundle exec knife cookbook list)"
+COOKBOOKS=(); for CB in $(cookbooks-that-require-deploy); do
+  COOKBOOKS+=("$CB")
+done
 
 print-deploy-plan
 confirm-deploy || exit 255
