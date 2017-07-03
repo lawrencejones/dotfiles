@@ -31,7 +31,7 @@ project() {
 alias c='cookbook'
 cookbook() {
   book=$1; : ${book:=""}
-  cd "$HOME/Projects/chef-repo/cookbooks/$book"
+  cd "$HOME/Projects/chef-mono/cookbooks/$book"
 }
 
 edit-all() {

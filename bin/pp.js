@@ -31,7 +31,7 @@ process.stdin.on('end', () => {
   try {
     var json = JSON.parse(input.toString());
     /* This blocks! */
-    process.stdout.write(JSON.stringify(sortOutputKeys ? lexisort(json) : json, null, 2));
+    process.stdout.write(JSON.stringify(sortOutputKeys ? lexisort(json) : json, null, 2) + "\n");
     process.stdin.on('end', () => { process.exit(0) });
   } catch(err) {
     console.log(err);

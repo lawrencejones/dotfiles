@@ -52,12 +52,13 @@ function print-deploy-plan() {
   echo -e "]\n"
 }
 
-function confirm-deploy() {
-  echo -n "Deploy? [y/n] " && read -r YN
+function confirm() {
+  echo -n "${1} [y/n] " && read -r YN
   if [ ! "$YN" == 'y' ]; then
     echo "Did not receive yes, exiting!"
     return 255
   fi
+  echo # for whitespace
 }
 
 # Uploads all cookbooks included in this change.
@@ -88,7 +89,11 @@ COOKBOOKS=(); for CB in $(cookbooks-that-require-deploy); do
   COOKBOOKS+=("$CB")
 done
 
-print-deploy-plan
-confirm-deploy || exit 255
+if [ "${#COOKBOOKS}" == 0 ]; then
+  echo "No cookbooks to deploy, exiting"
+  exit 255
+fi
 
-upload-cookbooks && run-chef
+print-deploy-plan && \
+  confirm "Upload cookbooks?" && upload-cookbooks && \
+  confirm "Run Chef?" && run-chef

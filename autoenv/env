@@ -4,7 +4,7 @@
 [ -f ~/.private-env ] && source ~/.private-env
 
 # Load the docker machine if we're not already configured
-if [ -z "$LOADED_DOCKER" ];
+if [ -f /var/run/docker.sock ] || [ -z "$LOADED_DOCKER" ];
 then
   export LOADED_DOCKER=yes
   eval $(docker-machine env default)

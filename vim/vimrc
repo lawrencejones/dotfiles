@@ -7,18 +7,21 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Syntax plugins
-Plug 'neomake/neomake'
-Plug 'slim-template/vim-slim'
-Plug 'digitaltoad/vim-jade'
-Plug 'wavded/vim-stylus'
-Plug 'kchmck/vim-coffee-script'
 Plug 'ap/vim-css-color'
-Plug 'tikhomirov/vim-glsl'
 Plug 'dag/vim2hs'
+Plug 'derekwyatt/vim-scala'
+Plug 'digitaltoad/vim-jade'
 Plug 'eagletmt/ghcmod-vim'
-Plug 'rust-lang/rust.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'kchmck/vim-coffee-script'
+Plug 'neomake/neomake'
 Plug 'rodjek/vim-puppet'
+Plug 'rust-lang/rust.vim'
+Plug 'slim-template/vim-slim'
+Plug 'tikhomirov/vim-glsl'
+Plug 'vim-scripts/applescript.vim'
+Plug 'wavded/vim-stylus'
 Plug 'zah/nim.vim'
 
 " Utility plugins
@@ -170,9 +173,14 @@ au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filety
 autocmd! BufWritePost * Neomake
 
 let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']
-let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+let g:neomake_ruby_enabled_makers = ['bundle', 'mri']
+let g:neomake_ruby_bundle_maker = {
+    \ 'args': ['--format', 'emacs'],
+    \ 'errorformat': '%f:%l:%c: %t: %m',
+    \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess')
+    \ }
 
 " --------------- General Shortcuts -------------------------------------------
 

@@ -31,7 +31,7 @@ alias sprung='pgrep spring ruby rails rake | xargs kill -9'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
-alias diffocop="git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop"
+alias diffocop="(cd \$(git rev-parse --show-toplevel) && git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop)"
 #----------------------------------------------------------------
 
 #------- Git Aliases --------------------------------------------
@@ -94,6 +94,7 @@ alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
 alias by='bpython'
+alias lab-ssh='_lab-ssh() { ssh $(dig @$(scutil --dns | grep nameserver | grep -Po "10.\d+.\d+.\d+" | head -n1) +short A "$1") }; _lab-ssh'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

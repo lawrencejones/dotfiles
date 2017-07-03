@@ -15,10 +15,7 @@ Host *.staging
   Hostname %h.gocardless.com
   Port $GC_PORT
 
-Host *.gocardless.com
-  Port $GC_PORT
-
-Host *.gc.cx
+Host *.gocardless.com *.gc.cx 10.*
   Port $GC_PORT
 
 # Github and services ######################################
