@@ -1,6 +1,7 @@
 [user]
 	name = Lawrence Jones
 	email = lawrjone@gmail.com
+	signingkey = CDCABF0622EEE3B4F8EB828874179F6972FC3A21
 [push]
 	default = upstream
 [alias]
@@ -41,3 +42,5 @@
 
 [hub]
 protocol = https
+[commit]
+	gpgsign = true

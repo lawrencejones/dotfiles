@@ -34,7 +34,7 @@ function require-deploy() {
 
 # local-cookbook-version <cookbook>
 function local-cookbook-version() {
-  perl -wnl -e '/version.+?([0-9.]+)/ and print $1' < "cookbooks/$1/metadata.rb"
+  perl -wnl -e '/^version.+?([0-9.]+)/ and print $1' < "cookbooks/$1/metadata.rb"
 }
 
 # chef-cookbook-version <cookbook>
@@ -79,7 +79,7 @@ function run-chef() {
 
   echo -e "Run chef on nodes matching '$NODE_PATTERN'\n"
   bundle exec knife ssh -C 20 -x "$USER" -a softlayer.private_ip --ssh-port "$GC_PORT" \
-    "$NODE_PATTERN" -- sudo chef-client
+    "$NODE_PATTERN" -- sudo bash -c "'hostname -f && chef-client 2>&1 >> /var/log/chef/client.log'"
 }
 
 KNIFE_ENV="$1"
