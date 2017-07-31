@@ -190,3 +190,27 @@ ckdir() {
 last-screenshot() {
   echo "$HOME/Dropbox/Screenshots/$(ls --color=no -t $HOME/Dropbox/Screenshots | head -n 1)"
 }
+
+aws-keychain-activate() {
+  if [[ "$#" -eq 0 ]]; then
+    echo """
+    Usage: aws-keychain-activate <repo-name>
+    Desc:  Exports aws credentials from keychain into current env
+    Examples...
+
+        aws-keychain-activate gc-iam
+
+    Available envs:
+
+        $(aws-keychain ls | xargs | sed 's/ /\n        /g')
+
+    """
+  else
+    aws-keychain exec "$1" bash <<-BASH | source /dev/stdin
+    echo -e """
+    export AWS_ACCESS_KEY_ID=\"\$AWS_ACCESS_KEY_ID\"
+    export AWS_SECRET_ACCESS_KEY=\"\$AWS_SECRET_ACCESS_KEY\"
+    """
+BASH
+  fi
+}
