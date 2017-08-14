@@ -29,11 +29,13 @@ Plug 'zah/nim.vim'
 Plug 'AndrewRadev/sideways.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/vimproc.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
 Plug 'bling/vim-airline'
 Plug 'burnettk/vim-angular'
 Plug 'danro/rename.vim'
 Plug 'diepm/vim-rest-console'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
 Plug 'garbas/vim-snipmate'
 Plug 'lukaszkorecki/CoffeeTags'
 Plug 'ntpeters/vim-better-whitespace'
@@ -183,6 +185,12 @@ let g:neomake_ruby_bundle_maker = {
     \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess')
     \ }
 
+" --------------- YouCompleteMe -----------------------------------------------
+
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
 " --------------- General Shortcuts -------------------------------------------
 
 " Delete the current file and buffer
@@ -309,6 +317,12 @@ if executable('coffeetags')
         \ }
         \ }
 endif
+
+" --------------- Golang Preferences ------------------------------------------
+
+" Automatically add missing imports to go files
+let g:go_fmt_command = "goimports"
+let g:go_list_type = "quickfix"
 
 " --------------- TinyOS Preferences ------------------------------------------
 
