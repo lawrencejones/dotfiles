@@ -30,7 +30,6 @@ Plug 'AndrewRadev/sideways.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/vimproc.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
-Plug 'bling/vim-airline'
 Plug 'burnettk/vim-angular'
 Plug 'danro/rename.vim'
 Plug 'diepm/vim-rest-console'
@@ -49,11 +48,13 @@ Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/taglist.vim'
 Plug 'wellle/targets.vim'
 Plug 'xolox/vim-misc'
+Plug 'bling/vim-airline'
 
 " Requires external fzf binary
 set rtp+=/usr/local/opt/fzf
@@ -187,7 +188,7 @@ let g:neomake_ruby_bundle_maker = {
 
 " --------------- YouCompleteMe -----------------------------------------------
 
-let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_auto_trigger = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 

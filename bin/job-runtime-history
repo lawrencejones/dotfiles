@@ -75,7 +75,10 @@ runtimes = JobRuntimes.
 
 case opts[:format]
 when 'spark'  then puts %x{spark #{runtimes.map(&:last).join(' ')}}
-when 'values' then puts runtimes.map(&:last).join(' ')
+when 'values'
+  runtimes.each do |t, runtime|
+    puts "#{Time.at(t).to_date},#{runtime}"
+  end
 when 'chart'
   # Bar chart
   puts AsciiCharts::Cartesian.new(runtimes.map do |(t,runtime)|

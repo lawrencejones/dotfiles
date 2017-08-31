@@ -94,7 +94,7 @@ alias plain-paste='pbpaste | pbcopy'
 alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
 alias by='bpython'
-alias lab-ssh='_lab-ssh() { ssh $(dig @$(scutil --dns | grep nameserver | grep -Po "10.\d+.\d+.\d+" | head -n1) +short A "$1") }; _lab-ssh'
+alias lab-ssh='ssh -o StrictHostKeyChecking=no'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------
