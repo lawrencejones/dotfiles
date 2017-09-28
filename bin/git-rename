@@ -1,9 +1,12 @@
 #!/bin/sh
-# Renames a git file in two stages
-# Useful for case sensitive renames
-cp $1 .tmp-copy
-git rm $1 && git commit -m "Renaming file $1..."
-mv .tmp-copy $2
-git add $2 && git commit -m "...to $2"
+# Renames a git file in two stages, allowing case sensitive renames
 
+SOURCE=$1
+TARGET=$2
+TEMPDIR=$(mktemp -d)
 
+cp -r "${SOURCE}" "${TEMPDIR}/asset"
+git rm -rf "${SOURCE}" && git commit -m "Renaming ${SOURCE}..."
+mv "${TEMPDIR}/asset" "${TARGET}"
+git add "${TARGET}" && git commit -m "...to ${TARGET}"
+rm -rf "${TEMPDIR}"
