@@ -6,9 +6,11 @@
 
 PATH=$PATH:/usr/local/bin                   # Brewness
 PATH=$PATH:/usr/local/heroku/bin            # Heroku toolbelt
-PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries, cabal dependent
+PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries
+PATH=$PATH:$HOME/.cabal/bin                 # cabal binaries
 PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
-PATH=$PATH:/usr/local/google-cloud-sdk/bin  # Cargo binaries
+PATH=$PATH:$HOME/.local/bin                 # Home local binaries
+PATH=$PATH:/usr/local/google-cloud-sdk/bin  # Google SDK
 
 # Primary paths (ascd importance) ################
 
@@ -53,6 +55,9 @@ export VIRTUAL_ENV_DISABLE_PROMPT=true  # turn off patching of prompt
 # Golang
 export GOPATH="$HOME/Projects/golang"
 export PATH="$PATH:$GOPATH/bin"
+
+# Brew is slow, so calculate the prefix once
+export BREW_PREFIX="$(dirname $(dirname $(which brew)))/opt"
 
 ### SELECT GNU COMMANDS ########################################################
 
@@ -154,4 +159,4 @@ setopt promptsubst
 [ -f ~/.private-env ] && source ~/.private-env
 
 # Load autoenv to boot shared .env
-[ -f "$(brew --prefix autoenv)/activate.sh" ] && source "$(brew --prefix autoenv)/activate.sh"
+[ -f "${BREW_PREFIX}/autoenv/activate.sh" ] && source "${BREW_PREFIX}/autoenv/activate.sh"

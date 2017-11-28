@@ -7,7 +7,9 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Syntax plugins
+Plug 'Shougo/vimproc.vim'
 Plug 'ap/vim-css-color'
+Plug 'cespare/vim-toml'
 Plug 'dag/vim2hs'
 Plug 'derekwyatt/vim-scala'
 Plug 'digitaltoad/vim-jade'
@@ -177,6 +179,7 @@ au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filety
 autocmd! BufWritePost * Neomake
 
 let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']
+let g:neomake_zsh_enabled_makers = ['sh']
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 let g:neomake_ruby_enabled_makers = ['bundle', 'mri']

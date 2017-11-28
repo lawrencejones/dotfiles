@@ -208,6 +208,7 @@ aws-keychain-activate() {
   else
     aws-keychain exec "$1" bash <<-BASH | source /dev/stdin
     echo -e """
+    export AWS_ACTIVE_KEYCHAIN=\"$1\"
     export AWS_ACCESS_KEY_ID=\"\$AWS_ACCESS_KEY_ID\"
     export AWS_SECRET_ACCESS_KEY=\"\$AWS_SECRET_ACCESS_KEY\"
     """
