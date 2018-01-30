@@ -14,6 +14,24 @@ alias :ev='vim ~/.vim/vimrc'
 alias :eh='vim /opt/boxen/repo/hiera/users/lawrencejones.yaml'
 #----------------------------------------------------------------
 
+#------- Kubernetes Aliases -------------------------------------
+alias k='kubectl'
+alias kd='kubectl describe'
+alias ke='kubectl exec'
+alias kei='kubectl exec -it'
+alias kg='kubectl get'
+alias kl='kubectl logs'
+alias ks='kubectl get services'
+alias kn='kubectl get nodes'
+alias kp='kubectl get pods'
+alias kcc='bash -c "kubectl config set-context \$0 --namespace=\$1 && kubectl config use-context \$0"'
+
+alias helm='TILLER_NAMESPACE="$(_k_currentNamespace)-tiller" /usr/local/bin/helm'
+
+# Helper aliases
+alias _k_currentNamespace='kubectl config view -o json | jq -r ".contexts | map(select(.name == \"$(kubectl config current-context)\")) | .[0].context.namespace"'
+#----------------------------------------------------------------
+
 #------- Vim Commands -------------------------------------------
 alias :q='exit'
 alias :Q='exit'
@@ -23,7 +41,6 @@ alias vim='nvim'
 #------- Ruby ---------------------------------------------------
 alias be='bundle exec'
 alias bi='bundle install'
-alias bc='bundle console'
 alias ctags-ruby-bundle='ctags -R --languages=ruby --exclude=.git --exclude=log $(bundle list --paths) .'
 alias ispec='RAILS_ENV=integration be rspec'
 alias pry-lib='bundle exec pry --exec "\$LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), \"lib\")); true"'
