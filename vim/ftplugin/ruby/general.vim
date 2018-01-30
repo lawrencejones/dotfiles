@@ -1,4 +1,5 @@
 set textwidth=90
+set expandtab
 
 set foldlevel=99
 set fdm=syntax
