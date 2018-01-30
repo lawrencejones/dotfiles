@@ -10,7 +10,9 @@ PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries
 PATH=$PATH:$HOME/.cabal/bin                 # cabal binaries
 PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
 PATH=$PATH:$HOME/.local/bin                 # Home local binaries
-PATH=$PATH:/usr/local/google-cloud-sdk/bin  # Google SDK
+
+# Google SDK
+PATH=$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 
 # Primary paths (ascd importance) ################
 
@@ -160,3 +162,6 @@ setopt promptsubst
 
 # Load autoenv to boot shared .env
 [ -f "${BREW_PREFIX}/autoenv/activate.sh" ] && source "${BREW_PREFIX}/autoenv/activate.sh"
+
+# github.com/wting/autojump
+[ -f "${BREW_PREFIX}/../etc/profile.d/autojump.sh" ] && source "${BREW_PREFIX}/../etc/profile.d/autojump.sh"
