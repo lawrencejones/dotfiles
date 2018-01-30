@@ -15,21 +15,23 @@ if [[ "$1" -eq "--help" ]]; then
   exit 0
 fi
 
+export ETCDCTL_API=3
+
 # resolve-primary <etcd>
 function resolve-primary() {
-  ETCDCTL_API=3 etcdctl get --endpoints "$1" get /postgres/main/master
+  etcdctl get --endpoints "$1" get /postgres/main/master
 }
 
 for envPair in $(env | grep "GC_POSTGRES_ENDPOINTS_"); do
   envPair=$(perl -wnl -e '/GC_POSTGRES_ENDPOINTS_(.+)=(.+)$/ and print "$1 $2"' <<< "${envPair}")
 
-  envName=$(cut -d' ' -f 1 <<< "${envPair}")
-  etcdHost=$(cut -d' ' -f 2 <<< "${envPair}")
+  envName=$(awk '{print $1}' <<< "${envPair}")
+  etcdHost=$(awk '{print $2}'  <<< "${envPair}")
 
-  host "${etcdHost}" >/dev/null 2>&1 || continue
+  if gtimeout 0.1 host "${etcdHost}" 2>&1 | grep -E '\d+' >/dev/null; then
+    primaryAddr=$(etcdctl --endpoints "${etcdHost}:2379" get --print-value-only /postgres/main/master)
+    primaryHost=$(ssh "${primaryAddr}" hostname -f)
 
-  primaryAddr=$(etcdctl --endpoints "${etcdHost}:2379" get --print-value-only /postgres/main/master)
-  primaryHost=$(ssh "${primaryAddr}" hostname -f)
-
-  echo "${envName} ${primaryAddr} ${primaryHost}"
+    echo "${envName} ${primaryAddr} ${primaryHost}"
+  fi
 done | column -t
