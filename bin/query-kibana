@@ -3,14 +3,15 @@ gem 'excon'
 require 'excon'
 require 'json'
 
-# This is an example of a query that you might execute against Kibana, to find all logs
-# that contain the string "Refusing to cancel"
-#
-# You should probably execute this script piping the output to jq, like so:
-#
-#   $ ruby query.rb /path/to/query.json | jq '.[0]'
-#
-=begin
+if ARGV.empty?
+  puts <<-HELP
+This is an example of a query that you might execute against Kibana, to find all logs
+that contain the string "Refusing to cancel"
+
+You should probably execute this script piping the output to jq, like so:
+
+  $ ruby query.rb /path/to/query.json | jq '.[0]'
+
 {
   "_source": {
     "includes": [
@@ -41,7 +42,9 @@ require 'json'
     }
   }
 }
-=end
+  HELP
+  exit
+end
 
 def paginate(kibana, query, per_page: 5000)
   response = kibana.get(
