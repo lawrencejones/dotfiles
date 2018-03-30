@@ -75,7 +75,7 @@ end
 query_file = ARGV.first || './query.json'
 query = JSON.parse(File.read(query_file))
 
-kibana = Excon.new('https://kibana.gocardless.io:9200', {
+kibana = Excon.new(ENV.fetch('ELASTICSEARCH_HOST', 'https://kibana.gocardless.io:9200'), {
   headers: { 'Accept' => 'application/json' },
   read_timeout: 360,
 })
