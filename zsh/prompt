@@ -1,11 +1,10 @@
-### CONFIGURE PROMPT ###########################################################
 _prompt_trunc_path()
 {
-  #   How many characters of the $PWD should be kept
+  # How many characters of the $PWD should be kept
   local pwdmaxlen=30
   local wd=$1
 
-  #   Indicator that there has been directory truncation:
+  # Indicator that there has been directory truncation:
   local trunc_symbol="..."
   if [ "${#wd}" -gt $pwdmaxlen ]
   then
@@ -15,11 +14,6 @@ _prompt_trunc_path()
     newPWD=$wd
   fi
   echo -e $newPWD | sed 's/\\//g'
-}
-
-_prompt_python_virt_env()
-{
-  [ -n "$VIRTUAL_ENV" ] && echo "🐍 ($(basename $VIRTUAL_ENV)) "
 }
 
 _prompt_pwd_ps1()
@@ -42,24 +36,22 @@ _prompt_git_ps1()
   [ -n "$branch" ] && echo " %{$WHITE%}on %{$PINK%}($branch)"
 }
 
+# Preload whether we have kubectl, so we don't compute a which every prompt
+if which kubectl >/dev/null 2>&1; then
+  KUBERNETES=1
+fi
+
 _prompt_lambda()
 {
-  if [ -n "$VIRTUAL_ENV" ];
-  then
-    echo "(🐍 ) ~> "
-  else
-    echo "λ ~> "
-  fi
+  echo -n "λ"
+  [ -n "$VIRTUAL_ENV" ] && echo -n " ($(basename $VIRTUAL_ENV))"
+  [ -n "$KUBERNETES"  ] && echo -n " ($(grep current-context ~/.kube/config | cut -d' ' -f2))"
+  echo -n " ~> "
 }
 
-# Configure host, allow for alias is provided
-HOST=`hostname`
-[ -e ~/.hostname ] && source ~/.hostname
-
-# Set to the debian colors
-PROMPT="%{$PINK%}%n%{$CLRCOL%} "                      # username
-PROMPT=$PROMPT"%{$WHITE%}at %{$ORANGE%}$HOST "        # hostname
-PROMPT=$PROMPT"%{$WHITE%}in %{$GREEN%}"'$(_prompt_pwd_ps1)'  # working dir
-PROMPT=$PROMPT'$(_prompt_git_ps1) '$'\n'                     # git branch
-PROMPT=$PROMPT"%{$WHITE%}"'$(_prompt_lambda)'"%{$CLRCOL%}%{$GREY%}"      # $ > grey
-
+# Set to the standard debian color scheme
+PROMPT="%{$PINK%}%n%{$CLRCOL%} "                                        # username
+PROMPT=$PROMPT"%{$WHITE%}at %{$ORANGE%}$HOST"                           # hostname
+PROMPT=$PROMPT" %{$WHITE%}in %{$GREEN%}"'$(_prompt_pwd_ps1)'            # working dir
+PROMPT=$PROMPT'$(_prompt_git_ps1) '$'\n'                                # git branch
+PROMPT=$PROMPT"%{$WHITE%}"'$(_prompt_lambda)'"%{$CLRCOL%}%{$GREY%}"     # $ > grey
