@@ -1,7 +1,5 @@
 ### PATH CONFIGURATION #########################################################
 
-[ -f ~/.profile ] && source ~/.profile
-
 # Secondary paths (desc importance) ##############
 
 PATH=$PATH:/usr/local/bin                   # Brewness
@@ -118,7 +116,7 @@ alias tree='tree -C'
 export HISTFILE=$HOME/.zhistory   # save on shell exit
 export HISTSIZE=10000             # lines of history
 export SAVEHIST=10000             # lines of history on disc
-setopt no_share_history           # don't share history
+setopt no_share_history           # dont share history
 setopt APPEND_HISTORY             # append rather than overwrite
 setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first
 setopt EXTENDED_HISTORY           # save timestamp and runtime info
@@ -156,6 +154,9 @@ setopt hist_ignore_dups
 setopt promptsubst
 
 ### LOAD CUSTOM CONFIG #########################################################
+
+# Obviously
+export EDITOR="$(which nvim)"
 
 # Load private environment in case autoenv isn't available
 [ -f ~/.private-env ] && source ~/.private-env
