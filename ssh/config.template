@@ -1,13 +1,4 @@
 # vim: set ft=sshconfig:
-# Diggit ###################################################
-
-Host diggit.prod
-  Hostname 178.62.124.191
-  User deploy
-
-Host diggit.worker
-  Hostname 146.169.47.204
-  User worker
 
 # GoCardless ###############################################
 
@@ -18,18 +9,28 @@ Host *.staging
 Host *.gocardless.com *.gc.cx 10.*
   Port $GC_PORT
 
+Host lab-bastion
+  HostName 35.204.40.9
+  Port $GC_PORT
+  IdentityFile ~/.ssh/google_compute_engine
+
+Host *.c.gc-lab-1eb1.internal
+  ProxyJump lab-bastion
+  StrictHostKeyChecking no
+  IdentityFile ~/.ssh/google_compute_engine
+
+Host prd-bastion
+  HostName 35.204.10.71
+  Port $GC_PORT
+  IdentityFile ~/.ssh/google_compute_engine
+
+Host *.c.gc-prd-effc.internal
+  ProxyJump prd-bastion
+  StrictHostKeyChecking no
+  IdentityFile ~/.ssh/google_compute_engine
+
 # Github and services ######################################
 
 Host github.com
   Hostname ssh.github.com
   Port 443
-
-# Imperial DoC #############################################
-
-Host doc-shell
-  User lmj112
-  Hostname shell1.doc.ic.ac.uk
-
-Host *.doc
-  User lmj112
-  ProxyCommand ssh -T -q doc-shell nc $(echo %h | cut -d. -f1) 22 2>/dev/null

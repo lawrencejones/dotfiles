@@ -44,7 +44,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'nvie/vim-flake8'
 Plug 'rizzatti/dash.vim'
 Plug 'rking/ag.vim'
-Plug 'rorymckinley/vim-rubyhash'
 Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree'
 Plug 'tomtom/tlib_vim'
@@ -78,9 +77,11 @@ let g:molokai_original = 1
 
 " colorscheme base16-default
 
-set t_ut=             " Disable deleted coloring
+set t_ut=''           " Disable deleted coloring
 set t_Co=256          " Force 256 colors
 syn sync fromstart    " Calculate syntax colors from start of file
+
+hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
 " Turn off visual/audible bell
 set visualbell
@@ -178,6 +179,11 @@ au BufRead,BufNewFile *.tex set ft=tex                        " Set latex filety
 " --------------- Neomake (nvim Syntastic) Config -----------------------------
 
 autocmd! BufWritePost * Neomake
+
+" Disable extended unicode symbols as the error message, as this plays badly
+" with kitty
+let g:neomake_warning_sign={'text': 'x'}
+let g:neomake_error_sign={'text': 'x'}
 
 let g:terraform_fmt_on_save = 1
 let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']

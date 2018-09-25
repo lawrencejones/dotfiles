@@ -59,6 +59,10 @@ export PATH="$PATH:$GOPATH/bin"
 # Brew is slow, so calculate the prefix once
 export BREW_PREFIX="$(dirname $(dirname $(which brew)))/opt"
 
+# Do this yourself, not in the middle of an incident when you really need *that*
+# tool!
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 ### SELECT GNU COMMANDS ########################################################
 
 # For those commands that require a g prefix, select if exist

@@ -1,9 +1,9 @@
 [user]
-	name = Lawrence Jones
-	email = lawrjone@gmail.com
-	signingkey = CDCABF0622EEE3B4F8EB828874179F6972FC3A21
+  name = Lawrence Jones
+  email = lawrjone@gmail.com
+  signingkey = CDCABF0622EEE3B4F8EB828874179F6972FC3A21
 [push]
-	default = upstream
+  default = upstream
 [alias]
   commit = commit -v
   branches = branch -a
@@ -18,29 +18,28 @@
   graph = log --graph -15 --branches --remotes --tags --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
   precommit = diff --cached --diff-algorithm=minimal -w
 [github]
-	user = LawrenceJones
+  user = LawrenceJones
 [ghi]
-	token = !security find-internet-password -a LawrenceJones -s github.com -l 'ghi token' -w
+  token = !security find-internet-password -a LawrenceJones -s github.com -l 'ghi token' -w
 [amazon]
-	append-cr-url = true
+  append-cr-url = true
 [color]
-	ui = true
+  ui = true
 [core]
-	excludesfile = /Users/lawrencejones/.gitignore_global
+  excludesfile = /Users/lawrencejones/.gitignore_global
 [url "git@github.com:"]
   insteadOf = github:
 [url "git@gist.github.com:"]
-	insteadOf = https://gist.github.com
+  insteadOf = https://gist.github.com
 [branch]
-	autosetuprebase = always
+  autosetuprebase = always
 [init]
-	templatedir = ~/dotfiles/git/template
+  templatedir = ~/dotfiles/git/template
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 [hub]
-protocol = https
+  protocol = https
 [commit]
-	gpgsign = true
+  gpgsign = true

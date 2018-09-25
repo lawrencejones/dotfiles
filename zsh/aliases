@@ -51,6 +51,11 @@ alias pry-lib='bundle exec pry --exec "\$LOAD_PATH << File.expand_path(File.join
 alias sprung='pgrep spring ruby rails rake | xargs kill -9'
 #----------------------------------------------------------------
 
+#------- Golang -------------------------------------------------
+# If not yet setup, docker volume create dep-pkg
+alias dep-enter='docker run --rm --mount source=dep-pkg,target=/go/pkg -v "/Users/lawrencejones/Projects/golang/src:/go/src" -it golang:1.10 bash'
+#----------------------------------------------------------------
+
 #------- Diffo-actions ------------------------------------------
 alias diffocop="(cd \$(git rev-parse --show-toplevel) && git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop)"
 #----------------------------------------------------------------

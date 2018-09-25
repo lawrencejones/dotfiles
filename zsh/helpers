@@ -188,7 +188,7 @@ ckdir() {
 }
 
 last-screenshot() {
-  echo "$HOME/Dropbox/Screenshots/$(ls --color=no -t $HOME/Dropbox/Screenshots | head -n 1)"
+  echo "$HOME/Dropbox (GoCardless)/Screenshots/$(ls --color=no -t \"$HOME/Dropbox (GoCardless)/Screenshots\" | head -n 1)"
 }
 
 aws-keychain-activate() {

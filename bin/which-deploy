@@ -12,7 +12,14 @@ if [[ "$#" -eq 0 ]]; then
   exit 255
 fi
 
-curl --silent \
-  -H "Authorization: Bearer $GITHUB_DEPLOYMENT_TOKEN" \
-  "https://api.github.com/repos/$1/deployments" \
-  | jq 'map({environment: .environment, sha: .sha, deployed: .created_at, author: .creator.login}) | group_by(.environment) | map(max_by(.deployed))'
+list-deployments() {
+  curl --silent -H "Authorization: Bearer $GITHUB_DEPLOYMENT_TOKEN" "https://api.github.com/repos/$1/deployments" \
+    | jq 'map({environment: .environment, sha: .sha, deployed: .created_at, author: .creator.login})' \
+    | jq 'group_by(.environment) | map(max_by(.deployed))'
+}
+
+if [ -z "$2" ]; then
+  list-deployments "$1"
+else
+  list-deployments "$1" | jq -r "map(select(.environment == \"${2}\"))[0].sha"
+fi
