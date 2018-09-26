@@ -1,48 +1,57 @@
-#!/usr/bin/env ruby
+cask_args appdir: "/Applications"
 
-brews = %w{
-  coreutils
-  findutils
-  gnu-tar
-  gnu-sed
-  gawk
-  gnutls
-  gnu-indent
-  gnu-getopt
-  gnu-sed
-  git
-  ruby-build
-  rbenv
-  ack
-  ctags
-  mercurial
-  mongodb
-  phantomjs
-  wget
-  vim
-  cmake
-  redis
-  the_silver_searcher
-  git-extras
-  youtube-dl
-  hub
-  python
-  tree
-  tmux
-  phantomjs
- }
+# Taps
+tap "homebrew/cask"
+tap "gocardless/homebrew-taps"
 
-INSTALLED_BREWS = `brew list`.split("\n")
+# General tooling
+brew "ack"
+brew "autoenv"
+brew "cmake"
+brew "coreutils"
+brew "ctags"
+brew "findutils"
+brew "gawk"
+brew "git"
+brew "git-extras"
+brew "gnu-getopt"
+brew "gnu-indent"
+brew "gnu-sed"
+brew "gnu-tar"
+brew "gnupg"
+brew "gnutls"
+brew "hub"
+brew "mercurial"
+brew "neovim"
+brew "pstree"
+brew "reattach-to-user-namespace"
+brew "the_silver_searcher"
+brew "tmux"
+brew "tree"
+brew "vim"
+brew "wget"
+brew "youtube-dl"
+brew "zsh"
 
-puts("Installing brews...\n\n")
+# Databases
+cask "homebrew/cask-versions/java8" # elasticsearch requirement
+brew "elasticsearch"
+brew "mongodb"
+brew "postgresql"
+brew "redis"
 
-brews.each do |brew|
-  if INSTALLED_BREWS.include?(brew)
-    puts("- #{brew} already installed")
-  else
-    puts("- Installing #{brew}...")
-    system("brew install #{brew}")
-  end
-end
+# Languages
+brew "go@1.11"
+brew "python"
+brew "rbenv"
+brew "ruby-build"
 
-puts("\nBrews complete!")
+# GoCardless
+brew "anu"
+brew "draupnir"
+
+# Kubernetes
+brew "kubernetes-cli"
+
+# Google
+cask "google-cloud-sdk"

@@ -1,4 +1,4 @@
 # Loads the common configuration to be found in ~/.profile
 emulate sh
-. ~/.profile
+[[ -f ~/profile ]] && . ~/.profile
 emulate zsh

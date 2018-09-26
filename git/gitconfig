@@ -26,7 +26,7 @@
 [color]
   ui = true
 [core]
-  excludesfile = /Users/lawrencejones/.gitignore_global
+  excludesfile = /Users/lawrence/.gitignore_global
 [url "git@github.com:"]
   insteadOf = github:
 [url "git@gist.github.com:"]

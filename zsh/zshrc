@@ -2,22 +2,23 @@
 
 # Secondary paths (desc importance) ##############
 
-PATH=$PATH:/usr/local/bin                   # Brewness
-PATH=$PATH:/usr/local/heroku/bin            # Heroku toolbelt
-PATH=$PATH:$HOME/Library/Haskell/bin        # Haskell binaries
-PATH=$PATH:$HOME/.cabal/bin                 # cabal binaries
-PATH=$PATH:$HOME/.cargo/bin                 # Cargo binaries
-PATH=$PATH:$HOME/.local/bin                 # Home local binaries
+PATH="$PATH:/usr/local/bin"                   # Brewness
+PATH="$PATH:/usr/local/heroku/bin"            # Heroku toolbelt
+PATH="$PATH:$HOME/Library/Haskell/bin"        # Haskell binaries
+PATH="$PATH:$HOME/.cabal/bin"                 # cabal binaries
+PATH="$PATH:$HOME/.cargo/bin"                 # Cargo binaries
+PATH="$PATH:$HOME/.local/bin"                 # Home local binaries
+PATH="$PATH:/usr/local/sbin"                  # Brew installs some stuff here
 
 # Google SDK
-PATH=$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+PATH="$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
 
 # Primary paths (ascd importance) ################
 
 # Priority paths (ascd importance)
-PATH=$HOME/.rbenv/bin:$PATH                 # rbenv path
-PATH=$HOME/.bin:$PATH                       # custom scripts
-PATH=./bin:$PATH                            # current path
+PATH="$HOME/.rbenv/bin:$PATH"                 # rbenv path
+PATH="$HOME/.bin:$PATH"                       # custom scripts
+PATH="./bin:$PATH"                            # current path
 
 export PATH
 
