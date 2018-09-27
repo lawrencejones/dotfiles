@@ -22,11 +22,13 @@ brew "gnu-tar"
 brew "gnupg"
 brew "gnutls"
 brew "hub"
+brew "jq"
 brew "libtool"
 brew "mercurial"
 brew "neovim"
 brew "pam_yubico"
 brew "pstree"
+brew "qt"
 brew "reattach-to-user-namespace"
 brew "the_silver_searcher"
 brew "tmux"
@@ -58,3 +60,10 @@ brew "kubernetes-cli"
 
 # Google
 cask "google-cloud-sdk"
+
+# AWS
+brew "awscli"
+brew "aws-keychain"
+
+# Infrastructure
+brew "terraform"
