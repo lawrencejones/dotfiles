@@ -28,7 +28,7 @@
 [core]
   excludesfile = /Users/lawrence/.gitignore_global
 [url "git@github.com:"]
-  insteadOf = github:
+	insteadOf = https://github.com/
 [url "git@gist.github.com:"]
   insteadOf = https://gist.github.com
 [branch]
@@ -43,3 +43,5 @@
   protocol = https
 [commit]
   gpgsign = true
+[credential]
+	helper = store

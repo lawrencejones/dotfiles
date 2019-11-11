@@ -8,10 +8,12 @@ tap "gocardless/homebrew-taps"
 brew "ack"
 brew "autoenv"
 brew "automake"
+brew "autojump"
 brew "cmake"
 brew "coreutils"
 brew "ctags"
 brew "findutils"
+brew "fzf"
 brew "gawk"
 brew "git"
 brew "git-extras"
@@ -25,8 +27,11 @@ brew "hub"
 brew "jq"
 brew "libtool"
 brew "mercurial"
+brew "ncat"
 brew "neovim"
+brew "nmap"
 brew "pam_yubico"
+brew "pwgen"
 brew "pstree"
 brew "qt"
 brew "reattach-to-user-namespace"
@@ -57,13 +62,14 @@ brew "draupnir"
 
 # Kubernetes
 brew "kubernetes-cli"
+brew "stern"
 
 # Google
 cask "google-cloud-sdk"
 
 # AWS
 brew "awscli"
-brew "aws-keychain"
+cask "aws-vault"
 
 # Infrastructure
 brew "terraform"

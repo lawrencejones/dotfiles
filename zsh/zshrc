@@ -4,11 +4,13 @@
 
 PATH="$PATH:/usr/local/bin"                   # Brewness
 PATH="$PATH:/usr/local/heroku/bin"            # Heroku toolbelt
+PATH="$PATH:/usr/local/kubebuilder/bin"       # Kubebuilder SDK
 PATH="$PATH:$HOME/Library/Haskell/bin"        # Haskell binaries
 PATH="$PATH:$HOME/.cabal/bin"                 # cabal binaries
 PATH="$PATH:$HOME/.cargo/bin"                 # Cargo binaries
 PATH="$PATH:$HOME/.local/bin"                 # Home local binaries
 PATH="$PATH:/usr/local/sbin"                  # Brew installs some stuff here
+PATH="$PATH:$HOME/Library/Python/2.7/bin"     # Python 2.7 tooling
 
 # Google SDK
 PATH="$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
@@ -35,8 +37,8 @@ fi
 # Load NVM
 export NVM_DIR="$HOME/.nvm"
 function nvm() {
-  if [ -s "$NVM_DIR/nvm.sh" ]; then
-    source "$NVM_DIR/nvm.sh" # this is super slow
+  if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
+    source "/usr/local/opt/nvm/nvm.sh" # this is super slow
     nvm "${@}"
   else
     echo "You have no nvm's- please install first!"
@@ -120,7 +122,7 @@ alias tree='tree -C'
 # Command history
 export HISTFILE=$HOME/.zhistory   # save on shell exit
 export HISTSIZE=10000             # lines of history
-export SAVEHIST=10000             # lines of history on disc
+export SAVEHIST=100000            # lines of history on disc
 setopt no_share_history           # dont share history
 setopt APPEND_HISTORY             # append rather than overwrite
 setopt HIST_EXPIRE_DUPS_FIRST     # remove duplicates from history first

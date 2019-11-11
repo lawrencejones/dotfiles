@@ -1,5 +1,10 @@
 # vim: set ft=sshconfig:
 
+Host *
+  ControlMaster auto
+  ControlPath ~/.ssh/control/%C
+  ControlPersist 10m
+
 # GoCardless ###############################################
 
 Host *.staging
@@ -28,6 +33,10 @@ Host *.c.gc-prd-effc.internal
   ProxyJump prd-bastion
   StrictHostKeyChecking no
   IdentityFile ~/.ssh/google_compute_engine
+
+Host ec2-3-120-108-63.eu-central-1.compute.amazonaws.com
+  User coreos
+  IdentityFile ~/.ssh/directli-bastion
 
 # Github and services ######################################
 

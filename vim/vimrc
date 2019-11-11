@@ -27,6 +27,7 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'vim-scripts/applescript.vim'
 Plug 'wavded/vim-stylus'
 Plug 'zah/nim.vim'
+Plug 'google/vim-jsonnet'
 
 " Utility plugins
 Plug 'AndrewRadev/sideways.vim'
@@ -200,6 +201,7 @@ let g:neomake_ruby_bundle_maker = {
 " --------------- YouCompleteMe -----------------------------------------------
 
 let g:ycm_auto_trigger = 1
+let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
@@ -307,29 +309,6 @@ if has("folding")
   set foldtext=NeatFoldText()
 
 endif
-
-" --------------- Coffee-Script Preferences -----------------------------------
-
-" Configure coffeescript errors
-let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
-
-" Configure coffeetags
-if executable('coffeetags')
-  let g:tagbar_type_coffee = {
-        \ 'ctagsbin' : 'coffeetags',
-        \ 'ctagsargs' : '',
-        \ 'kinds' : [
-        \ 'f:functions',
-        \ 'o:object',
-        \ ],
-        \ 'sro' : ".",
-        \ 'kind2scope' : {
-        \ 'f' : 'object',
-        \ 'o' : 'object',
-        \ }
-        \ }
-endif
-
 " --------------- Golang Preferences ------------------------------------------
 
 " Automatically add missing imports to go files

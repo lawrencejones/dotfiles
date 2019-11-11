@@ -15,6 +15,7 @@ alias :eh='vim /opt/boxen/repo/hiera/users/lawrencejones.yaml'
 #----------------------------------------------------------------
 
 #------- Kubernetes Aliases -------------------------------------
+alias k13="/usr/local/Cellar/kubernetes-cli/1.13.3/bin/kubectl"
 alias k='kubectl'
 alias kd='kubectl describe'
 alias ke='kubectl exec'
@@ -25,8 +26,7 @@ alias ks='kubectl get services'
 alias kn='kubectl get nodes'
 alias kp='kubectl get pods'
 alias kcc='bash -c "kubectl config set-context \$0 --namespace=\$1 && kubectl config use-context \$0"'
-
-alias helm='TILLER_NAMESPACE="$(_k_currentNamespace)-tiller" /usr/local/bin/helm'
+alias kenv="kubectl get secret -o go-template='{{ range \$k, \$v := .data }}{{ \$k }}={{ \$v | base64decode }}'$'\n''{{ end }}'"
 
 # Helper aliases
 alias _k_currentNamespace='kubectl config view -o json | jq -r ".contexts | map(select(.name == \"$(kubectl config current-context)\")) | .[0].context.namespace"'
@@ -53,7 +53,8 @@ alias sprung='pgrep spring ruby rails rake | xargs kill -9'
 
 #------- Golang -------------------------------------------------
 # If not yet setup, docker volume create dep-pkg
-alias dep-enter='docker run --rm --mount source=dep-pkg,target=/go/pkg -v "/Users/lawrencejones/Projects/golang/src:/go/src" -it golang:1.10 bash'
+alias dep-enter='docker run --rm --mount source=dep-pkg,target=/go/pkg -v "$HOME/Projects/golang/src:/go/src" -it golang:1.10 bash'
+alias go-mod='GO111MODULE=on go mod'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------
@@ -121,6 +122,7 @@ alias tmuxcp='tmux show-buffer | pbcopy'
 alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
 alias by='bpython'
 alias lab-ssh='ssh -o StrictHostKeyChecking=no'
+alias pg_format='pg_format --comma-start --spaces 2'
 #----------------------------------------------------------------
 
 #------  Work folder access -------------------------------------

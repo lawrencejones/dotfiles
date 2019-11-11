@@ -15,16 +15,18 @@ project() {
     """
 
   else
-    ghUrl=$([[ "$1" =~ '/' ]] && echo $1 || echo "LawrenceJones/$1")
-    projectDir=$(basename $ghUrl)
+    githubUrl=$([[ "$1" =~ '/' ]] && echo $1 || echo "lawrencejones/$1")
+    project="$GOPATH/src/github.com/${githubUrl}"
+    projectLink="$HOME/Projects/$(basename ${project})"
 
-    if [ ! -d "$HOME/Projects/$projectDir" ]; then
-      git clone git@github.com:$ghUrl $HOME/Projects/$projectDir || \
-        return
+    if [ ! -L "${projectLink}" ]; then
+      mkdir -p "${project}"
+      rm -rf "${project}"
+      git clone "git@github.com:${githubUrl}" "${project}"
+      ln -vs "${project}" "${projectLink}"
     fi
 
-    cd $HOME/Projects/$projectDir
-    [ -z "$TMUX" ] && tmux -2
+    cd "$HOME/Projects" && cd "$(readlink "${projectLink}")"
   fi
 }
 
@@ -191,27 +193,25 @@ last-screenshot() {
   echo "$HOME/Dropbox (GoCardless)/Screenshots/$(ls --color=no -t \"$HOME/Dropbox (GoCardless)/Screenshots\" | head -n 1)"
 }
 
-aws-keychain-activate() {
-  if [[ "$#" -eq 0 ]]; then
-    echo """
-    Usage: aws-keychain-activate <repo-name>
-    Desc:  Exports aws credentials from keychain into current env
-    Examples...
+# Accept as stdin arguments to apt-get install where if we find a
+# package=version stanza, we'll query the apt-cache to find the current
+# candidate and update the version to match.
+#
+# Example content:
+#
+#     tzdata=2017c-0ubuntu0.16.04 \
+#
+apt-update-candidate() {
+  while IFS=$'\n' read -r line; do
+    if read -r package version <<< $(perl -wnl -e '/(\S+?)\=(\S+)/ and print "$1 $2"' <<< "${line}"); then
+      candidate="$(apt-cache policy "${package}" | perl -wnl -e '/Candidate: (\S+)/ and print $1')"
 
-        aws-keychain-activate gc-iam
+      if [ ! "${version}" == "${candidate}" ]; then
+        line="${line/$version/$candidate}"
+      fi
 
-    Available envs:
+    fi
 
-        $(aws-keychain ls | xargs | sed 's/ /\n        /g')
-
-    """
-  else
-    aws-keychain exec "$1" bash <<-BASH | source /dev/stdin
-    echo -e """
-    export AWS_ACTIVE_KEYCHAIN=\"$1\"
-    export AWS_ACCESS_KEY_ID=\"\$AWS_ACCESS_KEY_ID\"
-    export AWS_SECRET_ACCESS_KEY=\"\$AWS_SECRET_ACCESS_KEY\"
-    """
-BASH
-  fi
+    echo "${line}"
+  done
 }
