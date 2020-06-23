@@ -31,6 +31,7 @@ Plug 'google/vim-jsonnet'
 
 " Utility plugins
 Plug 'AndrewRadev/sideways.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/vimproc.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
@@ -73,16 +74,19 @@ let g:tagbar_left=1           " Vim tagbar shortcut
 
 " --------------- Color and Scheme Preferences --------------------------------
 
-colorscheme molokai
-let g:molokai_original = 1
+" Disable molokai for now, as I'm working in a super bright space and it's a
+" dark color scheme
+" colorscheme molokai
+" let g:molokai_original = 1
+" hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
-" colorscheme base16-default
+set termguicolors
+let ayucolor="light"
+colorscheme ayu
 
 set t_ut=''           " Disable deleted coloring
-set t_Co=256          " Force 256 colors
+" set t_Co=256          " Force 256 colors
 syn sync fromstart    " Calculate syntax colors from start of file
-
-hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
 
 " Turn off visual/audible bell
 set visualbell
@@ -95,7 +99,7 @@ nnoremap <leader>S :syn sync fromstart<CR>
 nnoremap <CR> :noh<CR>
 
 " airline config
-let g:airline_theme='dark'
+" let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 0  " turn off git branch
 highlight clear LineNr
@@ -190,7 +194,7 @@ let g:terraform_fmt_on_save = 1
 let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']
 let g:neomake_zsh_enabled_makers = ['sh']
 let g:neomake_rust_enabled_makers = ['rustc']
-let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+let g:neomake_go_enabled_makers = ['go']
 let g:neomake_ruby_enabled_makers = ['bundle', 'mri']
 let g:neomake_ruby_bundle_maker = {
     \ 'args': ['--format', 'emacs'],
@@ -198,9 +202,13 @@ let g:neomake_ruby_bundle_maker = {
     \ 'postprocess': function('neomake#makers#ft#ruby#RubocopEntryProcess')
     \ }
 
+" Prevent save from lagging with default syntastic+vim-go combinations
+let g:syntastic_go_checkers = ['golint', 'govet']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
 " --------------- YouCompleteMe -----------------------------------------------
 
-let g:ycm_auto_trigger = 1
+let g:ycm_auto_trigger = 0
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -311,7 +319,8 @@ if has("folding")
 endif
 " --------------- Golang Preferences ------------------------------------------
 
-" Automatically add missing imports to go files
+" This used to be goimports, but that became really slow for a save hook
+" Re-enabling now I've cleaned up my gopath. Uncomment if things get slow again.
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
 
