@@ -1,3 +1,0 @@
-#compdef cookbook
-
-compadd $(ls ~/Projects/chef-repo/cookbooks | xargs)

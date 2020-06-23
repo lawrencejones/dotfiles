@@ -1,3 +1,0 @@
-#compdef cap
-
-compadd $(ls config/deploy/*.rb | perl -wnl -e "/([^\/]+)\.rb$/ and print \$1")

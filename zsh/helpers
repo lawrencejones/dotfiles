@@ -215,3 +215,8 @@ apt-update-candidate() {
     echo "${line}"
   done
 }
+
+infra-spend() {
+  projects=$(gcloud projects list --filter labels.team:core-infrastructure --format json | jq -r 'map(.projectId) | join(",")')
+  open "https://console.cloud.google.com/billing/01755F-1CBB5C-67CB4E/reports;chartType=STACKED_BAR;timeRange=LAST_90_DAYS;projects=${projects}?organizationId=127745229449"
+}

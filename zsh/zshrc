@@ -5,6 +5,7 @@
 PATH="$PATH:/usr/local/bin"                   # Brewness
 PATH="$PATH:/usr/local/heroku/bin"            # Heroku toolbelt
 PATH="$PATH:/usr/local/kubebuilder/bin"       # Kubebuilder SDK
+PATH="$PATH:$HOME/.krew/bin"                  # kubectl plugins
 PATH="$PATH:$HOME/Library/Haskell/bin"        # Haskell binaries
 PATH="$PATH:$HOME/.cabal/bin"                 # cabal binaries
 PATH="$PATH:$HOME/.cargo/bin"                 # Cargo binaries
@@ -143,11 +144,6 @@ compinit
 source ~/.zsh/helpers
 source ~/.zsh/prompt
 source ~/.zsh/aliases
-
-# Make custom completions take priority
-for completion in $(ls ~/.zsh/completion); do
-  compdef $completion ${completion:1}
-done
 
 # Glob-like autocomplete
 setopt glob_complete
