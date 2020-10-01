@@ -36,15 +36,8 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
 fi
 
 # Load NVM
-export NVM_DIR="$HOME/.nvm"
-function nvm() {
-  if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
-    source "/usr/local/opt/nvm/nvm.sh" # this is super slow
-    nvm "${@}"
-  else
-    echo "You have no nvm's- please install first!"
-  fi
-}
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # loads nvm, --no-use for speed
 
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];
@@ -122,7 +115,7 @@ alias tree='tree -C'
 
 # Command history
 export HISTFILE=$HOME/.zhistory   # save on shell exit
-export HISTSIZE=10000             # lines of history
+export HISTSIZE=100000            # lines of history
 export SAVEHIST=100000            # lines of history on disc
 setopt no_share_history           # dont share history
 setopt APPEND_HISTORY             # append rather than overwrite
@@ -136,9 +129,8 @@ bindkey '^R' history-incremental-search-backward
 autoload -U zmv
 
 # Autocompletion
-fpath=($fpath $HOME/.zsh/completion)
-autoload -U compinit
-compinit
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 
 # Zsh extras
 source ~/.zsh/helpers

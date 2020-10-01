@@ -1,6 +1,5 @@
 set completion-ignore-case on
 set show-all-if-ambiguous on
 TAB: menu-complete
-"\e[Z": complete
 set editing-mode vi
 set keymap vi-command

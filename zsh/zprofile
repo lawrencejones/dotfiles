@@ -1,4 +1,0 @@
-# Loads the common configuration to be found in ~/.profile
-emulate sh
-[[ -f ~/profile ]] && . ~/.profile
-emulate zsh

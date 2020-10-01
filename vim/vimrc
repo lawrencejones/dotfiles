@@ -34,7 +34,7 @@ Plug 'AndrewRadev/sideways.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/vimproc.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
 Plug 'burnettk/vim-angular'
 Plug 'danro/rename.vim'
 Plug 'diepm/vim-rest-console'
@@ -191,8 +191,8 @@ let g:neomake_warning_sign={'text': 'x'}
 let g:neomake_error_sign={'text': 'x'}
 
 let g:terraform_fmt_on_save = 1
-let g:neomake_sh_enabled_makers = ['shellcheck', 'sh']
-let g:neomake_zsh_enabled_makers = ['sh']
+let g:neomake_sh_enabled_makers = ['shellcheck']
+let g:neomake_zsh_enabled_makers = []
 let g:neomake_rust_enabled_makers = ['rustc']
 let g:neomake_go_enabled_makers = ['go']
 let g:neomake_ruby_enabled_makers = ['bundle', 'mri']
