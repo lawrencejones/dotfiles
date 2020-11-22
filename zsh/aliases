@@ -32,6 +32,14 @@ alias kenv="kubectl get secret -o go-template='{{ range \$k, \$v := .data }}{{ \
 alias _k_currentNamespace='kubectl config view -o json | jq -r ".contexts | map(select(.name == \"$(kubectl config current-context)\")) | .[0].context.namespace"'
 #----------------------------------------------------------------
 
+#------- Utopia -------------------------------------------------
+alias u='utopia'
+alias uk='utopia kubectl'
+alias ul='utopia logs'
+alias uc='utopia config'
+alias us='utopia config setup'
+#----------------------------------------------------------------
+
 #------- Draupnir Aliases ---------------------------------------
 alias draupnir-context="bash -c 'cp -v ~/.draupnir.\$0 ~/.draupnir'"
 #----------------------------------------------------------------
