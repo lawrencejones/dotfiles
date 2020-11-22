@@ -34,7 +34,7 @@ Plug 'AndrewRadev/sideways.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/vimproc.vim'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'burnettk/vim-angular'
 Plug 'danro/rename.vim'
 Plug 'diepm/vim-rest-console'
