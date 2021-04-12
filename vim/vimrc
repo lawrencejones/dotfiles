@@ -28,6 +28,10 @@ Plug 'vim-scripts/applescript.vim'
 Plug 'wavded/vim-stylus'
 Plug 'zah/nim.vim'
 Plug 'google/vim-jsonnet'
+Plug 'jjo/vim-cue'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Utility plugins
 Plug 'AndrewRadev/sideways.vim'
@@ -40,11 +44,8 @@ Plug 'danro/rename.vim'
 Plug 'diepm/vim-rest-console'
 Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
-Plug 'garbas/vim-snipmate'
-Plug 'lukaszkorecki/CoffeeTags'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'nvie/vim-flake8'
-Plug 'rizzatti/dash.vim'
 Plug 'rking/ag.vim'
 Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree'
@@ -206,12 +207,34 @@ let g:neomake_ruby_bundle_maker = {
 let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+" --------------- coc.nvim ----------------------------------------------------
+
+" Coc configuration, install if not there:
+let g:coc_global_extensions = [
+      \'coc-eslint',
+      \'coc-go',
+      \'coc-json',
+      \'coc-prettier',
+      \'coc-tsserver',
+      \]
+
+" Alias commands. Probably won't use this, but useful as an example:
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 ESlint :CocCommand eslint.formatFile
+
 " --------------- YouCompleteMe -----------------------------------------------
 
 let g:ycm_auto_trigger = 0
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" ---------------coc.nvim -----------------------------------------------------
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " --------------- General Shortcuts -------------------------------------------
 
@@ -321,7 +344,7 @@ endif
 
 " This used to be goimports, but that became really slow for a save hook
 " Re-enabling now I've cleaned up my gopath. Uncomment if things get slow again.
-let g:go_fmt_command = "goimports"
+" let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
 
 " --------------- TinyOS Preferences ------------------------------------------

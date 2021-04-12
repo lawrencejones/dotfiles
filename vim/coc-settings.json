@@ -1,4 +1,6 @@
 {
+  "coc.preferences.jumpCommand": "split",
+  "eslint.autoFixOnSave": true,
   "languageserver": {
   }
 }

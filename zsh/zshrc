@@ -161,3 +161,5 @@ export EDITOR="$(which nvim)"
 
 # github.com/wting/autojump
 [ -f "${BREW_PREFIX}/../etc/profile.d/autojump.sh" ] && source "${BREW_PREFIX}/../etc/profile.d/autojump.sh"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+docker run \
+  -v "$(pwd):/app" --workdir=/app \
+  --rm eu.gcr.io/gc-containers/gocardless/crank@sha256:50a5576c117b2b54128e043d8a31b7b3fd08654dfb76f092d868e178d3ee6994 \
+    crank "${@:1}"
