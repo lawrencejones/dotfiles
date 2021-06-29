@@ -1,5 +1,8 @@
 ### PATH CONFIGURATION #########################################################
 
+# Enable brew, which configures a load of paths
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Secondary paths (desc importance) ##############
 
 PATH="$PATH:/usr/local/bin"                   # Brewness
@@ -14,7 +17,7 @@ PATH="$PATH:/usr/local/sbin"                  # Brew installs some stuff here
 PATH="$PATH:$HOME/Library/Python/2.7/bin"     # Python 2.7 tooling
 
 # Google SDK
-PATH="$PATH:/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
+PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
 
 # Primary paths (ascd importance) ################
 
@@ -25,7 +28,7 @@ PATH="./bin:$PATH"                            # current path
 
 export PATH
 
-### SOURCE PACKAGE MANAGERS (RBENV, NVM) #######################################
+### SOURCE PACKAGE MANAGERS (RBENV, FNM) #######################################
 
 # Add npm locations to path if node exists
 if [ -n "$(node --version 2>/dev/null)" ]; then
@@ -35,9 +38,8 @@ if [ -n "$(node --version 2>/dev/null)" ]; then
   export PATH="./node_modules/.bin:$HOME/.nvm/$nodeVersion/bin:$PATH"
 fi
 
-# Load NVM
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # loads nvm, --no-use for speed
+# Load FNM (fast node manager)
+eval "$(fnm env)"
 
 # Configure rbenv
 if [ -n "$(rbenv --version 2>/dev/null)" ];

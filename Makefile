@@ -21,6 +21,7 @@ symlinks:
 	ln -shf $(DIR)/zsh/zshrc  ~/.zshrc
 	ln -shf $(DIR)/zsh/zprofile  ~/.zprofile
 	ln -shf $(DIR)/autoenv/env ~/.env
+	ln -shf $(DIR)/kitty ~/.config/kitty
 
 brew: ensure_brew
 	brew bundle
