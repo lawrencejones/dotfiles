@@ -63,7 +63,7 @@ alias sprung='pgrep spring ruby rails rake | xargs kill -9'
 # If not yet setup, docker volume create dep-pkg
 alias dep-enter='docker run --rm --mount source=dep-pkg,target=/go/pkg -v "$HOME/Projects/golang/src:/go/src" -it golang:1.10 bash'
 alias go-mod='GO111MODULE=on go mod'
-alias docker-compose='docker-compose --env-file /dev/null'
+alias docker-compose='docker-compose --env-file ~/.docker-compose-null'
 #----------------------------------------------------------------
 
 #------- Diffo-actions ------------------------------------------

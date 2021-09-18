@@ -9,14 +9,9 @@ Host *
 
 Host *.staging
   Hostname %h.gocardless.com
-  Port $GC_PORT
-
-Host *.gocardless.com *.gc.cx 10.*
-  Port $GC_PORT
 
 Host lab-bastion
   HostName 35.204.40.9
-  Port $GC_PORT
   IdentityFile ~/.ssh/google_compute_engine
 
 Host *.c.gc-lab-1eb1.internal
@@ -26,7 +21,6 @@ Host *.c.gc-lab-1eb1.internal
 
 Host prd-bastion
   HostName 35.204.10.71
-  Port $GC_PORT
   IdentityFile ~/.ssh/google_compute_engine
 
 Host *.c.gc-prd-effc.internal

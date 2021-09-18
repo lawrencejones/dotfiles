@@ -1,6 +1,15 @@
 {
   "coc.preferences.jumpCommand": "split",
   "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"],
   "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": [
+        "serve"
+      ],
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    }
   }
 }
