@@ -15,7 +15,7 @@ PATH="$PATH:$HOME/.cabal/bin"                 # cabal binaries
 PATH="$PATH:$HOME/.cargo/bin"                 # Cargo binaries
 PATH="$PATH:$HOME/.local/bin"                 # Home local binaries
 PATH="$PATH:/usr/local/sbin"                  # Brew installs some stuff here
-PATH="$PATH:$HOME/Library/Python/2.7/bin"     # Python 2.7 tooling
+PATH="$PATH:$HOME/Library/Python/3.9/bin"     # Python 3.9 tooling
 
 # Google SDK
 PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"

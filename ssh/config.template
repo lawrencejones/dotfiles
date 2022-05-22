@@ -37,3 +37,6 @@ Host ec2-3-120-108-63.eu-central-1.compute.amazonaws.com
 Host github.com
   Hostname ssh.github.com
   Port 443
+
+Host 34.89.78.132
+  IdentityFile ~/.ssh/container-builder.pem

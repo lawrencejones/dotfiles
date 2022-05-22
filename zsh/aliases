@@ -32,6 +32,27 @@ alias kenv="kubectl get secret -o go-template='{{ range \$k, \$v := .data }}{{ \
 alias _k_currentNamespace='kubectl config view -o json | jq -r ".contexts | map(select(.name == \"$(kubectl config current-context)\")) | .[0].context.namespace"'
 #----------------------------------------------------------------
 
+#------- Utilities ----------------------------------------------
+alias ll='ls -lh'
+alias listpath='echo $PATH | tr ":" "\n"'
+alias diffocop="(cd \$(git rev-parse --show-toplevel) && git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop)"
+alias tmux='tmux -2' # colors!!!
+alias twoup='lpr -o number-up=2 -o page-border=single'
+alias mocha='mocha --compilers coffee:coffee-script/register'
+alias ar='chdir $(git rev-parse --show-toplevel)'
+alias ssh='compile-ssh-conf && ssh'
+alias curl-json='function() { curl $1 | pp.js }'
+alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
+alias rest-console='chdir $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
+alias plain-paste='pbpaste | pbcopy'
+alias tmuxcp='tmux show-buffer | pbcopy'
+alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
+alias by='bpython'
+alias lab-ssh='ssh -o StrictHostKeyChecking=no'
+alias pg_format='pg_format --comma-start --spaces 2'
+alias gif-to-webm='ffmpeg -c vp9 -b:v 0 -crf 41 -i' # <in> <out>
+#----------------------------------------------------------------
+
 #------- Utopia -------------------------------------------------
 alias u='utopia'
 alias uk='utopia kubectl'
@@ -66,10 +87,6 @@ alias go-mod='GO111MODULE=on go mod'
 alias docker-compose='docker-compose --env-file ~/.docker-compose-null'
 #----------------------------------------------------------------
 
-#------- Diffo-actions ------------------------------------------
-alias diffocop="(cd \$(git rev-parse --show-toplevel) && git diff master --name-only --diff-filter=ACMRTUXB | grep '\.rb$' | tr '\n' ' ' | xargs bundle exec rubocop)"
-#----------------------------------------------------------------
-
 #------- Git Aliases --------------------------------------------
 alias g='git'
 alias git-init='git init && echo ".DS_Store" > .gitignore'
@@ -91,60 +108,4 @@ alias gri='git rebase -i'
 alias grc='git rebase --continue'
 alias gm='git merge'
 alias gpl='git pull'
-#----------------------------------------------------------------
-
-#------- Templating ---------------------------------------------
-template-init() {
-  if [[ "$#" -eq 1 ]]; then
-    echo "Requires destination directory!"
-    exit 255
-  fi
-
-  git clone https://github.com/$1 $2 && \
-    cd $2 && \
-    cat README.md && \
-    rm -rf .git README.md && \
-    git init && git add -A && git commit -am "Init from template $1"
-}
-alias latex-init='template-init lawrencejones/latex-template'
-alias d3-init='template-init lawrencejones/d3-template'
-alias js-init='template-init lawrencejones/js-template'
-#----------------------------------------------------------------
-
-#------- OS X Apps ----------------------------------------------
-alias skim='open -a /Applications/Skim.app'
-#----------------------------------------------------------------
-
-#------- Utilities ----------------------------------------------
-alias ll='ls -lh'
-alias listpath='echo $PATH | tr ":" "\n"'
-alias tmux='tmux -2' # colors!!!
-alias twoup='lpr -o number-up=2 -o page-border=single'
-alias mocha='mocha --compilers coffee:coffee-script/register'
-alias ar='chdir $(git rev-parse --show-toplevel)'
-alias ssh='compile-ssh-conf && ssh'
-alias curl-json='function() { curl $1 | pp.js }'
-alias pub-cp='cat ~/.ssh/id_rsa.pub | pbcopy'
-alias rest-console='chdir $(mktemp -d /tmp/rest-console.XXXX) && $(echo "#!/bin/zsh\ncurl --args" > request.rest) && chmod a+x request.rest && tmux split-window -h "vim request.rest"'
-alias plain-paste='pbpaste | pbcopy'
-alias tmuxcp='tmux show-buffer | pbcopy'
-alias curl-time='curl -w "@$HOME/dotfiles/nix/curl/curl-timing-output.txt"'
-alias by='bpython'
-alias lab-ssh='ssh -o StrictHostKeyChecking=no'
-alias pg_format='pg_format --comma-start --spaces 2'
-#----------------------------------------------------------------
-
-#------  Work folder access -------------------------------------
-alias projects='chdir /Users/lawrencejones/Projects'
-alias sesquis='chdir /Users/lawrencejones/Projects/sesquis'
-alias journal='chdir /Users/lawrencejones/Projects/journal'
-#----------------------------------------------------------------
-
-#------- PostgreSQL ---------------------------------------------
-alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-#----------------------------------------------------------------
-
-#------- Imperial Aliases ---------------------------------------
-alias cate-token="git log | head -1 | awk -F' ' '{ print \$NF }' > ~/cate_token.txt"
 #----------------------------------------------------------------
