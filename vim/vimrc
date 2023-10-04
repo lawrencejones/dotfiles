@@ -36,6 +36,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'github/copilot.vim'
 
 " Utility plugins
 Plug 'AndrewRadev/sideways.vim'

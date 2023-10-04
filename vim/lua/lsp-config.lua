@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local null_ls = require("null-ls")
 
 -- Aliases for easier calling.
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -23,14 +24,14 @@ lspconfig.tsserver.setup({
 
 -- Apparently null-ls is a must-have with the tsserver stuff, so I've installed
 -- it ¯\_(ツ)_/¯
-local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     -- Note we use eslint_d as a daemonised eslint, which returns errors
     -- faster
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.formatting.prettier
-  },
-  on_attach = on_attach
+    --
+    -- These are broken.
+    -- null_ls.builtins.diagnostics.eslint_d,
+    -- null_ls.builtins.code_actions.eslint_d,
+    -- null_ls.builtins.formatting.prettier
+  }
 })

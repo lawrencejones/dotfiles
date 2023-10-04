@@ -6,3 +6,4 @@ app/middleware/debug.rb
 .virtualenv
 virtualenv
 tmp/
+.DS_Store

@@ -31,6 +31,7 @@
   autosetuprebase = always
 [init]
   templatedir = ~/dotfiles/git/template
+	defaultBranch = master
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
@@ -47,3 +48,5 @@
 	autoStash = true
 [url "ssh://git@github.com:gocardless"]
 	insteadOf = https://github.com/gocardless
+[rerere]
+	enabled = true

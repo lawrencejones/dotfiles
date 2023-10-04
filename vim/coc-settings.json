@@ -1,7 +1,12 @@
 {
   "coc.preferences.jumpCommand": "split",
   "eslint.autoFixOnSave": true,
+  "eslint.probe": ["javascript","javascriptreact","typescript","typescriptreact","html","vue"],
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"],
+  "codeLens.enable": false,
+  "importCost.typescriptExtensions": [
+    "\\.tsx?$"
+  ],
 	"go.goplsOptions": {
 		"buildFlags": ["-gcflags=-G=3"]
 	},
